@@ -10,14 +10,10 @@ C4Context
       title System Context diagram for Bookstore System
       Enterprise_Boundary(b0, "Bookstore Boundary") {
         Person(customerA, "Bookstore Customer", "A customer of the bookstore")
-        Person(customerB, "Banking Customer B")      
-        
-        
         System(SystemAA, "Bookstore System", "Allows Book creation, search,...")  
       }
       
       BiRel(customerA, SystemAA, "Uses")
-      BiRel(SystemAA, SystemE, "Uses")
       UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 ```
 
