@@ -11,7 +11,6 @@ C4Context
       Person(customerA, "Bookstore Customer", "A customer of the bookstore") 
       Person(adminA, "Bookstore Administrator", "An administrator of the bookstore") 
       Enterprise_Boundary(b0, "Bookstore Boundary") {
-        customer of the bookstore")
         System(bookstoreSystem, "Bookstore System", "Allows Book creation, search,...")  
         System(iamSystem, "Bookstore IAM", "Allows Identification & authorization...")  
       }
