@@ -8,13 +8,17 @@ This workshop aims to introduce different ways to handle and propose several ver
 ```mermaid
 C4Context
       title System Context diagram for Bookstore System
+      Person(customerA, "Bookstore Customer", "A customer of the bookstore") 
+      Person(adminA, "Bookstore Administrator", "An administrator of the bookstore") 
       Enterprise_Boundary(b0, "Bookstore Boundary") {
-        Person(customerA, "Bookstore Customer", "A customer of the bookstore")
-        System(SystemAA, "Bookstore System", "Allows Book creation, search,...")  
+        customer of the bookstore")
+        System(bookstoreSystem, "Bookstore System", "Allows Book creation, search,...")  
+        System(iamSystem, "Bookstore IAM", "Allows Identification & authorization...")  
       }
-      
-      BiRel(customerA, SystemAA, "Uses")
-      UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
+      Rel(customerA, bookstoreSystem, "Uses")
+      Rel(adminA, bookstoreSystem, "Uses & manage users")
+      Rel(customerA, iamSystem, "identifies & authorizes")
+      Rel(adminA, iamSystem, "identifies & authorizes")
 ```
 
 ## Our API Roadmap
