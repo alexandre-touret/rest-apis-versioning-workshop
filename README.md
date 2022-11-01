@@ -2,37 +2,6 @@
 
 This workshop aims to introduce different ways to handle and propose several versions of a same API to your customers.
 
-
-## :traffic_light: Prerequisites
-
-### :mortar_board: Skills
-
-| Skill | Level | 
-|---|---|
-| REST API | proficient |
-| Java | novice |
-| Spring Framework, Gateway | novice |
-| OpenID Connect | novice |
-| Docker | novice |
-
-### :scissors: Tools 
-#### If you want to execute this workshop locally
-You must have set up these tools first:
-* Java 17+
-* Gradle 7.5+
-* Docker & Docker compose
-* Any IDE (IntelliJ IDEA, VSCode, Emacs,...)
-* [cURL](https://curl.se/), [HTTPie](https://httpie.io/) or any tool to call your REST APIs
-
-#### If you don't want to bother yourself with a local setup
-
-You can use [Gitpod](https://gitpod.io). 
-You must create an account first. 
-
-You then can open this project in either your local VS Code or directly in your browser
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versionning-workshop.git)
-
 ## :dart: Big picture
 
 During this workshop we will strive with API versionning on a (small) microservice application.
@@ -149,18 +118,37 @@ gitGraph:
     commit tag:"Deprecating V1"
 ```
 
-## Dealing with updates without versionning
+## :traffic_light: Prerequisites
 
-## Our first version
+### :mortar_board: Skills
 
-### Creating V1
+| Skill | Level | 
+|---|---|
+| REST API | proficient |
+| Java | novice |
+| Spring Framework, Gateway | novice |
+| OpenID Connect | novice |
+| Docker | novice |
 
-In the URI, in a header, a mix between the gateway & the apps
+### :scissors: Tools 
+#### If you want to execute this workshop locally
+You must have set up these tools first:
+* Java 17+
+* Gradle 7.5+
+* Docker & Docker compose
+* Any IDE (IntelliJ IDEA, VSCode, Emacs,...)
+* [cURL](https://curl.se/), [HTTPie](https://httpie.io/) or any tool to call your REST APIs
 
-### SCM & Configuration management
+#### :rocket: If you don't want to bother with a local setup
 
-## Customer's management
+You can use [Gitpod](https://gitpod.io). 
+You must create an account first. 
 
-## Dealing with conflicts
+You then can open this project in either your local VS Code or directly in your browser
 
-## Authorization
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versionning-workshop.git){: .center-image-caption} 
+
+## :heavy_check_mark: Ready ?
+
+Now, you can start [the workshop](./docs/index.md)
+
