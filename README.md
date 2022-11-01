@@ -126,11 +126,12 @@ gitGraph:
 |---|---|
 | REST API | proficient |
 | Java | novice |
+| Gradle | novice |
 | Spring Framework, Gateway | novice |
 | OpenID Connect | novice |
 | Docker | novice |
 
-### :scissors: Tools 
+### :wrench: Tools 
 #### If you want to execute this workshop locally
 You must have set up these tools first:
 * Java 17+
@@ -146,9 +147,9 @@ You must create an account first.
 
 You then can open this project in either your local VS Code or directly in your browser
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versionning-workshop.git){: .center-image-caption} 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versionning-workshop.git)
 
-## :heavy_check_mark: Ready ?
+## :boom: Ready ?
 
 Now, you can start [the workshop](./docs/index.md)
 
