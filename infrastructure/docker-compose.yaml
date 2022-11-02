@@ -19,3 +19,12 @@ services:
     ports:
       - "6831:6831/udp"
       - "16686:16686"
+  mock-oauth2-server:
+   build: ./mock-oauth2-server
+   container_name: oauth2-server
+   ports:
+     - 7777:7777
+   environment:
+     - JSON_CONFIG_PATH=./config.json
+     - LOG_LEVEL=DEBUG
+     - SERVER_PORT=7777
