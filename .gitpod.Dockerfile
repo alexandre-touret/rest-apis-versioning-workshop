@@ -2,7 +2,7 @@ FROM gitpod/workspace-full
 
 ## Install dependencies
 RUN sudo apt update && \
-    sudo apt install curl httpie
+    sudo apt install -y curl httpie
 
 
 USER gitpod
