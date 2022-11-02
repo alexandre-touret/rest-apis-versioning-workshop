@@ -1,0 +1,5 @@
+rootProject.name = 'res-apis-versionning-workshop'
+include 'rest-book'
+include 'rest-number'
+include 'gateway'
+include 'config-server'
