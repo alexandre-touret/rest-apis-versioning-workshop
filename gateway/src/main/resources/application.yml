@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: path_route
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/api/books/{segment}
+        - id: path_route
+          uri: http://127.0.0.1:8081
+          predicates:
+            - Path=/api/isbns/{segment}
