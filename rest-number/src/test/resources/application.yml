@@ -51,3 +51,10 @@ management:
     web:
       exposure:
         include: '*'
+spring:
+  cloud:
+    discovery:
+      enabled: false
+    config:
+      enabled: false
+      fail-fast: off

@@ -10,9 +10,6 @@ spring:
       format_sql: true
       generate_statistics: true
       use-new-id-generator-mappings: false
-  config:
-    import: optional:configserver:http://127.0.0.1:8888
-
   circuitbreaker:
      resilience4j:
        enabled: true
