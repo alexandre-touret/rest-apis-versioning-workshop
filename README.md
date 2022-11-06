@@ -151,5 +151,15 @@ You then can open this project in either your local VS Code or directly in your 
 
 ## :boom: Ready ?
 
-Now, you can start [the workshop](./docs/index.md)
+:warning: I strongly suggest to fork this project into your personal github namespace. You then can change the URL mentioned above to link github and gitpod:
+
+```markdown
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versionning-workshop.git)
+```
+
+or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` prefix):
+
+``https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versionning-workshop.git``
+
+Now, you can start [the workshop](./docs/index.md).
 
