@@ -12,7 +12,7 @@ You can also add a new operation getExcerpt
 
 You just added a new data and functionality without versionning
 
-## Evolvement 
+## Changes 
 
 add deprecated
 
