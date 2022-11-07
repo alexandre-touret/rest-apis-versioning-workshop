@@ -122,22 +122,22 @@ gitGraph:
 
 ### :mortar_board: Skills
 
-| Skill | Level | 
-|---|---|
-| REST API | proficient |
-| Java | novice |
-| Gradle | novice |
-| Spring Framework, Gateway | novice |
-| OpenID Connect | novice |
-| Docker | novice |
+| Skill                                                                                                                                                                                                                                                                                   | Level | 
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
+| [REST API](https://google.aip.dev/general)                                                                                                                                                                                                                                              | proficient |
+| [Java](https://www.oracle.com/java/)                                                                                                                                                                                                                                                    | novice |   
+| [Gradle](https://gradle.org/)                                                                                                                                                                                                                                                           | novice |
+| [Spring Framework](https://spring.io/projects/spring-framework), [Boot](https://spring.io/projects/spring-boot), [Cloud Config](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/#_quick_start), [Cloud Gateway](https://spring.io/projects/spring-cloud-gateway) | novice |
+| [OpenID Connect](https://openid.net/connect)                                                                                                                                                                                                                                            | novice |]
+| [Docker](https://docs.docker.com/)                                                                                                                                                                                                                                                      | novice |
 
 ### :wrench: Tools 
 #### If you want to execute this workshop locally
 You must have set up these tools first:
-* Java 17+
-* Gradle 7.5+
-* Docker & Docker compose
-* Any IDE (IntelliJ IDEA, VSCode, Emacs,...)
+* [Java 17+](https://adoptium.net/temurin/releases/?version=17)
+* [Gradle 7.5+](https://gradle.org/)
+* [Docker](https://docs.docker.com/) & [Docker compose](https://docs.docker.com/compose/)
+* Any IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea), [VSCode](https://code.visualstudio.com/), [Netbeans](https://netbeans.apache.org/),...)
 * [cURL](https://curl.se/), [HTTPie](https://httpie.io/) or any tool to call your REST APIs
 
 #### :rocket: If you don't want to bother with a local setup
@@ -151,7 +151,7 @@ You then can open this project in either your local VS Code or directly in your 
 
 ## :boom: Ready ?
 
-:warning: I strongly suggest to fork this project into your personal github namespace. You then can change the URL mentioned above to link github and gitpod:
+:warning: I **strongly** suggest to fork this project into your personal github namespace. You then can change the URL mentioned above to link github and gitpod:
 
 ```markdown
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versionning-workshop.git)
@@ -162,4 +162,3 @@ or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` pr
 ``https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versionning-workshop.git``
 
 Now, you can start [the workshop](./docs/index.md).
-
