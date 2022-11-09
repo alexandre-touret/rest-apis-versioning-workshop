@@ -24,7 +24,7 @@ class BookNumbersControllerTimeoutIT {
 
     @Test
     void should_get_book_numbers_fallback() {
-        var response = restTemplate.getForEntity("http://127.0.0.1:" + port + "/api/isbns", BookNumbers.class);
+        var response = restTemplate.getForEntity("http://127.0.0.1:" + port + "/isbns", BookNumbers.class);
         assertEquals(GATEWAY_TIMEOUT, response.getStatusCode());
     }
 }

@@ -29,7 +29,7 @@ springdoc:
 
 booknumbers:
   api:
-    url: http://127.0.0.1:9999/api/isbns
+    url: http://127.0.0.1:9999/isbns
     timeout_sec: 2
 
 logging:

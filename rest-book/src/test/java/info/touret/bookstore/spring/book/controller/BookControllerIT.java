@@ -43,7 +43,7 @@ class BookControllerIT {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
-
+    private String booksUrl;
     @Autowired
     private RestTemplate restTemplate;
 
@@ -53,6 +53,7 @@ class BookControllerIT {
 
     @BeforeEach
     void setUp() {
+        booksUrl ="http://127.0.0.1:" + port + "/books";
         mockServer = MockRestServiceServer.bindTo(restTemplate).build();
         mockServer.reset();
     }
@@ -101,14 +102,14 @@ class BookControllerIT {
 
     @Test
     void should_get_a_random_book() {
-        var book = testRestTemplate.getForEntity("http://127.0.0.1:" + port + "/api/books/random", Book.class).getBody();
+        var book = testRestTemplate.getForEntity(booksUrl +"/random", Book.class).getBody();
         assertNotNull(book.getId());
     }
 
 
     @Test
     void should_find_all_books() throws Exception {
-        var requestEntity = RequestEntity.get(new URI("http://127.0.0.1:" + port + "/api/books")).accept(MediaType.APPLICATION_JSON).build();
+        var requestEntity = RequestEntity.get(new URI(booksUrl)).accept(MediaType.APPLICATION_JSON).build();
         var books = testRestTemplate.exchange(requestEntity, new ParameterizedTypeReference<List<Book>>() {
         }).getBody();
         assertNotNull(books);
@@ -117,7 +118,7 @@ class BookControllerIT {
 
     @Test
     void should_get_a_count() throws Exception {
-        var requestEntity = RequestEntity.get(new URI("http://127.0.0.1:" + port + "/api/books/count")).accept(MediaType.APPLICATION_JSON).build();
+        var requestEntity = RequestEntity.get(new URI(booksUrl +"/count")).accept(MediaType.APPLICATION_JSON).build();
         var books = testRestTemplate.exchange(requestEntity, new ParameterizedTypeReference<Map<String, Long>>() {
         }).getBody();
         assertNotNull(books);
@@ -127,7 +128,7 @@ class BookControllerIT {
 
     @Test
     void should_find_a_book() throws Exception {
-        var responseEntity = testRestTemplate.getForEntity("http://127.0.0.1:" + port + "/api/books/100", Book.class);
+        var responseEntity = testRestTemplate.getForEntity(booksUrl +"/100", Book.class);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         var book = responseEntity.getBody();
         assertNotNull(book);
@@ -136,7 +137,7 @@ class BookControllerIT {
 
     @Test
     void should_find_no_book() throws Exception {
-        var responseEntity = testRestTemplate.getForEntity("http://127.0.0.1:" + port + "/api/books/999", Book.class);
+        var responseEntity = testRestTemplate.getForEntity(booksUrl +"/999", Book.class);
         assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
         assertFalse(responseEntity.hasBody());
     }
@@ -147,11 +148,11 @@ class BookControllerIT {
         Book book = new Book();
         book.setAuthor("George Orwell");
         book.setTitle("Animal's farm");
-        var responseEntity = testRestTemplate.postForEntity("http://127.0.0.1:" + port + "/api/books", book, Book.class);
+        var responseEntity = testRestTemplate.postForEntity(booksUrl, book, Book.class);
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         var uri = responseEntity.getHeaders().getLocation();
         assertNotNull(uri);
-        assertTrue(uri.getPath().matches(".*/api/books/[1-9]+$"));
+        assertTrue(uri.getPath().matches(".*/books/[1-9]+$"));
         mockServer.verify();
     }
 
@@ -161,7 +162,7 @@ class BookControllerIT {
         Book book = new Book();
         book.setAuthor("George Orwell");
         book.setTitle("Animal's farm");
-        var responseEntity = testRestTemplate.postForEntity("http://127.0.0.1:" + port + "/api/books", book, Book.class);
+        var responseEntity = testRestTemplate.postForEntity(booksUrl, book, Book.class);
         assertEquals(HttpStatus.REQUEST_TIMEOUT, responseEntity.getStatusCode());
     }
 
@@ -171,14 +172,14 @@ class BookControllerIT {
         book.setId(100L);
         book.setAuthor("George Orwell");
         book.setTitle("Animal's farm");
-        var responseEntity = testRestTemplate.exchange("http://127.0.0.1:" + port + "/api/books", HttpMethod.PUT, new HttpEntity<>(book), Book.class);
+        var responseEntity = testRestTemplate.exchange(booksUrl, HttpMethod.PUT, new HttpEntity<>(book), Book.class);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
     }
 
     @Test
     void should_delete_book() throws Exception {
-        testRestTemplate.delete("http://127.0.0.1:" + port + "/api/books/100");
-        var responseEntity = testRestTemplate.getForEntity("http://127.0.0.1:" + port + "/api/books/100", Book.class);
+        testRestTemplate.delete(booksUrl +"/100");
+        var responseEntity = testRestTemplate.getForEntity(booksUrl +"/100", Book.class);
         assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
     }
 }

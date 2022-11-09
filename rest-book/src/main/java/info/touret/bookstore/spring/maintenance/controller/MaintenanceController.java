@@ -29,7 +29,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class MaintenanceController {
 
 
-    public static final String API_MAINTENANCE_URI = "/api/maintenance";
+    public static final String API_MAINTENANCE_URI = "/maintenance";
     private ApplicationEventPublisher eventPublisher;
 
     private ApplicationAvailability availability;

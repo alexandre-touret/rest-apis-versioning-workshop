@@ -23,7 +23,7 @@ class BookNumbersControllerIT {
 
     @Test
     void should_get_book_numbers() {
-        var response = restTemplate.getForEntity("http://127.0.0.1:" + port + "/api/isbns", BookNumbers.class);
+        var response = restTemplate.getForEntity("http://127.0.0.1:" + port + "/isbns", BookNumbers.class);
         assertEquals(OK, response.getStatusCode());
         final var body = response.getBody();
         assertNotNull(body.getAsin());

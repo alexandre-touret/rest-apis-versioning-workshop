@@ -25,7 +25,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  */
 @Timed(value = "numberController")
 @RestController
-@RequestMapping(value = "/api/isbns", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/isbns", produces = APPLICATION_JSON_VALUE)
 public class BookNumbersController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookNumbersController.class);
