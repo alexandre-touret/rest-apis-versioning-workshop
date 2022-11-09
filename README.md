@@ -69,7 +69,7 @@ C4Container
       Rel(gateway, bookstoreApi, "exposes")
       Rel(bookstoreApi, isbnApi, "uses")
       Rel(bookstoreApi, database, "stores data")
-      UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="2")
+      UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
 ```
 
 #### Explanations
@@ -106,11 +106,11 @@ Here is a summary of the stack used in this workshop for this architecture:
 %%{init: { 'logLevel': 'debug', 'theme': 'base', 'gitGraph': {'rotateCommitLabel': true}} }%%
 gitGraph:
     commit id:"Init"
-    commit id: "new features" tag:"Adding new attributes & operations"
+    commit id: "new features" tag:"Adding excerpt attribute & operation"
     branch V1
     checkout V1
-    commit id:"first update"
-    commit tag:"Revamping Bookstore API for customer 1"
+    commit id:"add author list"
+    commit tag:"Revamping Bookstore API for customer w/ author list"
     checkout main
     branch V2
     commit id: "revamping" tag:"revamping for customer 2"
