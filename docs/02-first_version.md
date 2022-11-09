@@ -41,16 +41,16 @@ resta
 
 ### Create a HTTP Header based version
 
-In the rest-numbers project, we will apply a HTTP Header based version in the [BookNumbersController](./../rest-number/src/main/java/info/touret/bookstore/spring/number/controller/BookNumbersController.java) class.
+In the [rest-numbers project](../rest-numbers), we will apply a HTTP Header based version in the [BookNumbersController](./../rest-number/src/main/java/info/touret/bookstore/spring/number/controller/BookNumbersController.java) class.
 
 We will use the ``X-API-VERSION`` http header to specify it.
+
+### Creation an "accept media" header
+
 We could also use  the accept media type header :
 
+
+TODO: trouver un exemple
 ```
 Accept: application/vnd.myapi.v2+json
 ```
-
-
-
-
-

@@ -46,7 +46,9 @@ subprojects {
         implementation 'io.opentracing.contrib:opentracing-spring-jaeger-cloud-starter:3.3.1'
         implementation 'io.micrometer:micrometer-registry-prometheus'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
     }
+
 
     bootJar {
         enabled = true
@@ -60,11 +62,9 @@ project(':rest-book') {
         testImplementation 'com.h2database:h2'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
-        implementation 'org.springframework.boot:spring-boot-starter-actuator'
         implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'io.github.resilience4j:resilience4j-spring-boot2'
-
         implementation 'org.springframework.boot:spring-boot-starter-aop'
         implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
         implementation 'com.fasterxml.jackson.core:jackson-annotations'
@@ -75,7 +75,6 @@ project(':rest-number') {
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'org.springframework.boot:spring-boot-starter-validation'
-        implementation 'org.springframework.boot:spring-boot-starter-actuator'
         implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'io.github.resilience4j:resilience4j-spring-boot2'
