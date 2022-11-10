@@ -6,6 +6,11 @@ For this workshop, all the configuration items will be provided by [Spring Cloud
 
 We will illustrate in this chapter the impacts of versioning in the configuration management.
 
+## Potential issues
+
+Configure the timeout differently
+Configure the excerpt size 
+
 
 
 

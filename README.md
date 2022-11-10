@@ -110,13 +110,15 @@ gitGraph:
     branch V1
     checkout V1
     commit id:"add author list"
+    commit id: "authorization V1"
     checkout main
     branch V2
     commit id: "revamping"
-    commit id: "authorization" 
-    merge V1
+    checkout V1
+    checkout V2
     commit id: "authorization"
-    commit id:"Deprecating V1"
+    merge V1
+    commit id: "Deprecating V1"
 ```
 
 ## :traffic_light: Prerequisites
