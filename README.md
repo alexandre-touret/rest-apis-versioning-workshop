@@ -110,12 +110,13 @@ gitGraph:
     branch V1
     checkout V1
     commit id:"add author list"
-    commit tag:"Revamping Bookstore API for customer w/ author list"
     checkout main
     branch V2
-    commit id: "revamping" tag:"revamping for customer 2"
+    commit id: "revamping"
+    commit id: "authorization" 
     merge V1
-    commit tag:"Deprecating V1"
+    commit id: "authorization"
+    commit id:"Deprecating V1"
 ```
 
 ## :traffic_light: Prerequisites
