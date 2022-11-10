@@ -138,7 +138,7 @@ You must have set up these tools first:
 * [Gradle 7.5+](https://gradle.org/)
 * [Docker](https://docs.docker.com/) & [Docker compose](https://docs.docker.com/compose/)
 * Any IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea), [VSCode](https://code.visualstudio.com/), [Netbeans](https://netbeans.apache.org/),...)
-* [cURL](https://curl.se/), [HTTPie](https://httpie.io/) or any tool to call your REST APIs
+* [cURL](https://curl.se/), [jq](https://stedolan.github.io/jq/), [HTTPie](https://httpie.io/) or any tool to call your REST APIs
 
 #### :rocket: If you don't want to bother with a local setup
 
