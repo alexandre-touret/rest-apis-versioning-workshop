@@ -33,3 +33,4 @@ gradle-app.setting
 book-*.json
 
 .idea
+*/out/

@@ -19,7 +19,7 @@ In the first shell, run:
 In the second one:
 
 ```jshelllanguage
-./gradlew bootRun-p rest-run
+./gradlew bootRun-p rest-number
 ```
 
 And in the last one:
@@ -36,7 +36,7 @@ _You can disable unit and integration tests by adding the option ``-x test`` at 
 
 ### Getting the OpenAPI Documentation
 
-You can now reach the current API documentation by running these commands :
+You can now reach the current API documentation by running these commands:
 
 For the books API:
 
@@ -59,6 +59,7 @@ You can also use the scripts located in the [bin](../bin) folder.
 * Get a Random Book
 
 You can get a random book by running this command:
+
 ```jshelllanguage
 . ./bin/randomBook.sh
 ```

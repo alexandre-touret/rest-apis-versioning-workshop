@@ -27,7 +27,7 @@ C4Context
 ```
 
 #### Explanations
-Here we have two main kind of users :
+Here we have two main kind of users:
 * Customer : He can browse and book books
 * Administrator: He can create books and activate/desactivate the maintenance mode
 
@@ -52,12 +52,13 @@ C4Container
 
                }
         Container_Boundary(b1,"Bookstore System"){
-          
-            Container(gateway,"API Gateway","Spring Cloud Gateway","Exposes the APIs")
             Container(bookstoreApi,"Bookstore API","Spring Boot, Cloud","Exposes the Bookstore APIs")
-            Container(configuration,"Configuration Server","Spring Cloud Config","Exposes the configuration")
-            Container(isbnApi,"ISBN","Spring Boot, Cloud","Exposes the ISBN APIs")
+            Container(gateway,"API Gateway","Spring Cloud Gateway","Exposes the APIs")
             ContainerDb(database, "Database", "PostgreSQL Database", "Stores bookstore")
+            Container(isbnApi,"ISBN","Spring Boot, Cloud","Exposes the ISBN APIs")
+            Container(configuration,"Configuration Server","Spring Cloud Config","Exposes the configuration")
+            Container(jaeger,"Jaeger","Jaeger","Gathers and provides distributed tracing")
+            ContainerDb(monitoring, "Monitoring TSDB", "Prometheus", "Stores metrics")
         }
       }
 
@@ -67,6 +68,7 @@ C4Container
       Rel(adminA, iam, "identifies & authorizes")
 
       Rel(gateway, bookstoreApi, "exposes")
+      Rel(gateway, isbnApi, "exposes")
       Rel(bookstoreApi, isbnApi, "uses")
       Rel(bookstoreApi, database, "stores data")
       UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
@@ -95,7 +97,7 @@ Here is a summary of the stack used in this workshop for this architecture:
 | ISBN API | JAVA 17,Spring Boot 2.7.X |  |
 | Configuration Server | Spring Cloud Config 2021.0.4 |  |
 | Database | PostgreSQL |  |
-| IAM Mock |  |  |
+| IAM Mock | TO BE DEFINED |  |
 
 
 ### Customers
@@ -140,7 +142,7 @@ You must have set up these tools first:
 * [Java 17+](https://adoptium.net/temurin/releases/?version=17)
 * [Gradle 7.5+](https://gradle.org/)
 * [Docker](https://docs.docker.com/) & [Docker compose](https://docs.docker.com/compose/)
-* Any IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea), [VSCode](https://code.visualstudio.com/), [Netbeans](https://netbeans.apache.org/),...)
+* Any IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea), [VSCode](https://code.visualstudio.com/), [Netbeans](https://netbeans.apache.org/),...) you wants
 * [cURL](https://curl.se/), [jq](https://stedolan.github.io/jq/), [HTTPie](https://httpie.io/) or any tool to call your REST APIs
 
 #### :rocket: If you don't want to bother with a local setup
@@ -148,7 +150,7 @@ You must have set up these tools first:
 You can use [Gitpod](https://gitpod.io). 
 You must create an account first. 
 
-You then can open this project in either your local VS Code or directly in your browser
+You then can open this project in either your local VS Code or directly in your browser:
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versionning-workshop.git)
 

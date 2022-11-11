@@ -3,9 +3,9 @@
 ## Warm up
 
 ### Infrastructure
-The required infrastructure is available by running Docker containers.
+:warning: The required infrastructure is available by running [Docker containers](https://www.docker.com/resources/what-container/).
 
-You can start the whole by running Docker compose.
+You can start the whole by running [Docker compose](https://docs.docker.com/compose/).
 
 ```bash
 cd infrastructure
@@ -28,7 +28,7 @@ oauth2-server             "java -cp @/app/jib-…"   mock-oauth2-server   runnin
 
 ## Spring services to be started before
 
-You **MUST** start the [config-server](../config-server) service before.
+:warning: You **MUST** also start the [config-server](../config-server) service before.
 
 Start a new shell and run the following command at the root of the project (i.e., ``rest-apis-versionning-workshop``)
 
