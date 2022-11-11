@@ -88,11 +88,9 @@ project(':rest-book') {
                 dateLibrary          : "java8",
                 java8                : "true",
                 openApiNullable      : "false",
-                serializationLibrary : "jackson",
                 documentationProvider: "springdoc",
                 useBeanValidation    : "true",
-                useSpringController  : "true",
-                serializableModel    : "true"
+                interfaceOnly: "true"
         ]
     }
     tasks.withType(JavaCompile) {
@@ -145,11 +143,9 @@ project(':rest-number') {
                 dateLibrary          : "java8",
                 java8                : "true",
                 openApiNullable      : "false",
-                serializationLibrary : "jackson",
                 documentationProvider: "springdoc",
                 useBeanValidation    : "true",
-                useSpringController  : "true",
-                serializableModel    : "true"
+                interfaceOnly: "true"
         ]
     }
     tasks.withType(JavaCompile) {
@@ -163,8 +159,6 @@ project(':rest-number') {
         mainClass = "info.touret.bookstore.spring.number.RestNumbersApplication"
     }
     sourceSets.main.java.srcDirs += "$buildDir/generated/src/main/java".toString()
-
-
     compileJava.dependsOn 'openApiGenerate'
 }
 

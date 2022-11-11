@@ -1,11 +1,12 @@
 package info.touret.bookstore.spring;
 
+import info.touret.apiversionning.book.generated.dto.APIErrorDto;
+import info.touret.bookstore.spring.book.exception.ApiCallTimeoutException;
+import info.touret.bookstore.spring.maintenance.exception.MaintenanceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import info.touret.bookstore.spring.book.exception.ApiCallTimeoutException;
-import info.touret.bookstore.spring.maintenance.exception.MaintenanceException;
 
 /**
  * Handles all the exceptions thrown by the application
@@ -18,8 +19,11 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     @ExceptionHandler(MaintenanceException.class)
-    public APIError maintenance() {
-        return new APIError(HttpStatus.I_AM_A_TEAPOT.value(),"Service currently in maintenance");
+    public APIErrorDto maintenance() {
+        APIErrorDto apiErrorDto = new APIErrorDto();
+        apiErrorDto.setCode(HttpStatus.I_AM_A_TEAPOT.value());
+        apiErrorDto.setReason("Service currently in maintenance");
+        return apiErrorDto;
     }
 
     /**
@@ -27,8 +31,11 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.REQUEST_TIMEOUT)
     @ExceptionHandler({ApiCallTimeoutException.class})
-    public APIError timeoutException() {
-        return new APIError(HttpStatus.REQUEST_TIMEOUT.value(),"A timeout occured");
+    public APIErrorDto timeoutException() {
+        APIErrorDto apiErrorDto = new APIErrorDto();
+        apiErrorDto.setCode(HttpStatus.REQUEST_TIMEOUT.value());
+        apiErrorDto.setReason("A timeout occured");
+        return apiErrorDto;
     }
 
 
@@ -37,7 +44,10 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({RuntimeException.class, Exception.class})
-    public APIError anyException() {
-        return new APIError(HttpStatus.INTERNAL_SERVER_ERROR.value(),"An unexpected server error occured");
+    public APIErrorDto anyException() {
+        APIErrorDto apiErrorDto = new APIErrorDto();
+        apiErrorDto.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        apiErrorDto.setReason("An unexpected server error occured");
+        return apiErrorDto;
     }
 }

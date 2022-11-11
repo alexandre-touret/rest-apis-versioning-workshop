@@ -26,9 +26,9 @@ infrastructure-jaeger-1   "/go/bin/all-in-one-…"   jaeger               runnin
 oauth2-server             "java -cp @/app/jib-…"   mock-oauth2-server   running             0.0.0.0:7777->7777/tcp, 8080/tcp
 ```
 
-## Spring services to start before
+## Spring services to be started before
 
-You MUST start the [config-server](../config-server) service before. 
+You **MUST** start the [config-server](../config-server) service before.
 
 Start a new shell and run the following command at the root of the project (i.e., ``rest-apis-versionning-workshop``)
 
@@ -113,8 +113,7 @@ Transfer-Encoding: chunked
 
 </details>
 
-
-## Ready? Let's deep dive into versionning!
+## Ready? Let's deep dive into versioning!
 
 Here are the chapters covered by this workshop:
 

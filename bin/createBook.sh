@@ -1,2 +1,2 @@
 #! /bin/bash
-curl -w "\n" -X POST -d '{"title":"Practising Quarkus", "author":"Antonio Goncalves", "yearOfPublication":"2020"}' -H "Content-Type: application/json" localhost:8888/books
+curl -w "\n" -X POST -d '{"title":"Practising Quarkus", "author":"Antonio Goncalves", "yearOfPublication":"2020"}' -H "Content-Type: application/json" localhost:8080/books

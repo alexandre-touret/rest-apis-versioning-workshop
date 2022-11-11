@@ -2,4 +2,4 @@
 
 curl -s \
   -w "\n" \
-  'localhost:8888/books/random' | jq
+  'localhost:8080/books/random' | jq

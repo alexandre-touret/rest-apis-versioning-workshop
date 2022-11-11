@@ -19,23 +19,27 @@ In the first shell, run:
 In the second one:
 
 ```jshelllanguage
-./gradlew bootRun -p rest-run
+./gradlew bootRun-p rest-run
 ```
 
 And in the last one:
 
 ```jshelllanguage
-./gradlew bootRun -p gateway
+./gradlew bootRun-p gateway
 ```
+
+_You can disable unit and integration tests by adding the option ``-x test`` at the end of the command ;-)._
 
 </details>
 
 ## The current status
 
 ### Getting the OpenAPI Documentation
+
 You can now reach the current API documentation by running these commands :
 
 For the books API:
+
 ```jshelllanguage
 http :8082/v3/api-docs
 ```

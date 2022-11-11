@@ -11,3 +11,5 @@
 See what happens
 
 Create scope for every version
+
+Spring security in the gateway, in the two services

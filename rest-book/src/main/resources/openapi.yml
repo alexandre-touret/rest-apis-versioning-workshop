@@ -47,7 +47,7 @@ paths:
       operationId: initInMaintenance
       requestBody:
         content:
-          application/json:
+          "*/*":
             schema:
               type: string
         required: true
@@ -84,7 +84,10 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Book"
+
         '204':
           description: No books found
           content:
@@ -311,7 +314,10 @@ paths:
           content:
             application/json:
               schema:
-                type: string
+                type: object
+                additionalProperties:
+                  type: integer
+                  format: int64
         '408':
           description: Request Timeout
           content:

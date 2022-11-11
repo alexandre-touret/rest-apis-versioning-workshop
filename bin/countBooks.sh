@@ -2,5 +2,5 @@
 
 curl -s \
   -w "\n" \
-  'localhost:8888/books/count' \
+  'localhost:8080/books/count' \
   -H 'accept: application/json' | jq
