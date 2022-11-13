@@ -1,9 +1,13 @@
 package info.touret.apiversionning.authorizationserver;
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.interfaces.RSAPublicKey;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,22 +19,28 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.OidcScopes;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.UUID;
+import com.nimbusds.jose.jwk.JWKSet;
+import com.nimbusds.jose.jwk.RSAKey;
+import com.nimbusds.jose.jwk.source.JWKSource;
+import com.nimbusds.jose.proc.SecurityContext;
 
 
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationConfiguration {
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationConfiguration.class);
+    private final AuthorizationClientsProperties authorizationClientsProperties;
+
+    public AuthorizationConfiguration(AuthorizationClientsProperties authorizationClientsProperties){
+        this.authorizationClientsProperties = authorizationClientsProperties;
+    }
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -41,16 +51,19 @@ public class AuthorizationConfiguration {
 
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId("products-client")
-                .clientSecret("{noop}secret")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
-                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .scope("openid")
-                .scope("products.write")
-                .build();
-
-        return new InMemoryRegisteredClientRepository(registeredClient);
+        var clientRepositories = authorizationClientsProperties.getClients().entrySet().stream().map(          
+        client -> {
+            LOGGER.info("Creating [{},{},{}] client repository",client.getKey(),client.getValue().getClientSecret(),client.getValue().getScopes());
+            return RegisteredClient.withId(UUID.randomUUID().toString())
+        .clientId(client.getValue().getClientId())
+        .clientSecret("{noop}"+client.getValue().getClientSecret())
+        .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+        .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+        .scopes(scopes -> scopes.addAll(client.getValue().getScopes()))
+        .build();
+        }).collect(Collectors.toList());
+        LOGGER.info("[{}] client repositories created",clientRepositories.size());
+        return new InMemoryRegisteredClientRepository(clientRepositories);
     }
 
     @Bean

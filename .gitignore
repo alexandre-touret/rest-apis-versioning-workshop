@@ -35,3 +35,4 @@ book-*.json
 .vscode
 .idea
 */out/
+token.txt
