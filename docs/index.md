@@ -36,7 +36,7 @@ Start a new shell and run the following command at the root of the project (i.e.
 ./gradlew bootRun -p config-server
 ```
 
-You should have the following output indicating the service is ready
+You should have the following output indicating the service is ready:
 
 ```
  [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''

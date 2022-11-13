@@ -173,10 +173,21 @@ You can also add a new operation getExcerpt
 
 You just added a new data and functionality without versionning
 
-## Changes 
+## What about backward compatibiliy?
 
-add deprecated
+Let's create a additional test with the [goold old BookDto definition](../rest-book/build/generated/src/main/java/info/touret/apiversionning/book/generated/dto/BookDto.java).
 
-Update openapi
+Copy paste this class in your [test source directory](../rest-book/src/test/java/) and remove the new attribute and operation created earlier. 
+You can rename it ``OldBookDto`` for example.
 
-see consequences
+In the [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java), add a new test method:
+
+```java
+@Test
+    void should_get_a_random_book_with_old_contract() {
+        var bookDto = testRestTemplate.getForEntity(booksUrl + "/random", OldBookDto.class).getBody();
+        assertNotNull(bookDto.getId());
+    }
+```
+
+See what happens.
