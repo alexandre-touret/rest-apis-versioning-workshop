@@ -16,3 +16,6 @@ Spring security in the gateway, in the two services
 
 
 https://oidcdebugger.com/
+
+
+http --form post :8009/oauth2/token grant_type="client_credentials" client_id="products-client-client-credentials"
