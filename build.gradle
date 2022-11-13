@@ -48,6 +48,7 @@ subprojects {
         implementation 'io.micrometer:micrometer-registry-prometheus'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        compileOnly("org.springframework.boot:spring-boot-devtools")
     }
 
     bootJar {
@@ -66,10 +67,10 @@ project(':rest-book') {
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'io.github.resilience4j:resilience4j-spring-boot2'
         implementation 'org.springframework.boot:spring-boot-starter-aop'
-        implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+        implementation "org.springdoc:springdoc-openapi-ui:${springdocVersion}"
         implementation 'com.fasterxml.jackson.core:jackson-annotations'
-        implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+        implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+        annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     }
     openApiValidate {
         inputSpec = "$projectDir/src/main/resources/openapi.yml".toString()
@@ -117,12 +118,12 @@ project(':rest-number') {
         implementation 'org.springframework.cloud:spring-cloud-starter-config'
         implementation 'io.github.resilience4j:resilience4j-spring-boot2'
         implementation 'org.springframework.boot:spring-boot-starter-aop'
-        implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
+        implementation "org.springdoc:springdoc-openapi-ui:${springdocVersion}"
         implementation 'com.fasterxml.jackson.core:jackson-annotations'
         implementation 'com.github.javafaker:javafaker:1.0.2'
         implementation 'org.yaml:snakeyaml:1.33'
-        implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-        annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+        implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+        annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     }
 
@@ -175,4 +176,14 @@ project(':config-server') {
         implementation 'org.springframework.cloud:spring-cloud-config-server'
     }
 
+}
+
+project(':authorization-server') {
+    dependencies {
+	    implementation 'org.springframework.boot:spring-boot-starter-security'
+        implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.3.1'
+	    implementation 'org.springframework.boot:spring-boot-starter-web'
+	    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	    testImplementation 'org.springframework.security:spring-security-test'
+    }
 }

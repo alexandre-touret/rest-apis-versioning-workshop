@@ -32,5 +32,6 @@ gradle-app.setting
 
 book-*.json
 
+.vscode
 .idea
 */out/

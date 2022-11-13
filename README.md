@@ -48,7 +48,7 @@ C4Container
 
       Enterprise_Boundary(b0, "Bookstore Boundary") {
         Container_Boundary(b2,"Bookstore IAM"){
-          Container(iam,"IAM Mock","Provides a JWT token with roles in claims")
+          Container(iam,"IAM","Provides a JWT token with roles in claims")
 
                }
         Container_Boundary(b1,"Bookstore System"){
@@ -97,7 +97,7 @@ Here is a summary of the stack used in this workshop for this architecture:
 | ISBN API | JAVA 17,Spring Boot 2.7.X |  |
 | Configuration Server | Spring Cloud Config 2021.0.4 |  |
 | Database | PostgreSQL |  |
-| IAM Mock | TO BE DEFINED |  |
+| Authorization Server | JAVA 17,Spring Boot 2.7.X, Spring Authorization Server 0.3.1 |  |
 
 
 ### Customers
@@ -132,7 +132,7 @@ gitGraph:
 | [REST API](https://google.aip.dev/general)                                                                                                                                                                                                                                              | proficient |
 | [Java](https://www.oracle.com/java/)                                                                                                                                                                                                                                                    | novice |   
 | [Gradle](https://gradle.org/)                                                                                                                                                                                                                                                           | novice |
-| [Spring Framework](https://spring.io/projects/spring-framework), [Boot](https://spring.io/projects/spring-boot), [Cloud Config](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/#_quick_start), [Cloud Gateway](https://spring.io/projects/spring-cloud-gateway) | novice |
+| [Spring Framework](https://spring.io/projects/spring-framework), [Boot](https://spring.io/projects/spring-boot), [Cloud Config](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/#_quick_start), [Cloud Gateway](https://spring.io/projects/spring-cloud-gateway) [Spring Authorization Server](https://docs.spring.io/spring-authorization-server/docs/current/reference/html/index.html)| novice |
 | [OpenID Connect](https://openid.net/connect)                                                                                                                                                                                                                                            | novice |]
 | [Docker](https://docs.docker.com/)                                                                                                                                                                                                                                                      | novice |
 
