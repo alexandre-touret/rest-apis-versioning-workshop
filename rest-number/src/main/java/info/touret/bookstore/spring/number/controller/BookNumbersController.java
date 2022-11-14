@@ -24,7 +24,7 @@ public class BookNumbersController implements IsbnsApi {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookNumbersController.class);
 
-    private BookNumbersService bookNumbersService;
+    private final BookNumbersService bookNumbersService;
 
     public BookNumbersController(BookNumbersService bookNumbersService) {
         this.bookNumbersService = bookNumbersService;

@@ -180,13 +180,12 @@ project(':config-server') {
 
 project(':authorization-server') {
     dependencies {
-	    implementation 'org.springframework.boot:spring-boot-starter-security'
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+        implementation 'org.springframework.boot:spring-boot-starter-security'
         implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.2.3'
-	    implementation 'org.springframework.boot:spring-boot-starter-web'
-	    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-        runtimeOnly 'com.h2database:h2'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	    testImplementation 'org.springframework.security:spring-security-test'
-        
+        testImplementation 'org.springframework.security:spring-security-test'
+
     }
 }
