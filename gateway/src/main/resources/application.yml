@@ -10,7 +10,7 @@ spring:
           uri: http://127.0.0.1:8081
           predicates:
             - Path=/isbns/{segment}
-# SECURITY CONFIGURATION TO BE APPLIED
+# SECURITY CONFIGURATION TO BE APPLIED (remove comments to apply it)
 #  security:
 #    oauth2:
 #      client:
