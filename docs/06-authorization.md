@@ -21,4 +21,4 @@ https://oidcdebugger.com/
 http --form post :8009/oauth2/token grant_type="client_credentials" client_id="products-client-client-credentials"
 
 
-http --form post :8009/oauth2/token grant_type="client_credentials" client_id="products-client" client_secret="secret"
+http --form post :8009/oauth2/token grant_type="client_credentials" client_id="customer1" client_secret="secret"
