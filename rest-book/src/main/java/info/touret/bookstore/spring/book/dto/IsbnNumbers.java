@@ -1,12 +1,14 @@
 package info.touret.bookstore.spring.book.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.io.Serializable;
 
 /**
  * Exposes only the useful attributes from the payload returned by Numbers API
  */
+@JsonTypeName("BookNumbers")
 public class IsbnNumbers implements Serializable {
     @JsonProperty("isbn_10")
     private String isbn10;

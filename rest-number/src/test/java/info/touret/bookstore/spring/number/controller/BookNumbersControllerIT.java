@@ -1,6 +1,6 @@
 package info.touret.bookstore.spring.number.controller;
 
-import info.touret.bookstore.spring.number.dto.BookNumbers;
+import info.touret.apiversionning.number.generated.dto.BookNumbersDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,7 +23,7 @@ class BookNumbersControllerIT {
 
     @Test
     void should_get_book_numbers() {
-        var response = restTemplate.getForEntity("http://127.0.0.1:" + port + "/api/isbns", BookNumbers.class);
+        var response = restTemplate.getForEntity("http://127.0.0.1:" + port + "/isbns", BookNumbersDto.class);
         assertEquals(OK, response.getStatusCode());
         final var body = response.getBody();
         assertNotNull(body.getAsin());

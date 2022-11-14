@@ -26,9 +26,13 @@ hs_err_pid*
 .gradle
 */build/
 /build/
+*/bin/
 # Ignore Gradle GUI config
 gradle-app.setting
 
 book-*.json
 
+.vscode
 .idea
+*/out/
+token.txt

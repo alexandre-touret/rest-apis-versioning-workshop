@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.availability.ApplicationAvailability;
 import org.springframework.boot.availability.ReadinessState;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,9 @@ public class CheckMaintenanceFilter implements Filter {
     @Autowired
     private ApplicationAvailability availability;
 
+    @Value("${server.servlet.context-path:}")
+    private String contextPath;
+
     @Autowired
     @Qualifier("handlerExceptionResolver")
     private HandlerExceptionResolver exceptionHandler;
@@ -46,7 +50,7 @@ public class CheckMaintenanceFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (availability.getReadinessState().equals(ReadinessState.REFUSING_TRAFFIC) &&
-                !((HttpServletRequest) request).getRequestURI().equals(API_MAINTENANCE_URI)) {
+                !((HttpServletRequest) request).getRequestURI().equals(contextPath + API_MAINTENANCE_URI)) {
             LOGGER.warn("Message handled during maintenance [{}]", ((HttpServletRequest) request).getRequestURI());
             exceptionHandler.resolveException((HttpServletRequest) request, (HttpServletResponse) response, null, new MaintenanceException("Service currently in maintenance"));
         } else {

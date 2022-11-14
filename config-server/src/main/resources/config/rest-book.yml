@@ -1,6 +1,5 @@
 server:
   port: 8082
-
 spring:
   ## The most important feature... ever
   banner:
@@ -62,7 +61,7 @@ springdoc:
 
 booknumbers:
   api:
-    url: http://127.0.0.1:8081/api/isbns
+    url: http://127.0.0.1:8081/isbns
     timeout_sec: 2
 
 # Default values
@@ -72,3 +71,12 @@ opentracing:
       host: localhost
       port: 6831
     enabled: true
+logging:
+  level:
+    org:
+      hibernate:
+        stat: debug
+        type: trace
+      springframework:
+        web: debug
+

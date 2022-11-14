@@ -3,7 +3,10 @@ package info.touret.bookstore.spring.book.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import info.touret.bookstore.spring.book.BookConfiguration;
+import info.touret.bookstore.spring.book.dto.IsbnNumbers;
 import info.touret.bookstore.spring.book.entity.Book;
+import info.touret.bookstore.spring.book.exception.ApiCallTimeoutException;
+import info.touret.bookstore.spring.book.repository.BookRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,9 +14,6 @@ import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.RestTemplate;
-import info.touret.bookstore.spring.book.dto.IsbnNumbers;
-import info.touret.bookstore.spring.book.exception.ApiCallTimeoutException;
-import info.touret.bookstore.spring.book.repository.BookRepository;
 
 import javax.validation.Valid;
 import java.io.FileNotFoundException;
@@ -22,10 +22,7 @@ import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
 import java.util.stream.StreamSupport;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * Book Spring Service
@@ -36,11 +33,11 @@ public class BookService {
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookService.class);
-    private BookRepository bookRepository;
-    private RestTemplate restTemplate;
+    private final BookRepository bookRepository;
+    private final RestTemplate restTemplate;
 
-    private CircuitBreakerFactory circuitBreakerFactory;
-    private String isbnServiceURL;
+    private final CircuitBreakerFactory circuitBreakerFactory;
+    private final String isbnServiceURL;
 
     public BookService(BookRepository bookRepository,
                        RestTemplate restTemplate,
@@ -111,7 +108,7 @@ public class BookService {
      * @return all the books stored in the database
      */
     public List<Book> findAllBooks() {
-        return StreamSupport.stream(bookRepository.findAll().spliterator(), false).collect(toList());
+        return StreamSupport.stream(bookRepository.findAll().spliterator(), false).toList();
     }
 
     public long count() {

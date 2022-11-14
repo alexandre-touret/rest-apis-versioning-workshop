@@ -1,6 +1,8 @@
 package info.touret.bookstore.spring.book.service;
 
+import info.touret.bookstore.spring.book.dto.IsbnNumbers;
 import info.touret.bookstore.spring.book.entity.Book;
+import info.touret.bookstore.spring.book.repository.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,8 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
-import info.touret.bookstore.spring.book.dto.IsbnNumbers;
-import info.touret.bookstore.spring.book.repository.BookRepository;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -20,10 +20,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 class BookServiceTest {
