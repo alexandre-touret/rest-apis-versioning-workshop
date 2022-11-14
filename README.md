@@ -1,3 +1,4 @@
+
 # REST APIs Versionning: Hands-on !
 
 This workshop aims to introduce different ways to handle and propose several versions of a same API to your customers.
@@ -66,7 +67,7 @@ C4Container
       Rel(adminA, gateway, "Uses & manage users")
       Rel(customerA, iam, "identifies & authorizes")
       Rel(adminA, iam, "identifies & authorizes")
-
+      Rel(gateway, iam, "verify token")
       Rel(gateway, bookstoreApi, "exposes")
       Rel(gateway, isbnApi, "exposes")
       Rel(bookstoreApi, isbnApi, "uses")
