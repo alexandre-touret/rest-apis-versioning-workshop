@@ -19,11 +19,10 @@ docker compose ps
 ```
 
 ```bash
-NAME                      COMMAND                  SERVICE              STATUS              PORTS
-books-database            "docker-entrypoint.s…"   database             running             0.0.0.0:5432->5432/tcp
-books-monitoring          "/bin/prometheus --c…"   monitoring           running             0.0.0.0:9090->9090/tcp
-infrastructure-jaeger-1   "/go/bin/all-in-one-…"   jaeger               running             5775/udp, 5778/tcp, 14250/tcp, 6832/udp, 14268/tcp, 0.0.0.0:6831->6831/udp, 0.0.0.0:16686->16686/tcp
-oauth2-server             "java -cp @/app/jib-…"   mock-oauth2-server   running             0.0.0.0:7777->7777/tcp, 8080/tcp
+NAME                      COMMAND                  SERVICE             STATUS              PORTS
+books-database            "docker-entrypoint.s…"   database            running             0.0.0.0:5432->5432/tcp
+books-monitoring          "/bin/prometheus --c…"   monitoring          running             0.0.0.0:9090->9090/tcp
+infrastructure-jaeger-1   "/go/bin/all-in-one-…"   jaeger              running             5775/udp, 5778/tcp, 14250/tcp, 6832/udp, 14268/tcp, 0.0.0.0:6831->6831/udp, 0.0.0.0:16686->16686/tcp
 ```
 
 ## Spring services to be started before
