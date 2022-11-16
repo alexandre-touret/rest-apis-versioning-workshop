@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.GATEWAY_TIMEOUT;
 
 /**
  * Numbers API spring controller
- * the time to respond is monitor using <code>@Timed</code> annotation
+ * the time to respond is monitored using <code>@Timed</code> annotation
  */
 @Timed(value = "numberController")
 @RestController
@@ -40,6 +40,7 @@ public class BookNumbersController implements IsbnsApi {
      */
 
     @Override
+    @SuppressWarnings("java:S2142")
     public ResponseEntity<BookNumbersDto> generateBookNumbers() {
         try {
             return ResponseEntity.ok(bookNumbersService.createBookNumbersAsync().get());

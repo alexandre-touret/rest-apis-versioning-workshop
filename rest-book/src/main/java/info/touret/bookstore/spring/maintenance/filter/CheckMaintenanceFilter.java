@@ -1,5 +1,6 @@
 package info.touret.bookstore.spring.maintenance.filter;
 
+import info.touret.bookstore.spring.maintenance.exception.MaintenanceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,12 @@ import org.springframework.boot.availability.ApplicationAvailability;
 import org.springframework.boot.availability.ReadinessState;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import info.touret.bookstore.spring.maintenance.exception.MaintenanceException;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,7 +30,7 @@ import static info.touret.bookstore.spring.maintenance.controller.MaintenanceCon
  */
 @Component
 public class CheckMaintenanceFilter implements Filter {
-    private final static Logger LOGGER = LoggerFactory.getLogger(CheckMaintenanceFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CheckMaintenanceFilter.class);
     @Autowired
     private ApplicationAvailability availability;
 

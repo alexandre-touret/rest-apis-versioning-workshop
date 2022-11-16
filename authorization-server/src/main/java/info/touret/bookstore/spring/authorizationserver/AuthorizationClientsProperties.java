@@ -5,6 +5,11 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
+/**
+ * Holds the configuration of all the clients defined in the <pre>application.properties</pre> file
+ *
+ * @see ClientsConfigurationProperties
+ */
 @Configuration
 @ConfigurationProperties(prefix = "authorization")
 public class AuthorizationClientsProperties {

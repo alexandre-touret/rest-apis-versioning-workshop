@@ -30,6 +30,11 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
 
+/**
+ * Defines the security policy applied in this workshop.
+ * It is based on <a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/">OAUTH2 Credential Flow</a>
+ * to make the workshop easy to be tested.
+ */
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationConfiguration {
@@ -47,6 +52,12 @@ public class AuthorizationConfiguration {
         return http.formLogin(Customizer.withDefaults()).build();
     }
 
+    /**
+     * Stores all the clients defined in the application.properties file under the <pre>authorization.clients</pre> prefix.
+     * For instance: <pre>authorization.clients.customer1.clientId=customer1</pre>
+     *
+     * @return The registry of all the clients
+     */
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
         var clientRepositories = authorizationClientsProperties.getClients().entrySet().stream().map(

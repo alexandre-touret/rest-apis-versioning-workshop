@@ -45,6 +45,7 @@ public class BookNumbersService {
         return CompletableFuture.supplyAsync(this::createBookNumbers);
     }
 
+    @SuppressWarnings("java:S2142")
     public BookNumbersDto createBookNumbers() {
         LOGGER.info("Generating book numbers, sleeping {} msec", timeToSleep);
 
