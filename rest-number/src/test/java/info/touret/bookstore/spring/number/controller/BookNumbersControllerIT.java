@@ -1,6 +1,6 @@
 package info.touret.bookstore.spring.number.controller;
 
-import info.touret.apiversionning.number.generated.dto.BookNumbersDto;
+import info.touret.bookstore.spring.number.generated.dto.BookNumbersDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

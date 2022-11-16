@@ -1,4 +1,4 @@
-package info.touret.apiversionning.gateway;
+package info.touret.bookstore.spring.gateway;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;

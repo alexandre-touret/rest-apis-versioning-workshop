@@ -1,10 +1,10 @@
-package info.touret.apiversionning.authorizationserver;
+package info.touret.bookstore.spring.configserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AuthorizationServerApplicationTests {
+class ConfigServerApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -29,7 +29,7 @@ infrastructure-jaeger-1   "/go/bin/all-in-one-…"   jaeger              running
 
 :warning: You **MUST** also start the [config-server](../config-server) service before.
 
-Start a new shell and run the following command at the root of the project (i.e., ``rest-apis-versionning-workshop``)
+Start a new shell and run the following command at the root of the project (i.e., ``rest-apis-versioning-workshop``)
 
 ```
 ./gradlew bootRun -p config-server
@@ -116,7 +116,7 @@ Transfer-Encoding: chunked
 
 Here are the chapters covered by this workshop:
 
-1. [Dealing with updates without versionning](./01-without_versionning.md)
+1. [Dealing with updates without versioning](./01-without_versioning.md)
 2. [Our first version](./02-first_version.md)
 3. [Adding new customers and a new functionalities](./03-second-version.md)
 4. [Configuration management](./04-scm.md)

@@ -1,7 +1,7 @@
 package info.touret.bookstore.spring;
 
-import info.touret.apiversionning.book.generated.dto.APIErrorDto;
 import info.touret.bookstore.spring.book.exception.ApiCallTimeoutException;
+import info.touret.bookstore.spring.book.generated.dto.APIErrorDto;
 import info.touret.bookstore.spring.maintenance.exception.MaintenanceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

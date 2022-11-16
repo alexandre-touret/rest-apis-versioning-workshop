@@ -1,7 +1,7 @@
 package info.touret.bookstore.spring.number.controller;
 
-import info.touret.apiversionning.number.generated.controller.IsbnsApi;
-import info.touret.apiversionning.number.generated.dto.BookNumbersDto;
+import info.touret.bookstore.spring.number.generated.controller.IsbnsApi;
+import info.touret.bookstore.spring.number.generated.dto.BookNumbersDto;
 import info.touret.bookstore.spring.number.service.BookNumbersService;
 import io.micrometer.core.annotation.Timed;
 import org.slf4j.Logger;

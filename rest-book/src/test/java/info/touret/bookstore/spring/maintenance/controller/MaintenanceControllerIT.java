@@ -1,7 +1,7 @@
 package info.touret.bookstore.spring.maintenance.controller;
 
-import info.touret.apiversionning.book.generated.dto.MaintenanceDto;
 import info.touret.bookstore.spring.book.entity.Book;
+import info.touret.bookstore.spring.book.generated.dto.MaintenanceDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

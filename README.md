@@ -1,11 +1,11 @@
 
-# REST APIs Versionning: Hands-on !
+# REST APIs Versioning: Hands-on !
 
 This workshop aims to introduce different ways to handle and propose several versions of a same API to your customers.
 
 ## :dart: Big picture
 
-During this workshop we will strive with API versionning on a (small) microservice application.
+During this workshop we will strive with API versioning on a (small) microservice application.
 Here is a short description of it.
 
 This platform aims to store and get books of a bookstore.
@@ -28,16 +28,18 @@ C4Context
 ```
 
 #### Explanations
+
 Here we have two main kind of users:
-* Customer : He can browse and book books
+
+* Customer : He can browse and create books
 * Administrator: He can create books and activate/desactivate the maintenance mode
 
 Within our platform, we have two main systems:
+
 * Bookstore system which operate all the book related operations
 * Bookstore IAM which is responsible for identifying and authorizing users
 
 ### Container view
-
 
 ```mermaid
 C4Container
@@ -148,23 +150,23 @@ You must have set up these tools first:
 
 #### :rocket: If you don't want to bother with a local setup
 
-You can use [Gitpod](https://gitpod.io). 
-You must create an account first. 
+You can use [Gitpod](https://gitpod.io).
+You must create an account first.
 
 You then can open this project in either your local VS Code or directly in your browser:
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versionning-workshop.git)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versioning-workshop.git)
 
 ## :boom: Ready ?
 
 :warning: I **strongly** suggest to fork this project into your personal github namespace. You then can change the URL mentioned above to link github and gitpod:
 
 ```markdown
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versionning-workshop.git)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git)
 ```
 
 or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` prefix):
 
-``https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versionning-workshop.git``
+``https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git``
 
 Now, you can start [the workshop](./docs/index.md).

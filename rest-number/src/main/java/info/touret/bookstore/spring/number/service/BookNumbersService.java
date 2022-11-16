@@ -1,7 +1,7 @@
 package info.touret.bookstore.spring.number.service;
 
 import com.github.javafaker.Faker;
-import info.touret.apiversionning.number.generated.dto.BookNumbersDto;
+import info.touret.bookstore.spring.number.generated.dto.BookNumbersDto;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

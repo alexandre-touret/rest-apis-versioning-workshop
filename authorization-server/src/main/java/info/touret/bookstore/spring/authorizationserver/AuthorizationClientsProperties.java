@@ -1,4 +1,4 @@
-package info.touret.apiversionning.authorizationserver;
+package info.touret.bookstore.spring.authorizationserver;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

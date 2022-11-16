@@ -1,4 +1,4 @@
-package info.touret.apiversionning.authorizationserver;
+package info.touret.bookstore.spring.authorizationserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

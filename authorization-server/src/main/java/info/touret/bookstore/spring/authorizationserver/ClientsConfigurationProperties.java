@@ -1,4 +1,4 @@
-package info.touret.apiversionning.authorizationserver;
+package info.touret.bookstore.spring.authorizationserver;
 
 import java.util.Set;
 
