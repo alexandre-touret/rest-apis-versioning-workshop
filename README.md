@@ -152,7 +152,6 @@ You must have set up these tools first:
 
 You can use [Gitpod](https://gitpod.io).
 You must create an account first.
-
 You then can open this project in either your local VS Code or directly in your browser:
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versioning-workshop.git)
