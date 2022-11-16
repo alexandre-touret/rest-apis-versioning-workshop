@@ -1,9 +1,26 @@
 # Hand's on
 
+## Repository organisation
+
+Here is how this repository is organised and a short explanation:
+
+```jshelllanguage
+    ├── authorization-server-->OAUTH2 Spring Authorization Server
+    ├── config-server-->Spring Cloud Configuration Server
+    ├── docs-->Workshop documentation
+    ├── gateway-->Spring Cloud Gateway
+    ├── gradle-->Gradle configuration files and wrapper binaries
+    ├── infrastructure-->Docker compose based infrastructure(database,prometheus,jaeger)
+    ├── rest-book-->Spring Boot Bookstore application
+    └── rest-number-->Spring Boot Number application
+```
+
 ## :running: Warm up
 
 ### :computer: Infrastructure
-:warning: The required infrastructure is available by running [Docker containers](https://www.docker.com/resources/what-container/).
+
+:warning: The required infrastructure is available by
+running [Docker containers](https://www.docker.com/resources/what-container/).
 
 You can start the whole by running [Docker compose](https://docs.docker.com/compose/).
 
