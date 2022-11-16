@@ -21,7 +21,7 @@ public class GatewayApplication {
     @Bean
     SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) {
         /* Defaut configuration for OAUTH authorization (TO BE ADDED during the workshop)
-        http
+        http.csrf().disable().cors().disable()
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/book/**").hasAnyAuthority("SCOPE_book:read", "SCOPE_book:write")
                         .pathMatchers("/isbns").hasAnyAuthority("SCOPE_number:read", "SCOPE_number:write")
@@ -33,14 +33,14 @@ public class GatewayApplication {
                 */
 
         /* If the previous configuration is applied, you would remove this following line (and the other way around) */
-        http.authorizeExchange().anyExchange().permitAll();
+        http.csrf().disable().cors().disable().authorizeExchange().anyExchange().permitAll();
         return http.build();
     }
 
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         /* Defaut configuration for OAUTH authorization (TO BE ADDED during the workshop )
-        http
+        http.csrf().disable().cors().disable()
                 .authorizeExchange(exchanges -> exchanges
                         .anyExchange().permitAll()
                 )
@@ -48,7 +48,7 @@ public class GatewayApplication {
 
          */
         /* If the previous configuration is applied, you would remove this following line (and the other way around) */
-        http.authorizeExchange().anyExchange().permitAll();
+        http.csrf().disable().cors().disable().authorizeExchange().anyExchange().permitAll();
         return http.build();
     }
 

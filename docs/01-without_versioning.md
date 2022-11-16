@@ -47,7 +47,8 @@ http :8082/v3/api-docs
 For the numbers API:
 
 ```jshelllanguage
-http :8082/v3/api-docs
+http:
+8081 / v3 / api - docs
 ```
 
 You can also check the documentation by browsing these endpoints:

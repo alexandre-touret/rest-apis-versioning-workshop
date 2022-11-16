@@ -5,6 +5,10 @@ spring:
         - id: path_route
           uri: http://127.0.0.1:8082
           predicates:
+            - Path=/books
+        - id: path_route
+          uri: http://127.0.0.1:8082
+          predicates:
             - Path=/books/{segment}
         - id: path_route
           uri: http://127.0.0.1:8081
