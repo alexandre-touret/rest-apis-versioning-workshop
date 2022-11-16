@@ -1,8 +1,8 @@
 # Hand's on
 
-## Warm up
+## :running: Warm up
 
-### Infrastructure
+### :computer: Infrastructure
 :warning: The required infrastructure is available by running [Docker containers](https://www.docker.com/resources/what-container/).
 
 You can start the whole by running [Docker compose](https://docs.docker.com/compose/).
@@ -25,7 +25,7 @@ books-monitoring          "/bin/prometheus --c…"   monitoring          running
 infrastructure-jaeger-1   "/go/bin/all-in-one-…"   jaeger              running             5775/udp, 5778/tcp, 14250/tcp, 6832/udp, 14268/tcp, 0.0.0.0:6831->6831/udp, 0.0.0.0:16686->16686/tcp
 ```
 
-## Spring services to be started before
+## :information_desk_person: Spring services to be started before
 
 :warning: You **MUST** also start the [config-server](../config-server) service before.
 
@@ -112,7 +112,7 @@ Transfer-Encoding: chunked
 
 </details>
 
-## Ready? Let's deep dive into versioning!
+## :sparkles: Ready? Let's deep dive into versioning!
 
 Here are the chapters covered by this workshop:
 
