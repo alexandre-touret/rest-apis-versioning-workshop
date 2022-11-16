@@ -5,14 +5,14 @@
 Here is how this repository is organised and a short explanation:
 
 ```jshelllanguage
-    ├── authorization-server-->OAUTH2 Spring Authorization Server
-    ├── config-server-->Spring Cloud Configuration Server
-    ├── docs-->Workshop documentation
-    ├── gateway-->Spring Cloud Gateway
-    ├── gradle-->Gradle configuration files and wrapper binaries
-    ├── infrastructure-->Docker compose based infrastructure(database,prometheus,jaeger)
-    ├── rest-book-->Spring Boot Bookstore application
-    └── rest-number-->Spring Boot Number application
+    ├── authorization-server    -->OAUTH2 Spring Authorization Server
+    ├── config-server           -->Spring Cloud Configuration Server
+    ├── docs                    -->Workshop documentation
+    ├── gateway                 -->Spring Cloud Gateway
+    ├── gradle                  -->Gradle configuration files and wrapper binaries
+    ├── infrastructure          -->Docker compose based infrastructure(database,prometheus,jaeger)
+    ├── rest-book               -->Spring Boot Bookstore application
+    └── rest-number             -->Spring Boot Number application
 ```
 
 ## :running: Warm up
