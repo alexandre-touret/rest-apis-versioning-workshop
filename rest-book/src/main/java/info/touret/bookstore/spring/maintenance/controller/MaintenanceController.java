@@ -1,7 +1,7 @@
 package info.touret.bookstore.spring.maintenance.controller;
 
-import info.touret.apiversionning.book.generated.controller.MaintenanceApi;
-import info.touret.apiversionning.book.generated.dto.MaintenanceDto;
+import info.touret.bookstore.spring.book.generated.controller.MaintenanceApi;
+import info.touret.bookstore.spring.book.generated.dto.MaintenanceDto;
 import org.springframework.boot.availability.ApplicationAvailability;
 import org.springframework.boot.availability.AvailabilityChangeEvent;
 import org.springframework.boot.availability.ReadinessState;

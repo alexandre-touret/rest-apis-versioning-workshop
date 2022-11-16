@@ -12,8 +12,8 @@ bootJar {
 
 allprojects {
     apply plugin: 'java'
-
-    group = 'info.touret.apiversionning'
+    apply plugin: 'idea'
+    group = 'info.touret.bookstore.spring'
     version = '0.0.1-SNAPSHOT'
     sourceCompatibility = '17'
 
@@ -28,8 +28,6 @@ allprojects {
 }
 
 subprojects {
-
-    apply plugin: 'idea'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
@@ -48,7 +46,7 @@ subprojects {
         implementation 'io.micrometer:micrometer-registry-prometheus'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         implementation 'org.springframework.boot:spring-boot-starter-actuator'
-        compileOnly("org.springframework.boot:spring-boot-devtools")
+        compileOnly 'org.springframework.boot:spring-boot-devtools'
     }
 
     bootJar {
@@ -82,16 +80,16 @@ project(':rest-book') {
         modelNameSuffix = "Dto"
         inputSpec = "$projectDir/src/main/resources/openapi.yml".toString()
         outputDir = "$buildDir/generated".toString()
-        apiPackage = "info.touret.apiversionning.book.generated.controller"
-        invokerPackage = "info.touret.apiversionning.book.generated.invoker"
-        modelPackage = "info.touret.apiversionning.book.generated.dto"
+        apiPackage = "info.touret.bookstore.spring.book.generated.controller"
+        invokerPackage = "info.touret.bookstore.spring.book.generated.invoker"
+        modelPackage = "info.touret.bookstore.spring.book.generated.dto"
         configOptions = [
                 dateLibrary          : "java8",
                 java8                : "true",
                 openApiNullable      : "false",
                 documentationProvider: "springdoc",
                 useBeanValidation    : "true",
-                interfaceOnly: "true"
+                interfaceOnly        : "true"
         ]
     }
     tasks.withType(JavaCompile) {
@@ -137,16 +135,16 @@ project(':rest-number') {
         modelNameSuffix = "Dto"
         inputSpec = "$projectDir/src/main/resources/openapi.yml".toString()
         outputDir = "$buildDir/generated".toString()
-        apiPackage = "info.touret.apiversionning.number.generated.controller"
-        invokerPackage = "info.touret.apiversionning.number.generated.invoker"
-        modelPackage = "info.touret.apiversionning.number.generated.dto"
+        apiPackage = "info.touret.bookstore.spring.number.generated.controller"
+        invokerPackage = "info.touret.bookstore.spring.number.generated.invoker"
+        modelPackage = "info.touret.bookstore.spring.number.generated.dto"
         configOptions = [
                 dateLibrary          : "java8",
                 java8                : "true",
                 openApiNullable      : "false",
                 documentationProvider: "springdoc",
                 useBeanValidation    : "true",
-                interfaceOnly: "true"
+                interfaceOnly        : "true"
         ]
     }
     tasks.withType(JavaCompile) {

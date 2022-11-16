@@ -1,11 +1,12 @@
-# How to upgrade your API without versionning?
+# How to upgrade your API without versioning?
 
 At this point we have our first customer : **John Doe** who uses our API with the current specification.  
 
 ## Prerequisites
 
-You have to start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number) and [the gateway](../gateway) modules.
-As earlier, you must be at the root of the project (i.e., ``rest-apis-versionning-workshop``).
+You have to start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number)
+and [the gateway](../gateway) modules.
+As earlier, you must be at the root of the project (i.e., ``rest-apis-versioning-workshop``).
 
 <details>
 <summary>Click to expand</summary>
@@ -46,7 +47,8 @@ http :8082/v3/api-docs
 For the numbers API:
 
 ```jshelllanguage
-http :8082/v3/api-docs
+http:
+8081 / v3 / api - docs
 ```
 
 You can also check the documentation by browsing these endpoints:
@@ -96,8 +98,11 @@ We will extract the first 100 characters.
 ./gradlew build -p rest-book
 ```
 
-3. Normally you can see now this new attribute in the [BookDto class](../rest-book/build/generated/src/main/java/info/touret/apiversionning/book/generated/dto/BookDto.java). 
-4. In the [Book entity class](../rest-book/src/main/java/info/touret/bookstore/spring/book/entity/Book.java), add a transient attribute as below
+3. Normally you can see now this new attribute in
+   the [BookDto class](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java)
+   .
+4. In the [Book entity class](../rest-book/src/main/java/info/touret/bookstore/spring/book/entity/Book.java), add a
+   transient attribute as below
 
 ```java
 
@@ -171,16 +176,20 @@ You can restart your rest-book service
 
 You can also add a new operation getExcerpt
 
-You just added a new data and functionality without versionning
+You just added a new data and functionality without versioning
 
 ## What about backward compatibiliy?
 
-Let's create a additional test with the [goold old BookDto definition](../rest-book/build/generated/src/main/java/info/touret/apiversionning/book/generated/dto/BookDto.java).
+Let's create a additional test with
+the [goold old BookDto definition](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java)
+.
 
-Copy paste this class in your [test source directory](../rest-book/src/test/java/) and remove the new attribute and operation created earlier. 
+Copy paste this class in your [test source directory](../rest-book/src/test/java/) and remove the new attribute and
+operation created earlier.
 You can rename it ``OldBookDto`` for example.
 
-In the [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java), add a new test method:
+In the [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java)
+, add a new test method:
 
 ```java
 @Test

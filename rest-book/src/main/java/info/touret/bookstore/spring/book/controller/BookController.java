@@ -1,7 +1,7 @@
 package info.touret.bookstore.spring.book.controller;
 
-import info.touret.apiversionning.book.generated.controller.BooksApi;
-import info.touret.apiversionning.book.generated.dto.BookDto;
+import info.touret.bookstore.spring.book.generated.controller.BooksApi;
+import info.touret.bookstore.spring.book.generated.dto.BookDto;
 import info.touret.bookstore.spring.book.mapper.BookMapper;
 import info.touret.bookstore.spring.book.service.BookService;
 import io.micrometer.core.annotation.Timed;

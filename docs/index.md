@@ -1,9 +1,26 @@
 # Hand's on
 
-## Warm up
+## Repository organisation
 
-### Infrastructure
-:warning: The required infrastructure is available by running [Docker containers](https://www.docker.com/resources/what-container/).
+Here is how this repository is organised and a short explanation:
+
+```jshelllanguage
+    ├── authorization-server    -->OAUTH2 Spring Authorization Server
+    ├── config-server           -->Spring Cloud Configuration Server
+    ├── docs                    -->Workshop documentation
+    ├── gateway                 -->Spring Cloud Gateway
+    ├── gradle                  -->Gradle configuration files and wrapper binaries
+    ├── infrastructure          -->Docker compose based infrastructure(database,prometheus,jaeger)
+    ├── rest-book               -->Spring Boot Bookstore application
+    └── rest-number             -->Spring Boot Number application
+```
+
+## :running: Warm up
+
+### :computer: Infrastructure
+
+:warning: The required infrastructure is available by
+running [Docker containers](https://www.docker.com/resources/what-container/).
 
 You can start the whole by running [Docker compose](https://docs.docker.com/compose/).
 
@@ -19,18 +36,17 @@ docker compose ps
 ```
 
 ```bash
-NAME                      COMMAND                  SERVICE              STATUS              PORTS
-books-database            "docker-entrypoint.s…"   database             running             0.0.0.0:5432->5432/tcp
-books-monitoring          "/bin/prometheus --c…"   monitoring           running             0.0.0.0:9090->9090/tcp
-infrastructure-jaeger-1   "/go/bin/all-in-one-…"   jaeger               running             5775/udp, 5778/tcp, 14250/tcp, 6832/udp, 14268/tcp, 0.0.0.0:6831->6831/udp, 0.0.0.0:16686->16686/tcp
-oauth2-server             "java -cp @/app/jib-…"   mock-oauth2-server   running             0.0.0.0:7777->7777/tcp, 8080/tcp
+NAME                      COMMAND                  SERVICE             STATUS              PORTS
+books-database            "docker-entrypoint.s…"   database            running             0.0.0.0:5432->5432/tcp
+books-monitoring          "/bin/prometheus --c…"   monitoring          running             0.0.0.0:9090->9090/tcp
+infrastructure-jaeger-1   "/go/bin/all-in-one-…"   jaeger              running             5775/udp, 5778/tcp, 14250/tcp, 6832/udp, 14268/tcp, 0.0.0.0:6831->6831/udp, 0.0.0.0:16686->16686/tcp
 ```
 
-## Spring services to be started before
+## :information_desk_person: Spring services to be started before
 
 :warning: You **MUST** also start the [config-server](../config-server) service before.
 
-Start a new shell and run the following command at the root of the project (i.e., ``rest-apis-versionning-workshop``)
+Start a new shell and run the following command at the root of the project (i.e., ``rest-apis-versioning-workshop``)
 
 ```
 ./gradlew bootRun -p config-server
@@ -113,11 +129,11 @@ Transfer-Encoding: chunked
 
 </details>
 
-## Ready? Let's deep dive into versioning!
+## :sparkles: Ready? Let's deep dive into versioning!
 
 Here are the chapters covered by this workshop:
 
-1. [Dealing with updates without versionning](./01-without_versionning.md)
+1. [Dealing with updates without versioning](./01-without_versioning.md)
 2. [Our first version](./02-first_version.md)
 3. [Adding new customers and a new functionalities](./03-second-version.md)
 4. [Configuration management](./04-scm.md)

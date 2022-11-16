@@ -5,11 +5,15 @@ spring:
         - id: path_route
           uri: http://127.0.0.1:8082
           predicates:
+            - Path=/books
+        - id: path_route
+          uri: http://127.0.0.1:8082
+          predicates:
             - Path=/books/{segment}
         - id: path_route
           uri: http://127.0.0.1:8081
           predicates:
-            - Path=/isbns/{segment}
+            - Path=/isbns
 # SECURITY CONFIGURATION TO BE APPLIED (remove comments to apply it)
 #  security:
 #    oauth2:
@@ -17,11 +21,11 @@ spring:
 #        registration:
 #          login-client:
 #            provider: authz
-#            client-id: customer1
-#            client-secret: secret
+#            client-id: gateway
+#            client-secret: secret3
 #            authorization-grant-type: client_credentials
 #            redirect-uri-template: "{baseUrl}/"
-#            scope: book:write
+#            scope: gateway
 #        provider:
 #          authz:
 #            authorization-uri: http://localhost:8009/oauth2/authorize

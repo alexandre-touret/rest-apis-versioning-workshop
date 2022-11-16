@@ -1,4 +1,4 @@
-package info.touret.apiversionning.authorizationserver;
+package info.touret.bookstore.spring.authorizationserver;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -7,10 +7,8 @@ import com.nimbusds.jose.proc.SecurityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
@@ -19,8 +17,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
@@ -34,6 +30,11 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
 
+/**
+ * Defines the security policy applied in this workshop.
+ * It is based on <a href="https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/">OAUTH2 Credential Flow</a>
+ * to make the workshop easy to be tested.
+ */
 @EnableWebSecurity
 @Configuration(proxyBeanMethods = false)
 public class AuthorizationConfiguration {
@@ -51,6 +52,12 @@ public class AuthorizationConfiguration {
         return http.formLogin(Customizer.withDefaults()).build();
     }
 
+    /**
+     * Stores all the clients defined in the application.properties file under the <pre>authorization.clients</pre> prefix.
+     * For instance: <pre>authorization.clients.customer1.clientId=customer1</pre>
+     *
+     * @return The registry of all the clients
+     */
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
         var clientRepositories = authorizationClientsProperties.getClients().entrySet().stream().map(

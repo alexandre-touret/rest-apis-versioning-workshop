@@ -1,4 +1,4 @@
-rootProject.name = 'res-apis-versionning-workshop'
+rootProject.name = 'rest-apis-versioning-workshop'
 include 'rest-book'
 include 'rest-number'
 include 'gateway'
