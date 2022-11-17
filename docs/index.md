@@ -29,6 +29,9 @@ cd infrastructure
 docker compose up -d
 ```
 
+If you start this command on Gitpod, [you will be asked to make public or not some  network ports](https://www.gitpod.io/docs/configure/workspaces/ports).  
+You can make them public.
+
 You can then check the running containers by running this command:
 
 ```jshelllanguage

@@ -158,7 +158,8 @@ You then can open this project in either your local VS Code or directly in your 
 
 ## :boom: Ready ?
 
-:warning: I **strongly** suggest to fork this project into your personal github namespace. You then can change the URL mentioned above to link github and gitpod:
+:warning: I **strongly** suggest to fork this project into your personal github namespace (aka your Github accounb). 
+You then can change the URL mentioned above to link github and gitpod:
 
 ```markdown
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git)
