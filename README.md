@@ -32,7 +32,7 @@ C4Context
 Here we have two main kind of users:
 
 * Customer : He can browse and create books
-* Administrator: He can create books and activate/desactivate the maintenance mode
+* Administrator: He can create books and activate/deactivate the maintenance mode
 
 Within our platform, we have two main systems:
 
@@ -83,12 +83,12 @@ This diagram dig into the systems exposed above in the system view.
 
 The Bookstore system is composed of:
 * The API Gateway which exposes our APIs
-* Bookstore API which exposes all the related book APIs and stores data to a PostgreSQL database
-* ISBN API which provides random ISBN numbers
-* Configuration server which centralises all the configuration files
+* The Bookstore API which exposes all the related book APIs and stores data to a PostgreSQL database
+* The ISBN API which provides random ISBN numbers
+* A Configuration server which centralizes all the configuration files
 
 The Bookstore IAM is composed of:
-* a mock server which provides JWT token with appropriate roles and informations
+* A mock server which provides JWT token with appropriate roles and information
 
 ### :straight_ruler: Stack
 Here is a summary of the stack used in this workshop for this architecture:
@@ -145,7 +145,7 @@ You must have set up these tools first:
 * [Java 17+](https://adoptium.net/temurin/releases/?version=17)
 * [Gradle 7.5+](https://gradle.org/)
 * [Docker](https://docs.docker.com/) & [Docker compose](https://docs.docker.com/compose/)
-* Any IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea), [VSCode](https://code.visualstudio.com/), [Netbeans](https://netbeans.apache.org/),...) you wants
+* Any IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea), [VSCode](https://code.visualstudio.com/), [Netbeans](https://netbeans.apache.org/),...) you want
 * [cURL](https://curl.se/), [jq](https://stedolan.github.io/jq/), [HTTPie](https://httpie.io/) or any tool to call your REST APIs
 
 #### :rocket: If you don't want to bother with a local setup
@@ -158,7 +158,7 @@ You then can open this project in either your local VS Code or directly in your 
 
 ## :boom: Ready ?
 
-:warning: I **strongly** suggest to fork this project into your personal github namespace. You then can change the URL mentioned above to link github and gitpod:
+:warning: I **strongly** suggest to fork this project into your personal GitHub namespace. You then can change the URL mentioned above to link GitHub and Gitpod:
 
 ```markdown
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git)
