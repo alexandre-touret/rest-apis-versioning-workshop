@@ -62,6 +62,12 @@ You should have the following output indicating the service is ready:
  [  restartedMain] i.t.a.c.ConfigServerApplication          : Started ConfigServerApplication in 2.986 seconds (JVM running for 3.328)
 ```
 
+:warning: You can ignore the message below and start using the API
+
+```jshelllanguage
+<==========---> 80% EXECUTING [13s]
+```
+
 To check it is effectively ready, you can reach the API by running this command:
 
 ```jshelllanguage
