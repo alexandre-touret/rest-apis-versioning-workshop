@@ -29,6 +29,9 @@ cd infrastructure
 docker compose up -d
 ```
 
+If you start this command on Gitpod, [you will be asked to make public or not some  network ports](https://www.gitpod.io/docs/configure/workspaces/ports).  
+You can make them public.
+
 You can then check the running containers by running this command:
 
 ```jshelllanguage
@@ -57,6 +60,12 @@ You should have the following output indicating the service is ready:
 ```
  [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
  [  restartedMain] i.t.a.c.ConfigServerApplication          : Started ConfigServerApplication in 2.986 seconds (JVM running for 3.328)
+```
+
+:warning: You can ignore the message below and start using the API
+
+```jshelllanguage
+<==========---> 80% EXECUTING [13s]
 ```
 
 To check it is effectively ready, you can reach the API by running this command:
@@ -135,7 +144,7 @@ Here are the chapters covered by this workshop:
 
 1. [Dealing with updates without versioning](./01-without_versioning.md)
 2. [Our first version](./02-first_version.md)
-3. [Adding new customers and a new functionalities](./03-second-version.md)
+3. [Adding new customers and a new functionalities](./03-second_version.md)
 4. [Configuration management](./04-scm.md)
 5. [Dealing with conflicts](./05-conflicts.md)
 6. [Authorization issues](./06-authorization.md)
