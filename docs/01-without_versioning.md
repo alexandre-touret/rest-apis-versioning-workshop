@@ -20,13 +20,13 @@ In the first shell, run:
 In the second one:
 
 ```jshelllanguage
-./gradlew bootRun-p rest-number
+./gradlew bootRun -p rest-number
 ```
 
 And in the last one:
 
 ```jshelllanguage
-./gradlew bootRun-p gateway
+./gradlew bootRun -p gateway
 ```
 
 _You can disable unit and integration tests by adding the option ``-x test`` at the end of the command ;-)._
