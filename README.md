@@ -150,11 +150,24 @@ You must have set up these tools first:
 
 #### :rocket: If you don't want to bother with a local setup
 
+##### With Gitpod (recommended)
 You can use [Gitpod](https://gitpod.io).
 You must create an account first.
 You then can open this project in either your local VS Code or directly in your browser:
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versioning-workshop.git)
+
+##### With Github Codespaces
+You can also [use Github Codespaces](https://docs.github.com/en/codespaces/). 
+You can create a new one by [running "Code > Create codespace on main"](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository).
+
+You have then to run the command in the shell:
+
+```jshelllanguage
+pip install httpie
+sdk install java 17.0.5-tem
+sdk default java 17.0.5-tem
+```
 
 ## :boom: Ready ?
 
