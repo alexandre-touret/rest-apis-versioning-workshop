@@ -183,7 +183,7 @@ project(':authorization-server') {
     dependencies {
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
         implementation 'org.springframework.boot:spring-boot-starter-security'
-        implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.2.3'
+        implementation "org.springframework.security:spring-security-oauth2-authorization-server:${springAuthServerVersion}"
         implementation 'org.springframework.boot:spring-boot-starter-web'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.springframework.security:spring-security-test'
