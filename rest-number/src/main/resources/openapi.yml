@@ -24,9 +24,23 @@ paths:
           content:
             application/json:
               schema:
-                "$ref": "#/components/schemas/BookNumbers"
+                "$ref": "#/components/schemas/APIError"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/APIError"
 components:
   schemas:
+    APIError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        reason:
+          type: string
     BookNumbers:
       type: object
       properties:

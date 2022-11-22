@@ -1,15 +1,13 @@
 package info.touret.bookstore.spring.number.service;
 
 import com.github.javafaker.Faker;
+import info.touret.bookstore.spring.number.exception.ISBNExecutionException;
 import info.touret.bookstore.spring.number.generated.dto.BookNumbersDto;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.CompletableFuture;
@@ -53,7 +51,7 @@ public class BookNumbersService {
             if (timeToSleep != 0)
                 TimeUnit.MILLISECONDS.sleep(timeToSleep);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            throw new ISBNExecutionException(e);
         }
 
         Faker faker = new Faker();
@@ -72,8 +70,6 @@ public class BookNumbersService {
      * @param e The handled exception
      * @return failedFuture
      */
-    @ResponseStatus(HttpStatus.GATEWAY_TIMEOUT)
-    @ExceptionHandler({TimeoutException.class})
     public CompletableFuture<BookNumbersDto> generateBookNumbersFallBack(TimeoutException e) {
         LOGGER.error(e.getMessage(), e);
         return CompletableFuture.failedFuture(e);
