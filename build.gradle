@@ -31,14 +31,11 @@ subprojects {
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
 
-    sourceCompatibility = '17'
-
     dependencyManagement {
         imports {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         }
     }
-
 
     dependencies {
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
@@ -118,8 +115,8 @@ project(':rest-number') {
         implementation 'org.springframework.boot:spring-boot-starter-aop'
         implementation "org.springdoc:springdoc-openapi-ui:${springdocVersion}"
         implementation 'com.fasterxml.jackson.core:jackson-annotations'
-        implementation 'com.github.javafaker:javafaker:1.0.2'
-        implementation 'org.yaml:snakeyaml:1.33'
+        implementation "com.github.javafaker:javafaker:${javaFakerVersion}"
+        implementation "org.yaml:snakeyaml:${snakeYamlVersion}"
         implementation "org.mapstruct:mapstruct:${mapstructVersion}"
         annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
@@ -183,10 +180,9 @@ project(':authorization-server') {
     dependencies {
         annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
         implementation 'org.springframework.boot:spring-boot-starter-security'
-        implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.2.3'
+        implementation "org.springframework.security:spring-security-oauth2-authorization-server:${springAuthServerVersion}"
         implementation 'org.springframework.boot:spring-boot-starter-web'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.springframework.security:spring-security-test'
-
     }
 }

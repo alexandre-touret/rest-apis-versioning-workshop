@@ -30,7 +30,6 @@ C4Context
 #### Explanations
 
 Here we have two main kind of users:
-
 * Customer : He can browse and create books
 * Administrator: He can create books and activate/deactivate the maintenance mode
 
@@ -100,7 +99,7 @@ Here is a summary of the stack used in this workshop for this architecture:
 | ISBN API | JAVA 17,Spring Boot 2.7.X |  |
 | Configuration Server | Spring Cloud Config 2021.0.4 |  |
 | Database | PostgreSQL |  |
-| Authorization Server | JAVA 17,Spring Boot 2.7.X, Spring Authorization Server 0.3.1 |  |
+| Authorization Server | JAVA 17,Spring Boot 2.7.X, Spring Authorization Server 0.4.0 |  |
 
 
 ### Customers
