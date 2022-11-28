@@ -131,8 +131,8 @@ public class BookService {
     private Book persistBook(Book book) {
         var isbnNumbers = restTemplate.getForEntity(isbnServiceURL, IsbnNumbers.class).getBody();
         if (isbnNumbers != null) {
-            book.isbn13 = isbnNumbers.getIsbn13();
-            book.isbn10 = isbnNumbers.getIsbn10();
+            book.setIsbn13(isbnNumbers.getIsbn13());
+            book.setIsbn10(isbnNumbers.getIsbn10());
         }
         return bookRepository.save(book);
     }
