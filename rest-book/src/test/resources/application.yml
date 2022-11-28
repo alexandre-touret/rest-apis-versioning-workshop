@@ -38,3 +38,7 @@ logging:
       hibernate:
         stat: debug
         type: trace
+
+opentracing:
+  jaeger:
+    enabled: false

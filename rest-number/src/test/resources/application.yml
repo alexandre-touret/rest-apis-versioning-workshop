@@ -58,3 +58,7 @@ spring:
     config:
       enabled: false
       fail-fast: off
+
+opentracing:
+  jaeger:
+    enabled: false
