@@ -147,6 +147,38 @@ You must have set up these tools first:
 * Any IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea), [VSCode](https://code.visualstudio.com/), [Netbeans](https://netbeans.apache.org/),...) you want
 * [cURL](https://curl.se/), [jq](https://stedolan.github.io/jq/), [HTTPie](https://httpie.io/) or any tool to call your REST APIs
 
+
+Here are commands to validate your environment:
+
+**Java**
+
+```jshelllanguage
+java -version                                                                                                                                            a696618@WL-941Y493
+openjdk version "17.0.5" 2022-10-18
+OpenJDK Runtime Environment Temurin-17.0.5+8 (build 17.0.5+8)
+OpenJDK 64-Bit Server VM Temurin-17.0.5+8 (build 17.0.5+8, mixed mode, sharing)
+
+```
+
+**Gradle**
+
+If you use the wrapper, you won't have troubles. Otherwise...:
+
+```jshelllanguage
+gradle --version                                                                                                                                         a696618@WL-941Y493
+
+Welcome to Gradle 7.6!
+```
+
+**Docker Compose**
+
+```jshelllanguage
+docker compose version                                                                                                                              16 ↵ a696618@WL-941Y493
+Docker Compose version v2.12.2
+```
+
+
+
 #### :rocket: If you don't want to bother with a local setup
 
 ##### With Gitpod (recommended)
