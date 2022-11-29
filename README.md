@@ -78,7 +78,7 @@ C4Container
 
 #### Explanations
 
-This diagram dig into the systems exposed above in the system view.
+This diagram digs into the systems exposed above in the system view.
 
 The Bookstore system is composed of:
 * The API Gateway which exposes our APIs
@@ -87,7 +87,7 @@ The Bookstore system is composed of:
 * A Configuration server which centralizes all the configuration files
 
 The Bookstore IAM is composed of:
-* A mock server which provides JWT token with appropriate roles and information
+* A mock server which provides JWT token with appropriate roles and information.
 
 ### :straight_ruler: Stack
 Here is a summary of the stack used in this workshop for this architecture:
@@ -214,4 +214,4 @@ or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` pr
 
 ``https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git``
 
-Now, you can start [the workshop](./docs/index.md).
+Now, you can start [the workshop](./docs/index.md) :tada:.

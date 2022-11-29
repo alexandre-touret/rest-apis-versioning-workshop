@@ -56,6 +56,8 @@ You can also check the documentation by browsing these endpoints:
 
 You can also use the scripts located in the [bin](../bin) folder.
 
+Here are some examples of the functionalities provided:
+
 * Get a Random Book
 
 You can get a random book by running this command:
