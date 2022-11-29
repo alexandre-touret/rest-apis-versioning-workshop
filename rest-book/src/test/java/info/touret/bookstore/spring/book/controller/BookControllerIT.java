@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.mock.http.client.MockClientHttpResponse;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.client.ExpectedCount;
 import org.springframework.test.web.client.MockRestServiceServer;
@@ -33,12 +34,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
+import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFORE_CLASS;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withStatus;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @Sql("classpath:/books-data.sql")
+@DirtiesContext(classMode = BEFORE_CLASS)
 class BookControllerIT {
 
 
@@ -98,10 +101,9 @@ class BookControllerIT {
                         requestTo(new URI(isbnAPIURL)))
                 .andExpect(method(HttpMethod.GET))
                 .andRespond(request -> {
-                    try {
-                        Thread.sleep(30000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                    var max = System.currentTimeMillis()+30000;
+                    while(System.currentTimeMillis()<max){
+                        // do nothing
                     }
                     return new MockClientHttpResponse(isbnNumbers.toString().getBytes(), HttpStatus.OK);
                 });

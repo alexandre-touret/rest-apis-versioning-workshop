@@ -134,9 +134,38 @@ Transfer-Encoding: chunked
 }
 
 ```
-
-
 </details>
+
+
+:warning: In the same way, you must also start the [authorization-server](../authorization-server).
+You can run it by running the following command:
+
+```jshelllanguage
+./gradlew bootRun -p authorization-server
+```
+
+You should such an output:
+
+```jshelllanguage
+2022-11-29 10:10:45.775  INFO 13729 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8009 (http) with context path ''
+2022-11-29 10:10:45.789  INFO 13729 --- [  restartedMain] i.t.b.s.a.AuthorizationServerApplication : Started AuthorizationServerApplication in 4.657 seconds (JVM running for 4.972)
+```
+
+You can test it by running this command:
+
+```jshelllanguage
+http --form post :8009/oauth2/token grant_type="client_credentials" client_id="customer1" client_secret="secret1" -p b
+```
+
+You should then have an access token in the response:
+
+```json
+{
+    "access_token": "eyJraWQiOiJlZjY5MTRkMC0wM2UwLTRlZmUtYjg5NS00MzMyOTlkMmE5ODAiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjEiLCJhdWQiOiJjdXN0b21lcjEiLCJuYmYiOjE2Njk3MTMxNjYsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwOSIsImV4cCI6MTY2OTcxMzQ2NiwiaWF0IjoxNjY5NzEzMTY2fQ.E6_tfUxoULlAPUf91OYSyAu3YG0ZLCBIzNgaOq8cH7MKo5ZMTjUmGMycChtRQZPn7BAyseqQy8e8nwwkzcx9aIFOakQvKTg5GSJBwwwNUvpqvc91NhUfXy-KpuzLnDph4YIP5PjnUQwByBU5rsK_ALVQlcY5AePgErlcUszPx0VgZoLBrp46ld520BccAa9Tz20TaNz5wMlqURqrz7bwp-Q65iCVy3TrLaiT4qrdNLsCsxlJA-0HIrlBTU8HBt0Xv0oh-8P6iTFZvH7s1qtwby1fSZ11eGOOA5_SZ7JJ-9oC5L7-bdA0LBSQxDJtEJJOZBG1Ellypj8NWPRPFZt_UA",
+    "expires_in": 299,
+    "token_type": "Bearer"
+}
+```
 
 ## :sparkles: Ready? Let's deep dive into versioning!
 
