@@ -29,7 +29,7 @@ cd infrastructure
 docker compose up -d
 ```
 
-If you start this command on Gitpod, [you will be asked to make public or not some  network ports](https://www.gitpod.io/docs/configure/workspaces/ports).  
+If you start this command on Gitpod, [you will be asked to make public or not some network ports](https://www.gitpod.io/docs/configure/workspaces/ports).  
 You can make them public.
 
 You can then check the running containers by running this command:
@@ -137,14 +137,14 @@ Transfer-Encoding: chunked
 </details>
 
 
-:warning: In the same way, you must also start the [authorization-server](../authorization-server).
+:warning: In the same way, you **MUST** also start the [authorization-server](../authorization-server).
 You can run it by running the following command:
 
 ```jshelllanguage
 ./gradlew bootRun -p authorization-server
 ```
 
-You should such an output:
+You should get such an output:
 
 ```jshelllanguage
 2022-11-29 10:10:45.775  INFO 13729 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8009 (http) with context path ''
