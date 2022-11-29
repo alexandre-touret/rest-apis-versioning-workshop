@@ -4,8 +4,7 @@ At this point we have our first customer : **John Doe** who uses our API with th
 
 ## Prerequisites
 
-You have to start four new shells and run [rest-book](../rest-book), [rest-number](../rest-number), [authorization-server](../authorization-server)
-and [the gateway](../gateway) modules.
+You have to start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number) and [the gateway](../gateway) modules.
 As mentioned earlier, you must be at the root of the project (i.e., ``rest-apis-versioning-workshop``).
 
 <details>
@@ -23,11 +22,6 @@ In the second one:
 ./gradlew bootRun -p rest-number
 ```
 
-In the second one:
-
-```jshelllanguage
-./gradlew bootRun -p authorization-server
-```
 And in the last one:
 
 ```jshelllanguage
@@ -213,26 +207,64 @@ You can also do that through the API Gateway:
 http :8080/books/1098 --print b | jq .excerpt 
 ```
 
-## Adding new operations
+## Adding a new operation
 
-You can then add a new operation ``getBookExcerpt``:
-
-```java
- @Override
-    public ResponseEntity<String> getBookExcerpt(Long id) {
-        var optionalBook = bookService.findBookById(id);
-        if (optionalBook.isPresent()) {
-            return ResponseEntity.ok(optionalBook.get().getExcerpt());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
-```
-
+You can then add a new operation ``getBookExcerpt``.
 
 In the [OpenAPI spec file](../rest-book/src/main/resources/openapi.yml), add a new operation:
+<details>
+<summary>Click to expand</summary>
 
-You just added a new data and functionality without versioning!
+For instance:
+
+```yaml
+  /books/{id}/excerpt:
+    get:
+      tags:
+        - book-controller
+      summary: Gets a book's excerpt from its ID
+      operationId: getBookExcerpt
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Found book excerpt
+          content:
+            application/json:
+              schema:
+                type: string
+        '408':
+          description: Request Timeout
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/APIError"
+        '418':
+          description: I'm a teapot
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/APIError"
+        '500':
+          description: Internal Server Error
+          content:
+            "*/*":
+              schema:
+                "$ref": "#/components/schemas/APIError"
+
+```
+</details>
+
+You can now generate the corresponding Java code.
+
+```jshelllanguage
+./gradlew  openApiGenerate -p rest-book
+```
 
 Now, you can add a new integration test assertion:
 
@@ -292,7 +324,7 @@ You also have to modify the test ``should_get_a_random_book()``.
 You can remove this line: 
 
 ```java
-        assertNotNull(bookDto.getExcerpt());
+assertNotNull(bookDto.getExcerpt());
 ```
 
 See what happens and Explain it :exclamation:
