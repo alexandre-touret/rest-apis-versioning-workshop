@@ -329,4 +329,4 @@ You can remove this line:
 assertNotNull(bookDto.getExcerpt());
 ```
 
-See what happens and Explain it :exclamation:
+See what happens and **explain it** :exclamation:
