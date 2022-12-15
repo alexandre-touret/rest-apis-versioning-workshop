@@ -1,4 +1,19 @@
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+
 spring:
+  application:
+    name: gateway
+  zipkin:
+    base-url: http://localhost:9411
+    sender:
+      type: web
   cloud:
     gateway:
       routes:
@@ -33,3 +48,6 @@ spring:
 #            user-info-uri: http://localhost:8009/oauth2/userinfo
 #            user-name-attribute: sub
 #            jwk-set-uri: http://localhost:8009/oauth2/token_keys
+#      resourceserver:
+#        jwt:
+#          jwk-set-uri: http://localhost:8009

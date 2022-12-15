@@ -5,6 +5,7 @@ import info.touret.bookstore.spring.book.generated.dto.BookDto;
 import info.touret.bookstore.spring.book.mapper.BookMapper;
 import info.touret.bookstore.spring.book.service.BookService;
 import io.micrometer.core.annotation.Timed;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,7 +20,8 @@ import java.util.Map;
  *
  * @see Timed
  */
-@Timed(value = "bookController")
+@Observed(name = "book",
+        contextualName = "book")
 @RestController
 public class BookController implements BooksApi {
     private final BookMapper bookMapper;

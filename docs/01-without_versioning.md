@@ -4,7 +4,9 @@ At this point we have our first customer : **John Doe** who uses our API with th
 
 ## Prerequisites
 
+
 You have to start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number) and [the gateway](../gateway) modules.
+
 As mentioned earlier, you must be at the root of the project (i.e., ``rest-apis-versioning-workshop``).
 
 <details>
@@ -22,6 +24,10 @@ In the second one:
 ./gradlew bootRun -p rest-number
 ```
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c516c41... Upgrade to Spring Boot 3
 And in the last one:
 
 ```jshelllanguage
@@ -71,7 +77,7 @@ You can get a random book by running this command:
 . ./bin/createBook.sh
 ```
 
-Now you can stop this service now.
+Now you can stop this service now by typin CTRL+C on the shell you started the rest-book module.
 
 ## Adding new data
 
