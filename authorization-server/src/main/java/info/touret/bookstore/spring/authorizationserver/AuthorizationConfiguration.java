@@ -2,23 +2,32 @@ package info.touret.bookstore.spring.authorizationserver;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
+import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Role;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -48,8 +57,12 @@ public class AuthorizationConfiguration {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        return http.formLogin(Customizer.withDefaults()).build();
+        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+                .oidc(Customizer.withDefaults());
+
+        return http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt).build();
     }
+
 
     /**
      * Stores all the clients defined in the application.properties file under the <pre>authorization.clients</pre> prefix.
@@ -60,38 +73,51 @@ public class AuthorizationConfiguration {
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
         var clientRepositories = authorizationClientsProperties.getClients().entrySet().stream().map(
-                client -> {
-                    LOGGER.info("Creating [{},{},{}] client repository", client.getKey(), client.getValue().getClientSecret(), client.getValue().getScopes());
-                    return RegisteredClient.withId(UUID.randomUUID().toString())
-                            .clientId(client.getValue().getClientId())
-                            .clientSecret("{noop}" + client.getValue().getClientSecret())
-                            .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
-                            .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                            .scopes(scopes -> scopes.addAll(client.getValue().getScopes()))
-                            .build();
-                }).toList();
+                client -> RegisteredClient.withId(UUID.randomUUID().toString())
+                        .clientId(client.getValue().getClientId())
+                        .clientSecret("{noop}" + client.getValue().getClientSecret())
+                        .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                        .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                        .scopes(scopes -> {
+                                    scopes.add(OidcScopes.OPENID);
+                                    scopes.add(OidcScopes.PROFILE);
+                                    scopes.addAll(client.getValue().getScopes());
+                                }
+                        )
+                        .build()).toList();
         LOGGER.info("[{}] client repositories created", clientRepositories.size());
+        clientRepositories.stream().forEach(
+                registeredClient -> LOGGER.info("clientID : {} , scopes {}",registeredClient.getClientId(),registeredClient.getScopes())
+        );
         return new InMemoryRegisteredClientRepository(clientRepositories);
     }
 
     @Bean
-    public JWKSource<SecurityContext> jwkSource() {
-        RSAKey rsaKey = generateRsa();
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return (jwkSelector, securityContext) -> jwkSelector.select(jwkSet);
-    }
-
-    private static RSAKey generateRsa() {
-        KeyPair keyPair = generateRsaKey();
+    public JWKSource<SecurityContext> jwkSource(KeyPair keyPair) {
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        return new RSAKey.Builder(publicKey)
+        RSAKey rsaKey = new RSAKey.Builder(publicKey)
                 .privateKey(privateKey)
                 .keyID(UUID.randomUUID().toString())
                 .build();
+        JWKSet jwkSet = new JWKSet(rsaKey);
+        return new ImmutableJWKSet<>(jwkSet);
     }
 
-    private static KeyPair generateRsaKey() {
+
+    @Bean
+    public AuthorizationServerSettings authorizationServerSettings(@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}") String issuerUrl) {
+        return AuthorizationServerSettings.builder().issuer(issuerUrl).build();
+    }
+
+    @Bean
+    public JwtDecoder jwtDecoder(KeyPair keyPair) {
+        return NimbusJwtDecoder.withPublicKey((RSAPublicKey) keyPair.getPublic()).build();
+    }
+
+    @Bean
+    @Role(BeanDefinition.ROLE_INFRASTRUCTURE)
+    KeyPair generateRsaKey() {
         KeyPair keyPair;
         try {
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
@@ -101,10 +127,5 @@ public class AuthorizationConfiguration {
             throw new IllegalStateException(ex);
         }
         return keyPair;
-    }
-
-    @Bean
-    public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().build();
     }
 }

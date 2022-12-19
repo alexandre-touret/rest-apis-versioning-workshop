@@ -18,8 +18,23 @@ spring:
         enabled: true
   application:
     name: rest-book
+  zipkin:
+    base-url: http://localhost:9411
+    sender:
+      type: web
+
 
 management:
+  tracing:
+    sampling:
+      probability: 1.0
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+
   endpoints:
     enabled-by-default: true
     web:
@@ -47,12 +62,6 @@ management:
       enabled: true
     datasource:
       enabled: true
-  metrics:
-    web:
-      client:
-        request:
-          autotime:
-            enabled: true
 springdoc:
   api-docs:
     enabled: true
@@ -65,12 +74,6 @@ booknumbers:
     timeout_sec: 2
 
 # Default values
-opentracing:
-  jaeger:
-    udp-sender:
-      host: localhost
-      port: 6831
-    enabled: true
 logging:
   level:
     org:
@@ -79,4 +82,3 @@ logging:
         type: info
       springframework:
         web: info
-

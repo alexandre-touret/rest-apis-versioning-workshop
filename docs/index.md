@@ -39,10 +39,10 @@ docker compose ps
 ```
 
 ```bash
-NAME                      COMMAND                  SERVICE             STATUS              PORTS
-books-database            "docker-entrypoint.s…"   database            running             0.0.0.0:5432->5432/tcp
-books-monitoring          "/bin/prometheus --c…"   monitoring          running             0.0.0.0:9090->9090/tcp
-infrastructure-jaeger-1   "/go/bin/all-in-one-…"   jaeger              running             5775/udp, 5778/tcp, 14250/tcp, 6832/udp, 14268/tcp, 0.0.0.0:6831->6831/udp, 0.0.0.0:16686->16686/tcp
+NAME                COMMAND                  SERVICE             STATUS              PORTS
+books-database      "docker-entrypoint.s…"   database            running             0.0.0.0:5432->5432/tcp
+books-zipkin        "start-zipkin"           zipkin              running (healthy)   9410/tcp, 0.0.0.0:9411->9411/tcp
+
 ```
 
 ## :information_desk_person: Spring services to be started before
@@ -80,10 +80,10 @@ You should have such an output:
 <summary>Click to expand</summary>
 
 ```json
-HTTP/1.1 200 
+HTTP/1.1 200
 Connection: keep-alive
 Content-Type: application/json
-Date: Mon, 07 Nov 2022 16:44:35 GMT
+Date: Thu, 15 Dec 2022 19:04:45 GMT
 Keep-Alive: timeout=60
 Transfer-Encoding: chunked
 
@@ -97,6 +97,7 @@ Transfer-Encoding: chunked
 {
 "name": "classpath:/config/rest-number.yml",
 "source": {
+"logging.level.org.springframework.web": "info",
 "management.auditevents.enabled": true,
 "management.endpoint.health.enabled": true,
 "management.endpoint.health.probes.enabled": true,
@@ -109,10 +110,8 @@ Transfer-Encoding: chunked
 "management.endpoints.web.exposure.include": "*",
 "management.health.livenessstate.enabled": true,
 "management.health.readinessstate.enabled": true,
-"management.metrics.web.client.request.autotime.enabled": true,
-"opentracing.jaeger.enabled": true,
-"opentracing.jaeger.udp-sender.host": "localhost",
-"opentracing.jaeger.udp-sender.port": 6831,
+"management.metrics.distribution.percentiles-histogram.http.server.requests": true,
+"management.tracing.sampling.probability": 1.0,
 "resilience4j.bulkhead.configs.default.maxConcurrentCalls": 100,
 "resilience4j.bulkhead.instances.book-numbers.maxConcurrentCalls": 10,
 "resilience4j.thread-pool-bulkhead.configs.default.coreThreadPoolSize": 2,
@@ -125,6 +124,8 @@ Transfer-Encoding: chunked
 "server.port": 8081,
 "spring.application.name": "rest-number",
 "spring.cloud.circuitbreaker.resilience4j.enabled": true,
+"spring.zipkin.base-url": "http://localhost:9411",
+"spring.zipkin.sender.type": "web",
 "time.to.sleep": 1000
 }
 }

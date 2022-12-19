@@ -8,7 +8,10 @@ spring:
     circuitbreaker:
       resilience4j:
         enabled: true
-
+  zipkin:
+    base-url: http://localhost:9411
+    sender:
+      type: web
 
 resilience4j.bulkhead:
   configs:
@@ -40,6 +43,16 @@ time.to.sleep: 1000
 
 
 management:
+  tracing:
+    sampling:
+      probability: 1.0
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+
   endpoints:
     enabled-by-default: true
     web:
@@ -67,18 +80,10 @@ management:
       enabled: true
     readinessstate:
       enabled: true
-  metrics:
-    web:
-      client:
-        request:
-          autotime:
-            enabled: true
 
+logging:
+  level:
+    org:
+      springframework:
+        web: info
 
-# Default values
-opentracing:
-  jaeger:
-    udp-sender:
-      host: localhost
-      port: 6831
-    enabled: true

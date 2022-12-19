@@ -2,6 +2,8 @@ package info.touret.bookstore.spring.book;
 
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
+import io.micrometer.observation.ObservationRegistry;
+import io.micrometer.observation.aop.ObservedAspect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.cloud.circuitbreaker.resilience4j.Resilience4JCircuitBreakerFactory;
@@ -21,6 +23,11 @@ public class BookConfiguration {
 
     @Value("${booknumbers.api.timeout_sec}")
     private int timeoutInSec;
+
+    @Bean
+    ObservedAspect observedAspect(ObservationRegistry observationRegistry) {
+        return new ObservedAspect(observationRegistry);
+    }
 
     @Bean
     public RestTemplate createRestTemplate(RestTemplateBuilder restTemplateBuilder) {
