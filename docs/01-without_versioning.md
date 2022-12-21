@@ -1,12 +1,11 @@
 # How to upgrade your API without versioning?
 
-At this point we have our first customer : **John Doe** who uses our API with the current specification.  
+At this point we have our first customer : **John Doe** who uses our API with the current specification.
 
 ## Prerequisites
 
-
-You have to start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number) and [the gateway](../gateway) modules.
-
+You have to start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number), [authorization-server](../authorization-server)
+and [the gateway](../gateway) modules.
 As mentioned earlier, you must be at the root of the project (i.e., ``rest-apis-versioning-workshop``).
 
 <details>
@@ -24,10 +23,7 @@ In the second one:
 ./gradlew bootRun -p rest-number
 ```
 
-<<<<<<< HEAD
-=======
 
->>>>>>> c516c41... Upgrade to Spring Boot 3
 And in the last one:
 
 ```jshelllanguage
@@ -83,10 +79,10 @@ Now you can stop this service now by typin CTRL+C on the shell you started the r
 
 In this chapter, we will update the [Book schema in the OpenAPI spec file](../rest-book/src/main/resources/openapi.yml) adding the attribute ``excerpt``.
 
-This attribute is just the beginning of the [description attribute](../rest-book/src/main/resources/openapi.yml).
+This attribute is (only for the workshop) the beginning of the [description attribute](../rest-book/src/main/resources/openapi.yml).
 We will extract the first 100 characters.
 
-1. Update the [OpenAPI spec file]((../rest-book/src/main/resources/openapi.yml)), add the ``excerpt`` attribute 
+1. Update the [OpenAPI spec file]((../rest-book/src/main/resources/openapi.yml)), add the ``excerpt`` attribute
 
 ```yaml
     Book:
@@ -175,7 +171,7 @@ For instance:
 ```
 </details>
 
-You can also add a similar test in the [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java) integration test. 
+You can also add a similar test in the [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java) integration test.
 
 For instance, you can add this assertion in the [``should_get_a_random_book``](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java):
 
@@ -197,13 +193,13 @@ Now you can re-build your application and validate it by running tests.
 
 6. Now, let's get a random book with an excerpt
 
-You can restart your rest-book service
+Restart your rest-book service
 
 ```jshelllanguage
 ./gradlew bootRun -p rest-book
 ```
 
-You can check it manually by running the following command:
+Check it manually by running the following command:
 
 ```jshelllanguage
 http :8082/books/1098 --print b | jq .excerpt 
@@ -214,7 +210,6 @@ You can also do that through the API Gateway:
 ```jshelllanguage
 http :8080/books/1098 --print b | jq .excerpt 
 ```
-
 ## Adding a new operation
 
 You can then add a new operation ``getBookExcerpt``.
@@ -311,7 +306,7 @@ Run tests again:
 ./gradle build
 ```
 
-You have now added new data and functionality to your API without any version :exclamation:  
+You have now added new data and functionality to your API without any version :exclamation:
 
 ## What about backward compatibility?
 
@@ -323,16 +318,21 @@ Copy paste this class in your [test source directory](../rest-book/src/test/java
 operation created earlier.
 You can rename it ``OldBookDto`` for example and put in the package ``info.touret.bookstore.spring.book.dto``.
 
-Copy paste then your [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java)  integration test to [OldBookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java). 
+Copy paste then your [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java)  integration test to [OldBookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java).
 
 In the [OldBookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java)
-, replace the ``BookDto`` class usage with the new one. 
+, replace the ``BookDto`` class usage with the new one.
 
 You also have to modify the test ``should_get_a_random_book()``.
-You can remove this line: 
+You can remove this line:
 
 ```java
 assertNotNull(bookDto.getExcerpt());
 ```
 
-See what happens and **explain it** :exclamation:
+> **Note**
+>
+> See what happens and **explain it** :exclamation:
+>
+> [Go then to chapter 2](./02-first_version.md)
+
