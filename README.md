@@ -10,7 +10,7 @@ Here is a short description of it.
 
 This platform aims to store and get books of a bookstore.
 
-### System View 
+### System View
 
 ```mermaid
 C4Context
@@ -137,9 +137,9 @@ gitGraph:
 | [OpenID Connect](https://openid.net/connect)                                                                                                                                                                                                                                            | novice |]
 | [Docker](https://docs.docker.com/)                                                                                                                                                                                                                                                      | novice |
 
-### :wrench: Tools 
+### :wrench: Tools
 #### If you want to execute this workshop locally
-You must have set up these tools first:
+You **MUST** have set up these tools first:
 * [Java 17+](https://adoptium.net/temurin/releases/?version=17)
 * [Gradle 7.5+](https://gradle.org/)
 * [Docker](https://docs.docker.com/) & [Docker compose](https://docs.docker.com/compose/)
@@ -188,21 +188,23 @@ You then can open this project in either your local VS Code or directly in your 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versioning-workshop.git)
 
 ##### With Github Codespaces
-You can also [use Github Codespaces](https://docs.github.com/en/codespaces/). 
+You can also [use Github Codespaces](https://docs.github.com/en/codespaces/).
 You can create a new one by [running "Code > Create codespace on main"](https://docs.github.com/en/codespaces/developing-in-codespaces/creating-a-codespace-for-a-repository#creating-a-codespace-for-a-repository).
 
 You have then to run the command in the shell:
 
 ```jshelllanguage
 pip install httpie
-sdk install java 17.0.5-tem
-sdk default java 17.0.5-tem
+    sdk install java 17.0.5-tem
+    sdk default java 17.0.5-tem
 ```
 
 ## :boom: Ready ?
 
+> **Warning**
+>
+> I **strongly** suggest to fork this project into your personal GitHub namespace (aka your GitHub account).
 
-:warning: I **strongly** suggest to fork this project into your personal GitHub namespace (aka your GitHub accounb). 
 You then can change the URL mentioned above to link GitHub and Gitpod:
 
 ```markdown
@@ -213,4 +215,8 @@ or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` pr
 
 ``https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git``
 
-Now, you can start [the workshop](./docs/index.md) :tada:.
+
+> **Note**
+>
+> You can now start [the workshop](./docs/index.md) :tada:.
+  

@@ -9,7 +9,7 @@ spring:
     username: book
     password: book
   jpa:
-    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: create-drop
   cloud:
