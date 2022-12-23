@@ -423,6 +423,6 @@ In _the real life_ we would code a dynamic routing and filtering mechanism.
 
 > **Note**
 >
-> In your opinion, which way is better: URI, HTTP header, Accept HTTP header? And where: in the gateway or in the backend? or both?
+> In your opinion, which way is the best: URI, HTTP header, Accept HTTP header? And where: in the gateway or in the backend? or both?
 >
 > [Go then to chapter 3](./03-second_version.md)
