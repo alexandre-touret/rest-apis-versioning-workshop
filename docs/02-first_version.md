@@ -285,7 +285,7 @@ You could find below a flowchart explaining the mechanism:
 
 ```mermaid
 flowchart TD
-    A(Incoming request /books/count with header ``X-API-VERSION: v1``) --> B{Check the presence of the HEADER and the URI base path}
+    A(Incoming request /books/count with header ``X-API-VERSION: v1``) --> B{Check the presence \n of the HEADER \n and the URI base path}
     B -->|OK| C(URL Rewriting : books/count > /v1/books/count )
     B -->|KO| D[Error]
     C -->E(Send request to rest-book)
