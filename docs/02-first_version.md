@@ -168,27 +168,27 @@ Update the corresponding routes defined in the [gateway application.yml configur
 
 ```yaml
 spring:
- application:
-  name: gateway
- zipkin:
-  base-url: http://localhost:9411
-  sender:
-   type: web
- cloud:
-  gateway:
-   routes:
-    - id: path_route
-      uri: http://127.0.0.1:8082
-      predicates:
-       - Path=/v1/books
-    - id: path_route
-      uri: http://127.0.0.1:8082
-      predicates:
-       - Path=/v1/books/{segment}
-    - id: path_route
-      uri: http://127.0.0.1:8081
-      predicates:
-       - Path=/v1/isbns
+  application:
+    name: gateway
+  zipkin:
+    base-url: http://localhost:9411
+    sender:
+      type: web
+  cloud:
+    gateway:
+      routes:
+        - id: path_route
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/v1/books
+        - id: path_route
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/v1/books/{segment}
+        - id: path_route
+          uri: http://127.0.0.1:8081
+          predicates:
+            - Path=/v1/isbns
 ```
 </details>
 
@@ -202,8 +202,8 @@ Normally, you Docker infrastructure should be up. If not, start it:
 <summary>Click to expand</summary>
 
 ```jshelllanguage
-cd infrastructure 
-docker compose up
+cd infrastructure
+  docker compose up
 ```
 </details>
 
@@ -248,13 +248,15 @@ You can now reach the API.
 For instance, you can reach the gateway:
 
 ```jshelllanguage
-http :8080/v1/books/count
+http:
+8080 / v1 / books / count
 ```
 
 You can also access directly to the rest-book backend:
 
 ```jshelllanguage
-http :8082/v1/books/count
+http:
+8082 / v1 / books / count
 ```
 
 Now you can update in the same way [your scripts](../bin) adding the version prefix.
@@ -266,13 +268,15 @@ By the way, you can also verify if the Swagger and OpenAPI is up-to-date by brow
 
 ### Create a HTTP Header based version
 
-In this chapter, we will put in place a rewrite/redirection mechanism in the gateway to route incoming requests regarding an header.
+In this chapter, we will put in place a rewrite/redirection mechanism in the gateway to route incoming requests
+regarding an header.
 
 For this workshop we will extract the ``X-API-VERSION`` HTTP header and route to the appropriate backend.
 For instance if we reach the API as following:
 
 ```jshelllanguage
-http :8080/v1/books/count  "X-API-VERSION: v1" 
+http:
+8080 / books / count "X-API-VERSION: v1" 
 ```
 
 Our gateway will rewrite the URL and reach the good version (i.e., the version specified by the header).
@@ -281,7 +285,7 @@ You could find below a flowchart explaining the mechanism:
 
 ```mermaid
 flowchart TD
-    A(Incoming request /books/count with header ``X-API-VERSION: v1``) --> B{Check the presence \n of the HEADER \n and the URI base path}
+    A(Incoming request /books/count with header ``X-API-VERSION: v1``) --> B{Check the presence of the HEADER and the URI base path}
     B -->|OK| C(URL Rewriting : books/count > /v1/books/count )
     B -->|KO| D[Error]
     C -->E(Send request to rest-book)
@@ -295,29 +299,29 @@ Here is an example
 ```yaml
 [ ... ]
 cloud:
- gateway:
-  routes:
-   - id: rewrite_v1
-     uri: http://127.0.0.1:8082
-     predicates:
-      - Path=/books/{segment}
-      - Header=X-API-VERSION, v1
-     filters:
-      - RewritePath=/books/(?<segment>.*),/v1/books/$\{segment}
-   - id: rewrite_v1
+  gateway:
+    routes:
+      - id: rewrite_v1
+        uri: http://127.0.0.1:8082
+        predicates:
+          - Path=/books/{segment}
+          - Header=X-API-VERSION, v1
+        filters:
+          - RewritePath=/books/(?<segment>.*),/v1/books/$\{segment}
+      - id: rewrite_v1
           uri: http://127.0.0.1:8082
           predicates:
             - Path=/books
             - Header=X-API-VERSION, v1
           filters:
             - RewritePath=/books,/v1/books
-   - id: rewrite_v1
-     uri: http://127.0.0.1:8081
-     predicates:
-       - Path=/isbns
-       - Header=X-API-VERSION, v1
-     filters:
-       - RewritePath=/isbns,/v1/isbns
+          - id: rewrite_v1
+            uri: http://127.0.0.1:8081
+            predicates:
+              - Path=/isbns
+              - Header=X-API-VERSION, v1
+            filters:
+              - RewritePath=/isbns,/v1/isbns
 ```
 
 Restart the gateway:
