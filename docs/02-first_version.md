@@ -248,15 +248,13 @@ You can now reach the API.
 For instance, you can reach the gateway:
 
 ```jshelllanguage
-http:
-8080 / v1 / books / count
+http :8080/v1/books/count
 ```
 
 You can also access directly to the rest-book backend:
 
 ```jshelllanguage
-http:
-8082 / v1 / books / count
+http :8082/v1/books/count
 ```
 
 Now you can update in the same way [your scripts](../bin) adding the version prefix.
@@ -268,15 +266,13 @@ By the way, you can also verify if the Swagger and OpenAPI is up-to-date by brow
 
 ### Create a HTTP Header based version
 
-In this chapter, we will put in place a rewrite/redirection mechanism in the gateway to route incoming requests
-regarding an header.
+In this chapter, we will put in place a rewrite/redirection mechanism in the gateway to route incoming requests regarding an header.
 
 For this workshop we will extract the ``X-API-VERSION`` HTTP header and route to the appropriate backend.
 For instance if we reach the API as following:
 
 ```jshelllanguage
-http:
-8080 / books / count "X-API-VERSION: v1" 
+http :8080/v1/books/count  "X-API-VERSION: v1" 
 ```
 
 Our gateway will rewrite the URL and reach the good version (i.e., the version specified by the header).
@@ -315,13 +311,13 @@ cloud:
             - Header=X-API-VERSION, v1
           filters:
             - RewritePath=/books,/v1/books
-        - id: rewrite_v1
-          uri: http://127.0.0.1:8081
-          predicates:
-            - Path=/isbns
-            - Header=X-API-VERSION, v1
-          filters:
-            - RewritePath=/isbns,/v1/isbns
+   - id: rewrite_v1
+     uri: http://127.0.0.1:8081
+     predicates:
+       - Path=/isbns
+       - Header=X-API-VERSION, v1
+     filters:
+       - RewritePath=/isbns,/v1/isbns
 ```
 
 Restart the gateway:
@@ -376,33 +372,33 @@ For example, you can define the new one defined in the last two paragraphs as fo
 Accept: application/vnd.api.v1+json
 ```
 
-We won't deep dive into this mechanism because its implementation is mostly the same as the last one (i.e., .
+We won't deep dive into this mechanism because its implementation is mostly the same as the last one.
 
 For your information, you can define these new routes in [the gateway](../gateway/src/main/resources/application.yml).
 
 ```yaml
-        # HTTP ACCEPT MEDIA TYPE HEADER VERSIONING
-        - id: rewrite_accept_v1
-          uri: http://127.0.0.1:8082
-          predicates:
-            - Path=/books
-            - Header=accept, application/vnd.api\.v1\+json
-          filters:
-            - RewritePath=/books,/v1/books
-        - id: rewrite_accept_v1
-          uri: http://127.0.0.1:8082
-          predicates:
-            - Path=/books/{segment}
-            - Header=accept, application/vnd.api\.v1\+json
-          filters:
-            - RewritePath=/books/(?<segment>.*),/v1/books/$\{segment}
-        - id: rewrite_accept_v1
-          uri: http://127.0.0.1:8081
-          predicates:
-            - Path=/isbns
-            - Header=accept, application/vnd.api\.v1\+json
-          filters:
-            - RewritePath=/isbns,/v1/isbns
+   # HTTP ACCEPT MEDIA TYPE HEADER VERSIONING
+   - id: rewrite_accept_v1
+     uri: http://127.0.0.1:8082
+     predicates:
+       - Path=/books
+       - Header=accept, application/vnd.api\.v1\+json
+     filters:
+       - RewritePath=/books,/v1/books
+   - id: rewrite_accept_v1
+     uri: http://127.0.0.1:8082
+     predicates:
+       - Path=/books/{segment}
+       - Header=accept, application/vnd.api\.v1\+json
+     filters:
+       - RewritePath=/books/(?<segment>.*),/v1/books/$\{segment}
+   - id: rewrite_accept_v1
+     uri: http://127.0.0.1:8081
+     predicates:
+       - Path=/isbns
+       - Header=accept, application/vnd.api\.v1\+json
+     filters:
+       - RewritePath=/isbns,/v1/isbns
 ```
 
 Restart the gateway (see above to know how).
