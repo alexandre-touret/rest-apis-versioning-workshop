@@ -133,7 +133,7 @@ public void initFields(){
         if(description!=null) {
         this.excerpt = description.substring(0, 100);
         }
-        }
+}
 ```
 You can now rebuild the application.
 
@@ -281,7 +281,7 @@ void should_find_an_excerpt() throws Exception {
         var excerpt = responseEntity.getBody();
         assertNotNull(excerpt);
         assertEquals("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l", excerpt);
-        }
+}
 ```
 
 Now, let us create the corresponding method in [BookController](../rest-book/src/main/java/info/touret/bookstore/spring/book/controller/BookController.java):
@@ -297,7 +297,7 @@ public ResponseEntity<String> getBookExcerpt(Long id) {
         } else {
         return ResponseEntity.notFound().build();
         }
-        }
+}
 ```
 
 Run tests again:
