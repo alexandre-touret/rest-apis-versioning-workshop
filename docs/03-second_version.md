@@ -12,6 +12,7 @@ In this case, it is strongly recommended to deal with GIT long time versions.
 For instance, using [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
 
 You can also use and ship Docker images built on top of this workflow to facilitate the deployment of module's versions.
+
 To simplify the development loop of this workshop, we will only duplicate the [rest-book](../rest-book) module.
 
 > **Note**
@@ -27,7 +28,7 @@ You *MUST* stop the running [rest-book module](../rest-book) before!
 
 * Copy/paste the [rest-book module](../rest-book)
 * Rename the new folder as ``rest-book-2``
-* Update the [build.gradle] with the configuration below:
+* Update the [build.gradle](../build.gradle) with the configuration below:
 
 <details>
 <summary>Click to expand</summary>
