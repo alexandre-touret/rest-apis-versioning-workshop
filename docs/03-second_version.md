@@ -12,7 +12,6 @@ In this case, it is strongly recommended to deal with GIT long time versions.
 For instance, using [Gitflow](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
 
 You can also use and ship Docker images built on top of this workflow to facilitate the deployment of module's versions.
-
 To simplify the development loop of this workshop, we will only duplicate the [rest-book](../rest-book) module.
 
 > **Note**
@@ -28,7 +27,7 @@ You *MUST* stop the running [rest-book module](../rest-book) before!
 
 * Copy/paste the [rest-book module](../rest-book)
 * Rename the new folder as ``rest-book-2``
-* Update the [build.gradle](../build.gradle) with the configuration below:
+* Update the [build.gradle] with the configuration below:
 
 <details>
 <summary>Click to expand</summary>
@@ -132,7 +131,7 @@ You MAY also update your CI by adding a new job on [your Github workflow](../.gi
 
 ## Adding a new functionality
 
-In this new service, we are to deploy new features for our new customer. Firstly, he has a huge library of books, we therefore want to
+In this new service, we are to deploy new features for our new customer. He/She has a huge library of books, we therefore want to
 limit the numbers of results provided by our [``/books`` API](../rest-book/src/main/java/info/touret/bookstore/spring/book/controller/BookController.java) to only 10 results.
 
 We could imagine that a search engine functionality would be more realistic.
@@ -140,7 +139,7 @@ However, for this workshop, we will only work to a books list limiter.
 
 This limit will be applied by creating a new query which uses a [``Pageable`` parameter](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/domain/Pageable.html).
 
-This object is really useful to handle pagination. We will only use it for limiting the data queried on the database and returned by our API.
+This object is really useful to paginate results. We will only use it for limiting the data queried on the database and returned by our API.
 
 In the [``BookRepository`` class](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository/BookRepository.java), add the following method:
 
