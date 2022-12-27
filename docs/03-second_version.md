@@ -21,7 +21,7 @@ To simplify the development loop of this workshop, we will only duplicate the [r
 
 ### Pre requisites
 
-You *MUST* stop the running [rest-book module](../rest-book) before!
+You **MUST** stop the running [rest-book module](../rest-book) before!
 
 ### Duplicating the rest-book module
 
