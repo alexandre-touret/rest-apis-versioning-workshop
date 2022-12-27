@@ -86,13 +86,13 @@ We will extract the first 100 characters.
 
 ```yaml
     Book:
-      required:
-        - title
-      type: object
-      properties:
-        excerpt:
-          readOnly: true
-          type: string
+       required:
+          - title
+       type: object
+       properties:
+          excerpt:
+             readOnly: true
+             type: string
 ```
 2. Build the application again
 
@@ -104,7 +104,7 @@ The build and tests should success. In the meantime, you would get this warning 
 
 ```jshelllanguage
 ...mapper/BookMapper.java:13: warning: Unmapped target property: "excerpt".
-    BookDto toBookDto(Book book);
+   BookDto toBookDto(Book book);
 
 ```
 It is *"normal"* because the POJO used to persist data has not been modified yet.
@@ -125,14 +125,14 @@ private transient String excerpt;
 
 public String getExcerpt(){
         return this.excerpt;
-}
+        }
 
 
 @PostLoad
 public void initFields(){
-   if(description!=null) {
+        if(description!=null) {
         this.excerpt = description.substring(0, 100);
-   }
+        }
 }
 ```
 You can now rebuild the application.
@@ -156,18 +156,18 @@ For instance:
 @Test
  void should_find_a_random_book_with_excerpt() {
          var book = Mockito.mock(Book.class);
-     when(book.getId()).thenReturn(100L);
-     when(book.getDescription()).thenReturn("""
+        when(book.getId()).thenReturn(100L);
+        when(book.getDescription()).thenReturn("""
              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
              """);
-     when(book.getExcerpt()).thenReturn("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l");
-     var longList = createBookList().stream().map(Book::getId).collect(Collectors.toList());
-     when(bookRepository.findAllIds()).thenReturn(longList);
-     when(bookRepository.findById(anyLong())).thenReturn(Optional.of(book));
-     assertNotNull(bookService.findRandomBook());
-     var bookFounded = bookService.findRandomBook();
-     assertEquals(book.getDescription().substring(0, 100), bookFounded.getExcerpt());
-     }
+        when(book.getExcerpt()).thenReturn("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l");
+        var longList = createBookList().stream().map(Book::getId).collect(Collectors.toList());
+        when(bookRepository.findAllIds()).thenReturn(longList);
+        when(bookRepository.findById(anyLong())).thenReturn(Optional.of(book));
+        assertNotNull(bookService.findRandomBook());
+        var bookFounded = bookService.findRandomBook();
+        assertEquals(book.getDescription().substring(0, 100), bookFounded.getExcerpt());
+        }
 ```
 </details>
 
@@ -178,10 +178,10 @@ For instance, you can add this assertion in the [``should_get_a_random_book``](.
 ```java
 @Test
 void should_get_a_random_book() {
-       var bookDto = testRestTemplate.getForEntity(booksUrl + "/random", BookDto.class).getBody();
-   assertNotNull(bookDto.getId());
-   assertEquals(bookDto.getDescription().substring(0,100),bookDto.getExcerpt());
-}
+        var bookDto = testRestTemplate.getForEntity(booksUrl + "/random", BookDto.class).getBody();
+        assertNotNull(bookDto.getId());
+        assertEquals(bookDto.getDescription().substring(0,100),bookDto.getExcerpt());
+        }
 
 ```
 
@@ -222,43 +222,43 @@ For instance:
 
 ```yaml
   /books/{id}/excerpt:
-    get:
-      tags:
-        - book-controller
-      summary: Gets a book's excerpt from its ID
-      operationId: getBookExcerpt
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: Found book excerpt
-          content:
-            application/json:
-              schema:
-                type: string
-        '408':
-          description: Request Timeout
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/APIError"
-        '418':
-          description: I'm a teapot
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/APIError"
-        '500':
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                "$ref": "#/components/schemas/APIError"
+     get:
+        tags:
+           - book-controller
+        summary: Gets a book's excerpt from its ID
+        operationId: getBookExcerpt
+        parameters:
+           - name: id
+             in: path
+             required: true
+             schema:
+                type: integer
+                format: int64
+        responses:
+           '200':
+              description: Found book excerpt
+              content:
+                 application/json:
+                    schema:
+                       type: string
+           '408':
+              description: Request Timeout
+              content:
+                 "*/*":
+                    schema:
+                       "$ref": "#/components/schemas/APIError"
+           '418':
+              description: I'm a teapot
+              content:
+                 "*/*":
+                    schema:
+                       "$ref": "#/components/schemas/APIError"
+           '500':
+              description: Internal Server Error
+              content:
+                 "*/*":
+                    schema:
+                       "$ref": "#/components/schemas/APIError"
 
 ```
 </details>
@@ -276,11 +276,11 @@ In the [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/sprin
 ```java
 @Test
 void should_find_an_excerpt() throws Exception {
-var responseEntity = testRestTemplate.getForEntity(booksUrl + "/100/excerpt", String.class);
-assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-var excerpt = responseEntity.getBody();
-assertNotNull(excerpt);
-assertEquals("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l", excerpt);
+        var responseEntity = testRestTemplate.getForEntity(booksUrl + "/100/excerpt", String.class);
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        var excerpt = responseEntity.getBody();
+        assertNotNull(excerpt);
+        assertEquals("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l", excerpt);
 }
 ```
 
@@ -290,14 +290,14 @@ Add the following method:
 
 ```java
    @Override
-    public ResponseEntity<String> getBookExcerpt(Long id) {
+public ResponseEntity<String> getBookExcerpt(Long id) {
         var optionalBook = bookService.findBookById(id);
         if (optionalBook.isPresent()) {
-            return ResponseEntity.ok(optionalBook.get().getExcerpt());
+        return ResponseEntity.ok(optionalBook.get().getExcerpt());
         } else {
-            return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build();
         }
-    }
+}
 ```
 
 Run tests again:

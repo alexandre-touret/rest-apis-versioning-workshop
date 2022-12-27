@@ -10,7 +10,7 @@ Here is how this repository is organised and a short explanation:
     ├── docs                    -->Workshop documentation
     ├── gateway                 -->Spring Cloud Gateway
     ├── gradle                  -->Gradle configuration files and wrapper binaries
-    ├── infrastructure          -->Docker compose based infrastructure(database,prometheus,jaeger)
+    ├── infrastructure          -->Docker compose based infrastructure(database,zipkin)
     ├── rest-book               -->Spring Boot Bookstore application
     └── rest-number             -->Spring Boot Number application
 ```

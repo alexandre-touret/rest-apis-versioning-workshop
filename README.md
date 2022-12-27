@@ -16,10 +16,10 @@ This platform aims to store and get books of a bookstore.
 C4Context
       title System Context diagram for Bookstore System
       Person(customerA, "Bookstore Customer", "A customer of the bookstore") 
-      Person(adminA, "Bookstore Administrator", "An administrator of the bookstore") 
+      Person(adminA, "Bookstore Administrator", "An administrator of <br/> the bookstore") 
       Enterprise_Boundary(b0, "Bookstore Boundary") {
-        System(bookstoreSystem, "Bookstore System", "Allows Book creation, search,...")  
-        System(iamSystem, "Bookstore IAM", "Allows Identification & authorization...")  
+        System(bookstoreSystem, "Bookstore System", "Allows Book <br/> creation, search,...")  
+        System(iamSystem, "Bookstore IAM", "Allows Identification <br/> & authorization...")  
       }
       Rel(customerA, bookstoreSystem, "Uses")
       Rel(adminA, bookstoreSystem, "Uses & manage users")
@@ -46,7 +46,7 @@ C4Container
 
 
       Person(customerA, "Bookstore Customer", "A customer of the bookstore") 
-      Person(adminA, "Bookstore Administrator", "An administrator of the bookstore") 
+      Person(adminA, "Bookstore Administrator", "An administrator <br/> of the bookstore") 
 
       Enterprise_Boundary(b0, "Bookstore Boundary") {
         Container_Boundary(b2,"Bookstore IAM"){
@@ -59,7 +59,7 @@ C4Container
             ContainerDb(database, "Database", "PostgreSQL Database", "Stores bookstore")
             Container(isbnApi,"ISBN","Spring Boot, Cloud","Exposes the ISBN APIs")
             Container(configuration,"Configuration Server","Spring Cloud Config","Exposes the configuration")
-            Container(zipkin,"Zipkin","Zipkin","Gathers and provides distributed tracing")
+            Container(zipkin,"Zipkin","Zipkin","Gathers and <br/> provides distributed tracing")
         }
       }
 
@@ -152,7 +152,7 @@ Here are commands to validate your environment:
 **Java**
 
 ```jshelllanguage
-java -version                                                                                                                                            a696618@WL-941Y493
+java -version                                                                                                                                          
 openjdk version "17.0.5" 2022-10-18
 OpenJDK Runtime Environment Temurin-17.0.5+8 (build 17.0.5+8)
 OpenJDK 64-Bit Server VM Temurin-17.0.5+8 (build 17.0.5+8, mixed mode, sharing)
@@ -164,7 +164,7 @@ OpenJDK 64-Bit Server VM Temurin-17.0.5+8 (build 17.0.5+8, mixed mode, sharing)
 If you use the wrapper, you won't have troubles. Otherwise...:
 
 ```jshelllanguage
-gradle --version                                                                                                                                         a696618@WL-941Y493
+gradle --version                                                                                                                                       
 
 Welcome to Gradle 7.6!
 ```
@@ -172,7 +172,7 @@ Welcome to Gradle 7.6!
 **Docker Compose**
 
 ```jshelllanguage
-docker compose version                                                                                                                              16 ↵ a696618@WL-941Y493
+docker compose version                                                                                                                             
 Docker Compose version v2.12.2
 ```
 
@@ -195,8 +195,8 @@ You have then to run the command in the shell:
 
 ```jshelllanguage
 pip install httpie
-    sdk install java 17.0.5-tem
-    sdk default java 17.0.5-tem
+sdk install java 17.0.5-tem
+sdk default java 17.0.5-tem
 ```
 
 ## :boom: Ready ?
