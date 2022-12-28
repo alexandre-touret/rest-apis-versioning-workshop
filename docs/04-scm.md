@@ -28,7 +28,7 @@ server:
     context-path: /v2
 ```
 
-You can also remove the ``book.find.limit`` property in the first version and modify the ``booknumbers.api.timeout_sec`` property.
+You can also remove the ``book.find.limit`` property in the first version and modify the ``booknumbers.api.timeout_sec`` property in the second one.
 
 Now, start your config server:
 
