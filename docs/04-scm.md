@@ -19,7 +19,7 @@ For this workshop, we will only carry out a [simple version management based on 
 
 Copy / paste the [rest-book.yml](../config-server/src/main/resources/config/rest-book.yml) to [rest-book-v1.yml](../config-server/src/main/resources/config/rest-book-v1.yml) and [rest-book-v2.yml](../config-server/src/main/resources/config/rest-book-v2.yml).
 
-In the latter, modify the following properties:
+In the latter, modify the properties ``server.port`` and ``server.servet.context-path``:
 
 ```yaml
 server:
@@ -28,7 +28,7 @@ server:
     context-path: /v2
 ```
 
-You can also remove the ``book.find.limit`` property in the first version.
+You can also remove the ``book.find.limit`` property in the first version and modify the ``booknumbers.api.timeout_sec`` property.
 
 Now, start your config server:
 
@@ -40,14 +40,14 @@ Now, start your config server:
 You can test it using these HTTP requests:
 
 ```jshelllanguage
-http http://localhost:8888/rest-book/v1 --print b | jq ' .propertySources[0].source' | jq '."server.servlet.context-path"'
+http :8888/rest-book/v1 --print b | jq ' .propertySources[0].source' | jq '."server.servlet.context-path"'
  "/v1"
 ```
 
 and
 
 ```jshelllanguage
-http http://localhost:8888/rest-book/v2 --print b | jq ' .propertySources[0].source."server.servlet.context-path"'
+http :8888/rest-book/v2 --print b | jq ' .propertySources[0].source."server.servlet.context-path"'
 "/v2"
 ```
 
