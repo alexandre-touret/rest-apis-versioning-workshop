@@ -19,7 +19,7 @@ Beyond the API definition, this new functionality impacts the whole application.
 How could we do that maintaining two versions of our API for our customers?
 
 
-## V2 API Change
+## V2 API Changes
 
 Stop the [rest-book-2](../rest-book-2) and [rest-book](../rest-book) modules.
 
@@ -56,7 +56,7 @@ Regenerate the corresponding classes:
 
 You should see in the [generated sources folder](../rest-book-2/build/generated/src/main) the new ``Author`` class.
 
-If you build your application, the build may fail.
+If you build your application, the build will fail.
 
 ```jshelllanguage
 ./gradlew clean build -p rest-book-2
@@ -64,7 +64,7 @@ If you build your application, the build may fail.
 ## What's next?
 Regarding the use case, we should apply this new relationship between the ``Book`` and ``Author`` objects into the whole application, from the API to the database.
 
-This use case is really a breaking change. How to add this feature without disturbing the existing customers? We have few ways:
+This new feature is really a breaking change. How to add this feature without disturbing the existing customers? We have few ways:
 
 * By isolating the different tenants in a dedicated database/schema. It means the database schema could be also versioned.
 * By mixing the features in the same schema (adding a field author and an author list)
@@ -371,7 +371,6 @@ commit;
 INSERT INTO author(id,firstname,lastname,public_id) VALUES (1000,'Harriet','Beecher Stowe','7c11e1bf-1c74-4280-812b-cbc6038b7d21');
 insert into book (id,title,isbn_13,isbn_10,year_of_publication,nb_of_pages,rank,small_image_url,medium_image_url,description) values (100,'la case de l oncle tom','1234567899123','1234567890',1852,613,4.2,null,null,'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.');
 insert into book_authors(books_id, authors_id) VALUES (100,1000);
-
 ```
 
 ### Test it
@@ -410,7 +409,7 @@ http :8083/v2/books
 
 ```
 
-## Dealing with changes for existing customers in v1
+## Dealing with changes for existing customers in the v1
 
 Now, the database is not usable as is for the V1.
 
@@ -425,11 +424,9 @@ Copy/paste [the entities modified in the v2](../rest-book-2/src/main/java/info/t
 Nothing to do here.
 
 ### Service layer
-
 Nothing to do here too
 
 ### Mapper layer
-
 Create a class ``AuthorMapper`` in the package ``info.touret.bookstore.spring.book.mapper``:
 
 ```java
