@@ -41,14 +41,14 @@ You can test it using these HTTP requests:
 
 ```jshelllanguage
 http :8888/rest-book/v1 --print b | jq ' .propertySources[0].source' | jq '."server.servlet.context-path"'
- "/v1"
+    "/v1"
 ```
 
 and
 
 ```jshelllanguage
 http :8888/rest-book/v2 --print b | jq ' .propertySources[0].source."server.servlet.context-path"'
-"/v2"
+    "/v2"
 ```
 
 ## Rest-book configuration management
@@ -89,7 +89,7 @@ For instance, in the [MaintenanceControllerIT class](../rest-book-2/src/test/jav
 
 ```java
 maintenanceUrl = "http://127.0.0.1:" + port + "/v2/maintenance";
-booksUrl = "http://127.0.0.1:" + port + "/v2/books";
+        booksUrl = "http://127.0.0.1:" + port + "/v2/books";
 ```
 
 You also have to update the [application.yml file](../rest-book-2/src/test/resources/application.yml):
@@ -262,16 +262,32 @@ Although [rest-number](../rest-number) only provides **ONE** version (i.e., the 
       - RewritePath=/v2/isbns,/v1/isbns
 ```
 
+### Test it
 
+Restart your gateway and test it:
+
+```jshelllanguage
+./gradlew clean bootRun -p gateway
+```
+
+You can now create [new scripts files](../bin).
+For instance, here is an example for the [``countBooks.sh``](../bin/countBooks.sh) copied into a new file ``countBooks-v2.sh`` reaching the new version:
+
+You can copy/paste all the scripts in the [bin](../bin) in the same way.
+
+Here is an example for the ``countBooks.sh`` script file copied to ``countBooks-v2.sh``.
+
+```jshelllanguage
+#! /bin/bash
+http :8080/v2/books/count
+```
+This action is voluntary simple.
+Feel free to add an argument to the existing script files if you want ;-).
 
 > **Note**
 >
 > In this chapter, we have seen one part of the impacts of API versioning in configuration management. The most important part is done before, both in the GIT configuration and the release management.
 >
 > [Go then to chapter 5](05-conflicts.md)
-
-
-
-
 
 

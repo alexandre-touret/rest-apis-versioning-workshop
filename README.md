@@ -152,10 +152,10 @@ Here are commands to validate your environment:
 **Java**
 
 ```jshelllanguage
-java -version                                                                                                                                          
-openjdk version "17.0.5" 2022-10-18
-OpenJDK Runtime Environment Temurin-17.0.5+8 (build 17.0.5+8)
-OpenJDK 64-Bit Server VM Temurin-17.0.5+8 (build 17.0.5+8, mixed mode, sharing)
+java -version
+    openjdk version "17.0.5" 2022-10-18
+    OpenJDK Runtime Environment Temurin-17.0.5+8 (build 17.0.5+8)
+    OpenJDK 64-Bit Server VM Temurin-17.0.5+8 (build 17.0.5+8, mixed mode, sharing)
 
 ```
 
@@ -164,16 +164,16 @@ OpenJDK 64-Bit Server VM Temurin-17.0.5+8 (build 17.0.5+8, mixed mode, sharing)
 If you use the wrapper, you won't have troubles. Otherwise...:
 
 ```jshelllanguage
-gradle --version                                                                                                                                       
+gradle --version
 
-Welcome to Gradle 7.6!
+    Welcome to Gradle 7.6!
 ```
 
 **Docker Compose**
 
 ```jshelllanguage
-docker compose version                                                                                                                             
-Docker Compose version v2.12.2
+docker compose version
+    Docker Compose version v2.12.2
 ```
 
 
@@ -195,8 +195,8 @@ You have then to run the command in the shell:
 
 ```jshelllanguage
 pip install httpie
-sdk install java 17.0.5-tem
-sdk default java 17.0.5-tem
+    sdk install java 17.0.5-tem
+    sdk default java 17.0.5-tem
 ```
 
 ## :boom: Ready ?
@@ -218,5 +218,5 @@ or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` pr
 
 > **Note**
 >
-> You can now start [the workshop](./docs/index.md) :tada:.
+> Now, you can start [the workshop](./docs/index.md) :tada:.
   

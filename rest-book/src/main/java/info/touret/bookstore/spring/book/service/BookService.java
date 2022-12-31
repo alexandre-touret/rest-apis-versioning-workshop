@@ -78,7 +78,7 @@ public class BookService {
                 throwable -> fallbackPersistBook(book)
         );
 
-        return bookRepository.save(book);
+        return book;
     }
 
     /**
