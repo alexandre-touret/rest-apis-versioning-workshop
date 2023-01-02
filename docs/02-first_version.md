@@ -61,10 +61,10 @@ Update then your unit tests to reflect the version handling:
 ```java
 @BeforeEach
 void setUp(){
-    booksUrl="http://127.0.0.1:"+port+"/v1/books";
-    mockServer=MockRestServiceServer.bindTo(restTemplate).build();
-    mockServer.reset();
-}
+        booksUrl="http://127.0.0.1:"+port+"/v1/books";
+        mockServer=MockRestServiceServer.bindTo(restTemplate).build();
+        mockServer.reset();
+        }
 
 ```
 
@@ -80,7 +80,7 @@ to:
 assertTrue(uri.getPath().matches("/v1/books/[1-9]+$"));
 ```
 
-* In the [MaintenanceControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/maintenance/controller/MaintenanceControllerIT.java) test class, you have to modify the ``setUp()`` method in the same way than earlier:
+* In the [MaintenanceControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/maintenance/controller/MaintenanceControllerIT.java) test class, you have to modify the ``setUp()`` method in the same way as earlier:
 
 ```java
 @BeforeEach
@@ -282,7 +282,7 @@ You could find below a flowchart explaining the mechanism:
 
 ```mermaid
 flowchart TD
-    A(Incoming request /books/count with header ``X-API-VERSION: v1``) --> B{Check the presence of <br> the HEADER and <br> the URI base path}
+    A(Incoming request /books/count with header ``X-API-VERSION: v1``) --> B{Check the presence of the HEADER and the URI base path}
     B -->|OK| C(URL Rewriting : books/count > /v1/books/count )
     B -->|KO| D[Error]
     C -->E(Send request to rest-book)
@@ -296,29 +296,29 @@ Here is an example:
 ```yaml
 [ ... ]
 cloud:
- gateway:
-  routes:
-   - id: rewrite_v1
-     uri: http://127.0.0.1:8082
-     predicates:
-      - Path=/books/{segment}
-      - Header=X-API-VERSION, v1
-     filters:
-      - RewritePath=/books/(?<segment>.*),/v1/books/$\{segment}
-   - id: rewrite_v1
-     uri: http://127.0.0.1:8082
-     predicates:
-      - Path=/books
-      - Header=X-API-VERSION, v1
-     filters:
-      - RewritePath=/books,/v1/books
-   - id: rewrite_v1
-     uri: http://127.0.0.1:8081
-     predicates:
-       - Path=/isbns
-       - Header=X-API-VERSION, v1
-     filters:
-       - RewritePath=/isbns,/v1/isbns
+  gateway:
+    routes:
+      - id: rewrite_v1
+        uri: http://127.0.0.1:8082
+        predicates:
+          - Path=/books/{segment}
+          - Header=X-API-VERSION, v1
+        filters:
+          - RewritePath=/books/(?<segment>.*),/v1/books/$\{segment}
+      - id: rewrite_v1
+        uri: http://127.0.0.1:8082
+        predicates:
+          - Path=/books
+          - Header=X-API-VERSION, v1
+        filters:
+          - RewritePath=/books,/v1/books
+      - id: rewrite_v1
+        uri: http://127.0.0.1:8081
+        predicates:
+          - Path=/isbns
+          - Header=X-API-VERSION, v1
+        filters:
+          - RewritePath=/isbns,/v1/isbns
 ```
 
 Restart the gateway:
