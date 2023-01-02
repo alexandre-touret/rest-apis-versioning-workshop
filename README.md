@@ -112,14 +112,17 @@ gitGraph:
     commit id: "new features" tag:"Adding excerpt attribute & operation"
     branch V1
     checkout V1
-    commit id:"add author list"
-    commit id: "authorization V1"
+    commit id:"add URI PATH versions"
+    commit id: "add HTTP Header versions"
+    commit id: "add accept HTTP Header versions"
     checkout main
     branch V2
     commit id: "revamping"
+    commit id: "Add author list feature"
     checkout V1
+    commit id: "Add fallback behaviour in V1"
     checkout V2
-    commit id: "authorization"
+    commit id: "Authorization management"
     merge V1
     commit id: "Deprecating V1"
 ```
