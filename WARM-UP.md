@@ -1,6 +1,6 @@
 # WARM UP / Preparation
 
-If you want avoiding wasting your time with a poor WIFI local connection at the early steps or your workshops, do these steps before:
+If you want to avoid wasting your time against a shared WIFI local connection during the first steps or your workshops, do these ones before:
 
 ## If you want to run the workshop on your desktop
 ### Tools to install
