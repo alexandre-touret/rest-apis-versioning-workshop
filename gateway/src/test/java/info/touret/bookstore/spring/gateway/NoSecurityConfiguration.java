@@ -15,13 +15,13 @@ public class NoSecurityConfiguration {
 
     @Bean
     SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) {
-        http.authorizeExchange().anyExchange().permitAll();
+        http.authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec.anyExchange().permitAll());
         return http.build();
     }
 
     @Bean
     SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        http.authorizeExchange().anyExchange().permitAll();
+        http.authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec.anyExchange().permitAll());
         return http.build();
     }
 }
