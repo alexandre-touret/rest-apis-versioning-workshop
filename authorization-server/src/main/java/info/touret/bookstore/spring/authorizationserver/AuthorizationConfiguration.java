@@ -59,7 +59,6 @@ public class AuthorizationConfiguration {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults());
-
         return http.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt).build();
     }
 

@@ -12,6 +12,10 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoder;
 import org.springframework.security.oauth2.jwt.ReactiveJwtDecoders;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatcher;
+import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers;
+import org.springframework.security.web.util.matcher.RequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatchers;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -44,7 +48,8 @@ public class GatewayApplication {
                 .oauth2ResourceServer().jwt(Customizer.withDefaults());
 */
         /* If the previous configuration is applied, you would remove this following line (and the other way around) */
-        http.csrf().disable().cors().disable().authorizeExchange().anyExchange().permitAll();
+        http.csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec.anyExchange().permitAll());
         return http.build();
     }
 
