@@ -38,6 +38,8 @@ logging:
       hibernate:
         stat: debug
         type: trace
+      zalando:
+        logbook: TRACE
 
 opentracing:
   jaeger:

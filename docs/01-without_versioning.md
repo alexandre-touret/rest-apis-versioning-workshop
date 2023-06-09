@@ -310,29 +310,65 @@ You have now added new data and functionality to your API without any version :e
 
 ## What about backward compatibility?
 
-Let's create a additional test with
-the [good old BookDto definition](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java)
-.
+Let's check
+the [OldBookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java)
+integration test.
+It uses
+the [good old BookDto definition](../rest-book/src/test/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java)
+which represents the previous definition
+of [BookDto](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java).
+This class is based on the
+first [BookDto definition](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java) (
+i.e., without the ``exceprt`` attribute).
 
-Copy paste this class in your [test source directory](../rest-book/src/test/java/) and remove the new attribute and
-operation created earlier.
-You can rename it ``OldBookDto`` for example and put in the package ``info.touret.bookstore.spring.book.dto``.
+Run it, check the log output provided by [LogBook](https://github.com/zalando/logbook/).
 
-Copy paste then your [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java)  integration test to [OldBookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java).
-
-In the [OldBookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java)
-, replace the ``BookDto`` class usage with the new one.
-
-You also have to modify the test ``should_get_a_random_book()``.
-You can remove this line:
-
-```java
-assertNotNull(bookDto.getExcerpt());
+```jshelllanguage
+./gradlew -p rest-book test --tests "Old*IT"
 ```
+
+*Example*
+
+<details>
+<summary>Click to expand</summary>
+2023-06-09T17:19:49.723+02:00 TRACE 420048 --- [-auto-1-exec-10] org.zalando.logbook.Logbook              : {
+  "origin" : "local",
+  "type" : "response",
+  "correlation" : "83a5918100111142",
+  "duration" : 21,
+  "protocol" : "HTTP/1.1",
+  "status" : 200,
+  "headers" : {
+    "Connection" : [ "keep-alive" ],
+    "Content-Type" : [ "application/json" ],
+    "Date" : [ "Fri, 09 Jun 2023 15:19:49 GMT" ],
+    "Keep-Alive" : [ "timeout=60" ],
+    "Transfer-Encoding" : [ "chunked" ]
+  },
+  "body" : {
+  "excerpt":"Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
+  "title" : "la case de l oncle tom",
+  "isbn13" : "1234567899123",
+  "isbn10" : "1234567890",
+  "author" : "Harriet Beecher Stowe",
+  "yearOfPublication" : 1852,
+  "nbOfPages" : 613,
+  "rank" : 4,
+  "price" : null,
+  "smallImageUrl" : null,
+  "mediumImageUrl" : null,
+  "description" : "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
+  "id" : 100
+}
+}
+
+</details>
 
 > **Note**
 >
-> See what happens and **explain it** :exclamation:
+> See what happens, compare the data with
+> the [good old BookDto definition](../rest-book/src/test/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java)
+> and **explain it** :exclamation:
 >
 > [Go then to chapter 2](./02-first_version.md)
 

@@ -1,5 +1,7 @@
 package info.touret.bookstore.spring.book;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig;
 import io.github.resilience4j.timelimiter.TimeLimiterConfig;
 import io.micrometer.observation.ObservationRegistry;
@@ -12,6 +14,11 @@ import org.springframework.cloud.client.circuitbreaker.Customizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
+import org.zalando.logbook.Logbook;
+import org.zalando.logbook.core.DefaultHttpLogWriter;
+import org.zalando.logbook.core.DefaultSink;
+import org.zalando.logbook.json.JsonHttpLogFormatter;
+import org.zalando.logbook.json.PrettyPrintingJsonBodyFilter;
 
 import java.time.Duration;
 
@@ -50,6 +57,7 @@ public class BookConfiguration {
     /**
      * Creates a circuit breaker customizer applying a timeout specified by the <code>booknumbers.api.timeout_sec</code> property.
      * This customizer could be reached using this id: <code>slowNumbers</code>
+     *
      * @return the circuit breaker customizer to apply when calling to numbers api
      */
     @Bean
@@ -57,4 +65,14 @@ public class BookConfiguration {
         return factory -> factory.configure(builder -> builder.circuitBreakerConfig(CircuitBreakerConfig.ofDefaults())
                 .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(timeoutInSec)).build()), "slowNumbers");
     }
+
+    @Bean
+    public Logbook createLogbook() {
+        var objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
+        return Logbook.builder()
+                .sink(new DefaultSink(new JsonHttpLogFormatter(objectMapper), new DefaultHttpLogWriter()))
+                .bodyFilter(new PrettyPrintingJsonBodyFilter(objectMapper))
+                .build();
+    }
 }
+
