@@ -73,7 +73,7 @@ You can get a random book by running this command:
 . ./bin/createBook.sh
 ```
 
-Now you can stop this service now by typin CTRL+C on the shell you started the rest-book module.
+Now you can stop this service (i.e., [rest-book](../rest-book)) now by typin CTRL+C on the shell you started the rest-book module.
 
 ## Adding new data
 
