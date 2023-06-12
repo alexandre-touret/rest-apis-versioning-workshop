@@ -15,19 +15,18 @@ import java.net.URI;
 
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.http.HttpStatus.I_AM_A_TEAPOT;
-import static org.springframework.http.HttpStatus.NO_CONTENT;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @DirtiesContext(methodMode = DirtiesContext.MethodMode.BEFORE_METHOD)
 class MaintenanceControllerIT {
+
+    public static final String BOOKS_API_PREFIX = "/v1/books";
+    public static final String MAINTENANCE_API_PREFIX = "/v1/maintenance";
+
     @LocalServerPort
     private int port;
 
@@ -39,8 +38,8 @@ class MaintenanceControllerIT {
 
     @BeforeEach
     void setUp() throws Exception {
-        maintenanceUrl = "http://127.0.0.1:" + port + "/maintenance";
-        booksUrl = "http://127.0.0.1:" + port + "/books";
+        maintenanceUrl = "http://127.0.0.1:" + port + MAINTENANCE_API_PREFIX;
+        booksUrl = "http://127.0.0.1:" + port + BOOKS_API_PREFIX;
         /* Initializes the maintenance flag */
         var requestEntity = RequestEntity.put(new URI(maintenanceUrl)).body(FALSE.toString());
         var responseEntity = restTemplate.exchange(requestEntity, Void.class);

@@ -1,3 +1,6 @@
+server:
+  servlet:
+    context-path: /v1
 spring:
   datasource:
     url: jdbc:h2:mem:./test_db;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
@@ -11,8 +14,8 @@ spring:
       generate_statistics: true
       use-new-id-generator-mappings: false
   circuitbreaker:
-     resilience4j:
-       enabled: true
+    resilience4j:
+      enabled: true
   cloud:
     circuitbreaker:
       resilience4j:
@@ -29,7 +32,7 @@ springdoc:
 
 booknumbers:
   api:
-    url: http://127.0.0.1:9999/isbns
+    url: http://127.0.0.1:9999/v1/isbns
     timeout_sec: 2
 
 logging:

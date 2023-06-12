@@ -20,15 +20,15 @@ spring:
         - id: path_route
           uri: http://127.0.0.1:8082
           predicates:
-            - Path=/books
+            - Path=/v1/books
         - id: path_route
           uri: http://127.0.0.1:8082
           predicates:
-            - Path=/books/{segment}
+            - Path=/v1/books/{segment}
         - id: path_route
           uri: http://127.0.0.1:8081
           predicates:
-            - Path=/isbns
+            - Path=/v1/isbns
 # SECURITY CONFIGURATION TO BE APPLIED (remove comments to apply it)
 #  security:
 #    oauth2:

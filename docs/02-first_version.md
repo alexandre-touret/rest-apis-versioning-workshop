@@ -11,19 +11,30 @@ We will define in this chapter our first version in the URI and in a header mixi
 > * [rest-book](../rest-book)
 > * [rest-number](../rest-number)
 
-## URI based version creation
+## URI based version
 
-In the curent rest-book version,we will define the version in the BookController's URI.
+In the current rest-book version,we have already defined define the version in the BookController's URI.
 
-The pattern should be like ``/api/%VERSION%/books``.
+The pattern is ``/api/%VERSION%/books``.
 For instance, we could have ``/api/v1/books``.
 
-Here is how we could implement it both in the backends and in the gateway.
+We will shortly review the configuration already done and update the OpenAPI documentation.
 
 ### Configuration
+
 #### Rest-Book
 
-Update the [rest-book's openAPI descriptor file](../rest-book/src/main/resources/openapi.yml) adding the version in the URL:
+You can check the default context path in
+the [rest-book configuration file](../config-server/src/main/resources/config/rest-book.yml)
+
+```yaml
+server:
+  servlet:
+    context-path: /v1
+```
+
+Update the [rest-book's openAPI descriptor file](../rest-book/src/main/resources/openapi.yml) adding the version in the
+URL:
 
 ```yaml
 openapi: 3.0.0
@@ -34,63 +45,7 @@ servers:
   - url: http://localhost:8082/v1
 ```
 
-You can now override the default context path in the [rest-book configuration file](../config-server/src/main/resources/config/rest-book.yml)
-
-```yaml
-server:
-  servlet:
-    context-path: /v1
-```
-
-Now, try to build the project:
-
-```bash 
-./gradlew build -p rest-book
-``` 
-
-Update then your unit tests to reflect the version handling:
-
-* Add the same property in
-  the [application.yml test configuration file](../rest-book/src/test/resources/application.yml)
-
-* In the ``setUp`` method
-  of [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java)
-  and [OldBookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java)
-  integration tests, modify the basepath:
-
-```java
-@BeforeEach
-void setUp(){
-        booksUrl="http://127.0.0.1:"+port+"/v1/books";
-        mockServer=MockRestServiceServer.bindTo(restTemplate).build();
-        mockServer.reset();
-        }
-
-```
-
-* To get your unit tests successfull, you will also have to modify this test ``should_register_a_book_successfully()`` by modifying this assertion:
-
-from:
-```java
-assertTrue(uri.getPath().matches("/books/[1-9]+$"));
-```
-to:
-
-```java
-assertTrue(uri.getPath().matches("/v1/books/[1-9]+$"));
-```
-
-* In the [MaintenanceControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/maintenance/controller/MaintenanceControllerIT.java) test class, you have to modify the ``setUp()`` method in the same way as earlier:
-
-```java
-@BeforeEach
-void setUp()throws Exception{
-    maintenanceUrl="http://127.0.0.1:"+port+"/v1/maintenance";
-    booksUrl="http://127.0.0.1:"+port+"/v1/books";
-[...]
-```
-
-Build the application:
+Now, build the project:
 
 ```bash 
 ./gradlew build -p rest-book
@@ -98,12 +53,11 @@ Build the application:
 
 ##### Looking forward to rest-number api versioning updates
 
-This module reaches [rest-number](../rest-number) through API calls.
-It will be versioned later (see below).
-We need to anticipate these changes:
+The same version is applied in both rest-book and rest-number modules.
 
-In the [rest-book configuration file](../config-server/src/main/resources/config/rest-book.yml) , modify the following
-property adding the version:
+To reach it, the same version has been applied to reach the rest-number module.
+You can check the corresponding configuration in
+the [rest-book configuration file](../config-server/src/main/resources/config/rest-book.yml):
 
 ```yaml
 booknumbers:
@@ -111,11 +65,10 @@ booknumbers:
     url: http://127.0.0.1:8081/v1/isbns
 ```
 
-Update the same property in the rest-book [application.yml test configuration file](../rest-book/src/test/resources/application.yml)
-and finally, update the mock configuration in the test classes:
-
 #### Rest-Number
-Update the [rest-number's openAPI descriptor file](../rest-number/src/main/resources/openapi.yml) adding the version in the URL:
+
+Check and modify the [rest-number's openAPI descriptor file](../rest-number/src/main/resources/openapi.yml) to indicate
+the version:
 
 ```yaml
 openapi: 3.0.1
@@ -126,7 +79,8 @@ servers:
   - url: http://localhost:8081/v1
 ```
 
-You can now override the default context path in the [rest-number configuration file](../config-server/src/main/resources/config/rest-number.yml):
+Check the [rest-number configuration file](../config-server/src/main/resources/config/rest-number.yml) and the contex
+path:
 
 ```yaml
 server:
@@ -134,34 +88,16 @@ server:
     context-path: /v1
 ```
 
-Now, try to build the project:
+Now, build the project:
 
 ```bash 
 ./gradlew build -p rest-number
 ``` 
 
-Update then your unit tests to reflect the version handling:
-
-Add the same property in
-the [application.yml test configuration file](../rest-number/src/test/resources/application.yml)
-
-To get your unit tests successful, you will also have to modify
-the [BookNumbersControllerIT](../rest-number/src/test/java/info/touret/bookstore/spring/number/controller/BookNumbersControllerIT.java)
-and [BookNumberControllerTimeoutIT](../rest-number/src/test/java/info/touret/bookstore/spring/number/controller/BookNumbersControllerTimeoutIT.java)
-test classes by modifying this line in both classes:
-
-from:
-
-```java
-var response = restTemplate.getForEntity("http://127.0.0.1:" + port + "/isbns", BookNumbersDto.class);
-```
-to:
-```java
-var response = restTemplate.getForEntity("http://127.0.0.1:" + port + "/v1/isbns", BookNumbersDto.class);
-```
 ### In the gateway
 
-Update the corresponding routes defined in the [gateway application.yml configuration file](../gateway/src/main/resources/application.yml).
+Check the routes already defined in
+the [gateway application.yml configuration file](../gateway/src/main/resources/application.yml).
 
 <details>
 <summary>Click to expand</summary>
@@ -261,8 +197,8 @@ Now you can update in the same way [your scripts](../bin) adding the version pre
 
 By the way, you can also verify if the Swagger and OpenAPI is up-to-date by browsing these endpoints:
 
-* http://localhost:8082/swagger-ui/index.html
-* http://localhost:8081/swagger-ui/index.html
+* http://localhost:8082/v1/swagger-ui/index.html
+* http://localhost:8081/v1/swagger-ui/index.html
 
 ### Create a HTTP Header based version
 
@@ -275,7 +211,6 @@ For instance if we reach the API as following:
 ```jshelllanguage
 http :8080/books/count "X-API-VERSION: v1" 
 ```
-
 Our gateway will rewrite the URL and reach the good version (i.e., the version specified by the header).
 
 You could find below a flowchart explaining the mechanism:
@@ -339,9 +274,8 @@ You can now test your API using this new way:
 http :8080/books/count "X-API-VERSION: v1" 
 ```
 
-You can create now some dedicated scripts for this new approach. For instance, the [``randomBook``](../bin/randomBook.sh) script can be modified.
-
-You MAY create the following scripts
+You can use now some dedicated scripts for this new approach. For instance, the [``randomBook``](../bin/randomBook.sh)
+script can be modified.
 
 * ``bin/countBooks-header.sh``
 * ``bin/createBook-header.sh``
@@ -350,17 +284,6 @@ You MAY create the following scripts
 * ``bin/secureISBN-header.sh``
 * ``bin/secureCreateBook-header.sh``
 * ``bin/secureRandomBook-header.sh``
-
-You have to add this header as mentioned above:
-```jshelllanguage
-http :8080/books/count "X-API-VERSION: v1" 
-```
-
-Don't forget to make these new scripts executables:
-
-```jshelllanguage
-chmod a+x bin/*
-```
 
 Now you can test your API using either these two ways.
 
