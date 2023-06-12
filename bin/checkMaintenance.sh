@@ -1,3 +1,3 @@
 #!/bin/bash
 
-http :8082/maintenance
+http :8082/v1/maintenance

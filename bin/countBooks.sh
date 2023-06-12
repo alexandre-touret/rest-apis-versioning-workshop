@@ -1,3 +1,3 @@
 #! /bin/bash
 
-http :8080/books/count
+http :8080/v1/books/count

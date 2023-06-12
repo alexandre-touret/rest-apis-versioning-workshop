@@ -37,7 +37,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 @DirtiesContext(classMode = BEFORE_CLASS)
 class OldBookControllerIT {
 
-
+    public static final String BOOKS_API_PREFIX = "/v1/books";
     @Value("${booknumbers.api.url}")
     public String isbnAPIURL;
     @LocalServerPort
@@ -56,7 +56,7 @@ class OldBookControllerIT {
 
     @BeforeEach
     void setUp() {
-        booksUrl = "http://127.0.0.1:" + port + "/books";
+        booksUrl = "http://127.0.0.1:" + port + BOOKS_API_PREFIX;
         mockServer = MockRestServiceServer.bindTo(restTemplate).build();
         mockServer.reset();
     }
@@ -154,7 +154,7 @@ class OldBookControllerIT {
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         var uri = responseEntity.getHeaders().getLocation();
         assertNotNull(uri);
-        assertTrue(uri.getPath().matches("/books/[1-9]+$"));
+        assertTrue(uri.getPath().matches(BOOKS_API_PREFIX + "/[1-9]+$"));
         mockServer.verify();
     }
 

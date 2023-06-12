@@ -12,11 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
+import org.springframework.http.*;
 import org.springframework.mock.http.client.MockClientHttpResponse;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
@@ -29,10 +25,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 import static org.springframework.test.annotation.DirtiesContext.ClassMode.BEFORE_CLASS;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -45,6 +38,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 class BookControllerIT {
 
 
+    public static final String BOOKS_API_PREFIX = "/v1/books";
     @Value("${booknumbers.api.url}")
     public String isbnAPIURL;
     @LocalServerPort
@@ -63,7 +57,7 @@ class BookControllerIT {
 
     @BeforeEach
     void setUp() {
-        booksUrl ="http://127.0.0.1:" + port + "/books";
+        booksUrl = "http://127.0.0.1:" + port + BOOKS_API_PREFIX;
         mockServer = MockRestServiceServer.bindTo(restTemplate).build();
         mockServer.reset();
     }
@@ -161,7 +155,7 @@ class BookControllerIT {
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         var uri = responseEntity.getHeaders().getLocation();
         assertNotNull(uri);
-        assertTrue(uri.getPath().matches("/books/[1-9]+$"));
+        assertTrue(uri.getPath().matches(BOOKS_API_PREFIX + "/[1-9]+$"));
         mockServer.verify();
     }
 
