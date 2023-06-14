@@ -104,27 +104,27 @@ the [gateway application.yml configuration file](../gateway/src/main/resources/a
 
 ```yaml
 spring:
- application:
-  name: gateway
- zipkin:
-  base-url: http://localhost:9411
-  sender:
-   type: web
- cloud:
-  gateway:
-   routes:
-    - id: path_route
-      uri: http://127.0.0.1:8082
-      predicates:
-       - Path=/v1/books
-    - id: path_route
-      uri: http://127.0.0.1:8082
-      predicates:
-       - Path=/v1/books/{segment}
-    - id: path_route
-      uri: http://127.0.0.1:8081
-      predicates:
-       - Path=/v1/isbns
+  application:
+    name: gateway
+  zipkin:
+    base-url: http://localhost:9411
+    sender:
+      type: web
+  cloud:
+    gateway:
+      routes:
+        - id: path_route
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/v1/books
+        - id: path_route
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/v1/books/{segment}
+        - id: path_route
+          uri: http://127.0.0.1:8081
+          predicates:
+            - Path=/v1/isbns
 ```
 </details>
 
@@ -138,8 +138,8 @@ Normally, you Docker infrastructure should be up. If not, start it:
 <summary>Click to expand</summary>
 
 ```jshelllanguage
-cd infrastructure 
-docker compose up
+cd infrastructure
+    docker compose up
 ```
 </details>
 
@@ -274,8 +274,7 @@ You can now test your API using this new way:
 http :8080/books/count "X-API-VERSION: v1" 
 ```
 
-You can use now some dedicated scripts for this new approach. For instance, the [``randomBook``](../bin/randomBook.sh)
-script can be modified.
+You can use now some dedicated scripts for this new approach:
 
 * ``bin/countBooks-header.sh``
 * ``bin/createBook-header.sh``
@@ -287,7 +286,39 @@ script can be modified.
 
 Now you can test your API using either these two ways.
 
-### Create an ``accept`` media type header based version
+### Create a default version
+Now let's deep dive into the gateway configuration.
+We will configure it to apply automatically a version if no one is applied.
+
+Stop the gateway by typing CTRL+C.
+
+Add the following route at **THE END** of the routes definition:
+
+
+```yaml
+  - id: default_version_v1
+    uri: http://127.0.0.1:8081
+    predicates:
+    - Path=/isbns
+    filters:
+    - RewritePath=/isbns,/v1/isbns
+```
+
+Restart the gateway
+
+```jshelllanguage
+ ./gradlew bootRun -p gateway
+```
+
+and run the following command:
+
+```jshelllanguage
+http :8080/isbns
+```
+
+The default version is automatically applied and the gateway should throw the request to the isbns v1 API endpoint.
+
+### Create an ``accept`` media type header based version (OPTIONAL-DEPRECATED)
 
 It is also possible to specify the version in the [``accept`` header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept).
 For example, you can define the new one defined in the last two paragraphs as following:
