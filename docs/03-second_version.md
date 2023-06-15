@@ -157,9 +157,9 @@ import org.springframework.data.domain.Pageable;
 In the [BookService](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/service/BookService.java) class, update the [``findAllBooks`` method](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/service/BookService.java):
 
 ```java
-public List<Book> findAllBooks() {
-    return bookRepository.findAll(PageRequest.of(0, findLimit));
-}
+public List<Book> findAllBooks(){
+        return bookRepository.findAll(PageRequest.of(0,findLimit));
+        }
 ```
 
 The field ``findLimit`` is set in the constructor:
@@ -167,18 +167,18 @@ The field ``findLimit`` is set in the constructor:
 ```java
     private final Integer findLimit;
 
-    public BookService(BookRepository bookRepository,
-                       RestTemplate restTemplate,
-                       @Value("${booknumbers.api.url}") String isbnServiceURL,
-                       @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") CircuitBreakerFactory circuitBreakerFactory,
-                       @Value("${book.find.limit:10}") Integer findLimit) {
-        this.bookRepository = bookRepository;
-        this.restTemplate = restTemplate;
-        this.isbnServiceURL = isbnServiceURL;
+public BookService(BookRepository bookRepository,
+        RestTemplate restTemplate,
+@Value("${booknumbers.api.url}") String isbnServiceURL,
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") CircuitBreakerFactory circuitBreakerFactory,
+@Value("${book.find.limit:10}") Integer findLimit){
+        this.bookRepository=bookRepository;
+        this.restTemplate=restTemplate;
+        this.isbnServiceURL=isbnServiceURL;
 
-        this.circuitBreakerFactory = circuitBreakerFactory;
-        this.findLimit = findLimit;
-    }
+        this.circuitBreakerFactory=circuitBreakerFactory;
+        this.findLimit=findLimit;
+        }
 
 
 ```
@@ -198,18 +198,18 @@ In the [``BookServiceTest``](../rest-book-2/src/test/java/info/touret/bookstore/
 
 ```java
 @BeforeEach
-    void setUp() {
-        bookService = new BookService(bookRepository, restTemplate, "URL", circuitBreakerFactory,10);
-    }
+    void setUp(){
+            bookService=new BookService(bookRepository,restTemplate,"URL",circuitBreakerFactory,10);
+            }
 ```
 and the [Mockito](https://site.mockito.org/) configuration of ``should_find_all_books()`` method:
 
 ```java
 @Test
-void should_find_all_books() {
-    List<Book> books = createBookList();
-    when(bookRepository.findAll(any(Pageable.class))).thenReturn(books);
-[...]
+void should_find_all_books(){
+        List<Book> books=createBookList();
+        when(bookRepository.findAll(any(Pageable.class))).thenReturn(books);
+        [...]
 ```
 
 The integration tests [BookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java) and [OldBookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java) are not really representative of the new behaviour anymore because they only return one element.
