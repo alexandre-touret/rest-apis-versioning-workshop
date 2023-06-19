@@ -26,13 +26,19 @@ public class GatewayApplication {
 
         http.csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(exchanges -> exchanges
-                        .pathMatchers(GET, "/books/count").hasAuthority("SCOPE_book:read")
-                        .pathMatchers(GET, "/books/random").hasAuthority("SCOPE_book:read")
-                        .pathMatchers(POST, "/books").hasAuthority("SCOPE_book:write")
-                        .pathMatchers("/isbns").hasAuthority("SCOPE_number:read")
+                        .pathMatchers(GET, "/v1/books/count").hasAuthority("SCOPE_bookv1:read")
+                        .pathMatchers(GET, "/v1/books/random").hasAuthority("SCOPE_bookv1:read")
+                        .pathMatchers(POST, "/v1/books").hasAuthority("SCOPE_bookv1:write")
+                        .pathMatchers(GET, "/v1/books").hasAuthority("SCOPE_bookv1:read")
+                        .pathMatchers("/v1/isbns").hasAuthority("SCOPE_numberv1:read")
+                        .pathMatchers(GET, "/v2/books/count").hasAuthority("SCOPE_bookv2:read")
+                        .pathMatchers(GET, "/v2/books/random").hasAuthority("SCOPE_bookv2:read")
+                        .pathMatchers(POST, "/v2/books").hasAuthority("SCOPE_bookv2:write")
+                        .pathMatchers(GET, "/v2/books").hasAuthority("SCOPE_bookv2:read")
+                        .pathMatchers("/v2/isbns").hasAuthority("SCOPE_numberv2:read")
                         .anyExchange().authenticated()
                 )
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));*/
+                .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec.jwt(Customizer.withDefaults()));*/
         /* If the previous configuration is applied, you would remove this following line (and the other way around)*/
         http.csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec.anyExchange().permitAll());
