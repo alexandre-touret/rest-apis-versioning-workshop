@@ -1,10 +1,10 @@
 # Last but not least : what about security and authorization impacts?
 
 While versioning secured APIs, there is usually one impact we miss at the beginning: security, especially authorization.
-If you apply authorization policies on your whole platform using for instance, ABAC or RBAC mechanisms, you must take care about your authorization.
+If you apply authorization policies on your whole platform using for instance, [ABAC](https://en.wikipedia.org/wiki/Attribute-based_access_control) or [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control) approaches, you must take care about it.
 They could indeed evolve over your versions.
 
-If you use [OAUTHv2](https://www.rfc-editor.org/rfc/rfc6749.html) or [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) (_what else?_), you would restrict the usage of a version to specific clients or end users using scopes stored in claims.
+If you use [OAUTHv2](https://www.rfc-editor.org/rfc/rfc6749.html) or [OpenID Connect](https://openid.net/specs/openid-connect-core-1_0.html) (_what else?_), you would restrict the usage of a version to specific clients or end users using [scopes](https://auth0.com/docs/get-started/apis/scopes) stored in [claims](https://auth0.com/docs/secure/tokens/json-web-tokens/json-web-token-claims).
 
 You can declare scopes stored in claims such as: ``bookv1:write`` or ``numberv2:read`` to specify both the authorised action and the corresponding version.
 
@@ -19,7 +19,7 @@ We will see in this chapter how a standard [``credential flow`` authorization me
 
 Before starting, please stop the [gateway](../gateway) and the [authorization server](../authorization-server).
 
-### Authorization server:
+### Authorization server
 
 In the [``application.properties`` file](../authorization-server/src/main/resources/application.properties), update the configuration with the good scopes:
 
@@ -124,27 +124,27 @@ In [the gateway's configuration](../gateway/src/main/resources/application.yml),
 
 ```yaml
 # SECURITY CONFIGURATION TO BE APPLIED (remove comments to apply it)
-security:
-  oauth2:
-    client:
-      registration:
-        login-client:
-          provider: authz
-          client-id: gateway
-          client-secret: secret3
-          authorization-grant-type: client_credentials
-          redirect-uri-template: "{baseUrl}/"
-          scope: gateway
-      provider:
-        authz:
-          authorization-uri: http://localhost:8009/oauth2/authorize
-          token-uri: http://localhost:8009/oauth2/token
-          user-info-uri: http://localhost:8009/oauth2/userinfo
-          user-name-attribute: sub
-          jwk-set-uri: http://localhost:8009/oauth2/token_keys
-    resourceserver:
-      jwt:
-        jwk-set-uri: http://localhost:8009
+  security:
+    oauth2:
+      client:
+        registration:
+          login-client:
+            provider: authz
+            client-id: gateway
+            client-secret: secret3
+            authorization-grant-type: client_credentials
+            redirect-uri-template: "{baseUrl}/"
+            scope: gateway
+        provider:
+          authz:
+            authorization-uri: http://localhost:8009/oauth2/authorize
+            token-uri: http://localhost:8009/oauth2/token
+            user-info-uri: http://localhost:8009/oauth2/userinfo
+            user-name-attribute: sub
+            jwk-set-uri: http://localhost:8009/oauth2/token_keys
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8009
 ```
 
 Uncomment block codes in the [gateway application](../gateway/src/main/java/info/touret/bookstore/spring/gateway/GatewayApplication.java) to get the following content:
@@ -174,17 +174,22 @@ Uncomment block codes in the [gateway application](../gateway/src/main/java/info
             return http.build();
             }
 
-/* If the security is enabled, you MUST uncomment the following factories */
-@Bean
+        /* If the previous configuration is applied, you would remove this following line (and the other way around)
+        http.csrf().disable().cors().disable().authorizeExchange().anyExchange().permitAll();*/
+        return http.build();
+    }
+
+    /* If the security is enabled, you MUST uncomment the following factories */
+    @Bean
     JwtDecoder jwtDecoder(OAuth2ResourceServerProperties properties) {
-            return NimbusJwtDecoder.withJwkSetUri(properties.getJwt().getJwkSetUri()).build();
+        return NimbusJwtDecoder.withJwkSetUri(properties.getJwt().getJwkSetUri()).build();
 
-            }
+    }
 
-@Bean
-public ReactiveJwtDecoder reactiveJwtDecoder(@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}") String issuerUrl) {
+    @Bean
+    public ReactiveJwtDecoder reactiveJwtDecoder(@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}") String issuerUrl) {
         return ReactiveJwtDecoders.fromIssuerLocation(issuerUrl);
-        }
+    }
 ```
 
 Now restart the gateway:
@@ -205,9 +210,9 @@ from:
 #! /bin/bash
 
 
-    access_token=`http --form post :8009/oauth2/token grant_type="client_credentials" client_id="customer1" client_secret="secret1" scope="openid book:read" -p b | jq -r '.access_token'`
+access_token=`http --form post :8009/oauth2/token grant_type="client_credentials" client_id="customer1" client_secret="secret1" scope="openid book:read" -p b | jq -r '.access_token'`
 
-    http :8080/v1/books/count "Authorization: Bearer ${access_token}"
+http :8080/v1/books/count "Authorization: Bearer ${access_token}"
 
 ```
 
@@ -217,9 +222,9 @@ to:
 #! /bin/bash
 
 
-    access_token=`http --form post :8009/oauth2/token grant_type="client_credentials" client_id="customer1" client_secret="secret1" scope="openid bookv1:read" -p b | jq -r '.access_token'`
+access_token=`http --form post :8009/oauth2/token grant_type="client_credentials" client_id="customer1" client_secret="secret1" scope="openid bookv1:read" -p b | jq -r '.access_token'`
 
-    http :8080/v1/books/count "Authorization: Bearer ${access_token}"
+http :8080/v1/books/count "Authorization: Bearer ${access_token}"
 
 ```
 
