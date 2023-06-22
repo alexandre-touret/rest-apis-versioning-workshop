@@ -27,7 +27,7 @@ Run the following command at the root of your project:
 ./gradlew build -x test
 ```
 
-Now you aare ready!
+Now you are ready!
 
 ## If you want to run it on Gitpod
 
