@@ -147,8 +147,7 @@ In the [``BookRepository`` class](../rest-book-2/src/main/java/info/touret/books
 List<Book> findAll(Pageable pageable);
 ```
 
-Beware of the import of the ``Pageable`` class.
-It should be:
+Add also this import declaration:
 
 ```java
 import org.springframework.data.domain.Pageable;
@@ -160,6 +159,12 @@ In the [BookService](../rest-book-2/src/main/java/info/touret/bookstore/spring/b
 public List<Book> findAllBooks(){
         return bookRepository.findAll(PageRequest.of(0,findLimit));
         }
+```
+
+Add also the corresponding import declaration:
+
+```java
+import org.springframework.data.domain.PageRequest;
 ```
 
 The field ``findLimit`` is set in the constructor:
