@@ -54,7 +54,7 @@ http :8081/v1/v3/api-docs
 You can also check the documentation by browsing these endpoints:
 
 * http://localhost:8082/v1/swagger-ui/index.html
-* http://localhost:8081/v1swagger-ui/index.html
+* http://localhost:8081/v1/swagger-ui/index.html
 
 You can also use the scripts located in the [bin](../bin) folder.
 
@@ -202,13 +202,13 @@ Restart your rest-book service
 Check it manually by running the following command:
 
 ```jshelllanguage
-http :8082/v1/books/1098 --print b|jq.excerpt 
+http :8082/v1/books/1098 --print b| jq .excerpt 
 ```
 
 You can also do that through the API Gateway:
 
 ```jshelllanguage
-http :8080/v1/books/1098 --print b|jq.excerpt 
+http :8080/v1/books/1098 --print b| jq .excerpt 
 ```
 ## Adding a new operation
 
@@ -303,7 +303,7 @@ public ResponseEntity<String> getBookExcerpt(Long id) {
 Run tests again:
 
 ```jshelllanguage
-./gradle build
+./gradlew build
 ```
 
 You have now added new data and functionality to your API without any version :exclamation:
