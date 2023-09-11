@@ -437,7 +437,7 @@ Nothing to do here.
 Nothing to do here too
 
 ### Mapper layer
-Create a class ``AuthorMapper`` in the package ``info.touret.bookstore.spring.book.mapper``:
+Create a class ``AuthorMapper`` in the package ``info.touret.bookstore.spring.book.mapper`` with the following content:
 
 ```java
 package info.touret.bookstore.spring.book.mapper;
