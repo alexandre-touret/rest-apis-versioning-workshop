@@ -336,6 +336,7 @@ paths:
             "*/*":
               schema:
                 "$ref": "#/components/schemas/APIError"
+
 components:
   schemas:
     APIError:

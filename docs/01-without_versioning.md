@@ -8,8 +8,6 @@ You have to start three new shells and run [rest-book](../rest-book), [rest-numb
 and [the gateway](../gateway) modules.
 As mentioned earlier, you must be at the root of the project (i.e., ``rest-apis-versioning-workshop``).
 
-<details>
-<summary>Click to expand</summary>
 
 In the first shell, run:
 
@@ -32,7 +30,6 @@ And in the last one:
 
 _You can disable unit and integration tests by adding the option ``-x test`` at the end of the command ;-)._
 
-</details>
 
 ## The current status
 
@@ -82,7 +79,7 @@ In this chapter, we will update the [Book schema in the OpenAPI spec file](../re
 This attribute is (only for the workshop) the beginning of the [description attribute](../rest-book/src/main/resources/openapi.yml).
 We will extract the first 100 characters.
 
-1. Update the [OpenAPI spec file](../rest-book/src/main/resources/openapi.yml), add the ``excerpt`` attribute
+1. Update the [OpenAPI spec file](../rest-book/src/main/resources/openapi.yml), add the ``excerpt`` attribute:
 
 ```yaml
     Book:
@@ -113,7 +110,7 @@ It is *"normal"* because the POJO used to persist data has not been modified yet
    the [BookDto class](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java)
    .
 4. In the [Book entity class](../rest-book/src/main/java/info/touret/bookstore/spring/book/entity/Book.java), add a
-   transient attribute as below
+   transient attribute as below by uncommenting the following code. 
 
 ```java
 
@@ -145,53 +142,8 @@ Before creating unit and integration tests, we can run them to see if this modif
 
 :question: See what happens: Is it blocking or not?
 
-5. You can add a test in the [BookServiceTest](../rest-book/src/test/java/info/touret/bookstore/spring/book/service/BookServiceTest.java)
-<details>
-<summary>Click to expand</summary>
 
-For instance:
-
-
-```java
-@Test
- void should_find_a_random_book_with_excerpt() {
-         var book = Mockito.mock(Book.class);
-        when(book.getId()).thenReturn(100L);
-        when(book.getDescription()).thenReturn("""
-             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-             """);
-        when(book.getExcerpt()).thenReturn("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l");
-        var longList = createBookList().stream().map(Book::getId).collect(Collectors.toList());
-        when(bookRepository.findAllIds()).thenReturn(longList);
-        when(bookRepository.findById(anyLong())).thenReturn(Optional.of(book));
-        assertNotNull(bookService.findRandomBook());
-        var bookFounded = bookService.findRandomBook();
-        assertEquals(book.getDescription().substring(0, 100), bookFounded.getExcerpt());
-        }
-```
-</details>
-
-You can also add a similar test in the [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java) integration test.
-
-For instance, you can add this assertion in the [``should_get_a_random_book`` method](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java):
-
-```java
-@Test
-void should_get_a_random_book() {
-        var bookDto = testRestTemplate.getForEntity(booksUrl + "/random", BookDto.class).getBody();
-        assertNotNull(bookDto.getId());
-        assertEquals(bookDto.getDescription().substring(0,100),bookDto.getExcerpt());
-        }
-
-```
-
-Now you can re-build your application and validate it by running tests.
-
-```jshelllanguage
-./gradlew clean build -p rest-book
-```
-
-6. Now, let's get a random book with an excerpt
+5. Now, let's get a random book with an excerpt
 
 Restart your rest-book service
 
@@ -269,24 +221,9 @@ You can now generate the corresponding Java code.
 ./gradlew  openApiGenerate -p rest-book
 ```
 
-Now, you can add a new integration test assertion:
-
-In the [BookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java) class, add the following method:
-
-```java
-@Test
-void should_find_an_excerpt() throws Exception {
-        var responseEntity = testRestTemplate.getForEntity(booksUrl + "/100/excerpt", String.class);
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-        var excerpt = responseEntity.getBody();
-        assertNotNull(excerpt);
-        assertEquals("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut l", excerpt);
-}
-```
-
 Now, let us create the corresponding method in [BookController](../rest-book/src/main/java/info/touret/bookstore/spring/book/controller/BookController.java):
 
-Add the following method:
+Uncomment the following method:
 
 ```java
    @Override
