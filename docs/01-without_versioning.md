@@ -8,7 +8,6 @@ You have to start three new shells and run [rest-book](../rest-book), [rest-numb
 and [the gateway](../gateway) modules.
 As mentioned earlier, you must be at the root of the project (i.e., ``rest-apis-versioning-workshop``).
 
-
 In the first shell, run:
 
 ```jshelllanguage
@@ -267,9 +266,8 @@ Check the [test log file](../rest-book/build/test-results/test/TEST-info.touret.
 
 For instance:
 
-<details>
-<summary>Click to expand</summary>
-2023-06-09T17:19:49.723+02:00 TRACE 420048 --- [-auto-1-exec-10] org.zalando.logbook.Logbook              : {
+```json
+ {
   "origin" : "local",
   "type" : "response",
   "correlation" : "acc9e76fa90e42ed",
@@ -300,7 +298,7 @@ For instance:
 }
 }
 
-</details>
+```
 
 > **Note**
 >
