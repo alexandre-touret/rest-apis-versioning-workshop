@@ -221,5 +221,5 @@ or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` pr
 
 > **Note**
 >
-> Now, you can start [the workshop](./docs/index.md) :tada:.
+> Now, you can start [the workshop](docs/index.md) :tada:.
   
