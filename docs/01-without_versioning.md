@@ -153,13 +153,13 @@ Restart your rest-book service
 Check it manually by running the following command:
 
 ```jshelllanguage
-http :8082/v1/books/1098 --print b| jq .excerpt 
+http :8082/v1/books/1098 --print b | jq .excerpt 
 ```
 
 You can also do that through the API Gateway:
 
 ```jshelllanguage
-http :8080/v1/books/1098 --print b| jq .excerpt 
+http :8080/v1/books/1098 --print b | jq .excerpt 
 ```
 ## Adding a new operation
 
