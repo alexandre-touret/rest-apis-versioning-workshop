@@ -4,7 +4,7 @@ We will define in this chapter our first version in the URI and in a header mixi
 
 > **Warning**
 >
-> Before starting, this chapter, please shut down all the spring apps already started:
+> Before starting, this chapter, please shut down all the apps already started:
 > * [config server](../config-server)
 > * [gateway](../gateway)
 > * [authorization server](../authorization-server)
@@ -96,11 +96,7 @@ Now, build the project:
 
 ### In the gateway
 
-Check the routes already defined in
-the [gateway application.yml configuration file](../gateway/src/main/resources/application.yml).
-
-<details>
-<summary>Click to expand</summary>
+Check the routes already defined in the [gateway application.yml configuration file](../gateway/src/main/resources/application.yml).
 
 ```yaml
 spring:
@@ -126,7 +122,6 @@ spring:
           predicates:
             - Path=/v1/isbns
 ```
-</details>
 
 ### Tests
 
@@ -134,20 +129,15 @@ spring:
 
 Normally, you Docker infrastructure should be up. If not, start it:
 
-<details>
-<summary>Click to expand</summary>
 
 ```jshelllanguage
 cd infrastructure
     docker compose up
 ```
-</details>
 
 
 Start then the different applications:
 
-<details>
-<summary>Click to expand</summary>
 In the first shell:
 
 ```jshelllanguage
@@ -175,9 +165,6 @@ Last but not least, in the last one:
 ```jshelllanguage
  ./gradlew bootRun -p gateway
 ```
-
-</details>
-
 
 You can now reach the API.
 
