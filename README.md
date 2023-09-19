@@ -219,9 +219,6 @@ You then can change the URL mentioned above to link GitHub and Gitpod:
 or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` prefix):
 
 ``https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git``
+_________________
 
-[the workshop](docs/index.md)
-
-> **Note**
->
-> Now, you can start [the workshop](docs/index.md) :tada:.
+**Now, you can start [the workshop](docs/index.md) :tada:.**
