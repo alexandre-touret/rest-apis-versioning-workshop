@@ -95,7 +95,6 @@ Now, build the project:
 ``` 
 
 ### In the gateway
-
 Check the routes already defined in the [gateway application.yml configuration file](../gateway/src/main/resources/application.yml).
 
 ```yaml
@@ -132,7 +131,7 @@ Normally, you Docker infrastructure should be up. If not, start it:
 
 ```jshelllanguage
 cd infrastructure
-    docker compose up
+docker compose up
 ```
 
 

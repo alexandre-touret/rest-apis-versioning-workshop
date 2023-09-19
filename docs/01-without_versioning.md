@@ -166,8 +166,6 @@ http :8080/v1/books/1098 --print b | jq .excerpt
 You can then add a new operation ``getBookExcerpt``.
 
 In the [OpenAPI spec file](../rest-book/src/main/resources/openapi.yml), add a new operation:
-<details>
-<summary>Click to expand</summary>
 
 For instance:
 
@@ -212,7 +210,7 @@ For instance:
                        "$ref": "#/components/schemas/APIError"
 
 ```
-</details>
+
 
 You can now generate the corresponding Java code.
 
