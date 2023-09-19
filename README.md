@@ -220,6 +220,7 @@ or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` pr
 
 ``https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git``
 
+[the workshop](docs/index.md)
 
 > **Note**
 >
