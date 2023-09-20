@@ -25,12 +25,7 @@ You **MUST** stop the running [rest-book module](../rest-book) before!
 
 ### Duplicating the rest-book module
 
-* Copy/paste the [rest-book module](../rest-book)
-* Rename the new folder as ``rest-book-2``
-* Update the [build.gradle] with the configuration below:
-
-<details>
-<summary>Click to expand</summary>
+* Update the [build.gradle] uncommenting the following configuration:
 
 ```groovy
 project(':rest-book-2') {
@@ -89,9 +84,8 @@ project(':rest-book-2') {
 
 ```
 
-</details>
-
-In the [settings.gradle](../settings.gradle) file you have to define this new module:
+In the [settings.gradle](../settings.gradle) file you have to define this new module.
+Uncomment this line:
 
 ```properties
 include 'rest-book-2'
@@ -194,44 +188,6 @@ You have then to add some config lines and the [rest-book.yml](../config-server/
 book:
   find:
     limit: 10
-```
-
-### Tests
-
-Now, we have to update our unit tests.
-In the [``BookServiceTest``](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/service/BookServiceTest.java), update the ``setUp`` method:
-
-```java
-@BeforeEach
-    void setUp(){
-            bookService=new BookService(bookRepository,restTemplate,"URL",circuitBreakerFactory,10);
-            }
-```
-and the [Mockito](https://site.mockito.org/) configuration of ``should_find_all_books()`` method:
-
-```java
-@Test
-void should_find_all_books(){
-        List<Book> books=createBookList();
-        when(bookRepository.findAll(any(Pageable.class))).thenReturn(books);
-        [...]
-```
-
-The integration tests [BookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java) and [OldBookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java) are not really representative of the new behaviour anymore because they only return one element.
-If you have time enough, you MAY update the [``books-data.sql``](../rest-book-2/src/test/resources/books-data.sql) file to have more elements and test the limit.
-
-Finally, add the same config value you added earlier in [your test configuration file](../rest-book-2/src/test/resources/application.yml)
-
-```yaml
-book:
-  find:
-    limit: 10
-```
-
-Build and test your application:
-
-```jshelllanguage
-./gradlew clean build -p rest-book-2
 ```
 
 ## Running it
