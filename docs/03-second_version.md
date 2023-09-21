@@ -105,24 +105,6 @@ You can also only build the new module by running this command :
 ./gradlew build -p rest-book-2
 ```
 
-You MAY also update your CI by adding a new job on [your Github workflow](../.github/workflows/build.yml):
-
-```yaml
-  build-book-2:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-          cache: 'gradle'
-      - name: Build with Gradle
-        run: ./gradlew -p rest-book-2 clean build
-```
-
-
 ## Adding a new functionality
 
 In this new service, we are to deploy new features for our new customer. He/She has a huge library of books, we therefore want to
@@ -141,10 +123,11 @@ In the [``BookRepository`` class](../rest-book-2/src/main/java/info/touret/books
 List<Book> findAll(Pageable pageable);
 ```
 
-Add also this import declaration:
+Add also these import declarations:
 
 ```java
 import org.springframework.data.domain.Pageable;
+import java.util.List;
 ```
 
 In the [BookService](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/service/BookService.java) class, update the [``findAllBooks`` method](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/service/BookService.java):
