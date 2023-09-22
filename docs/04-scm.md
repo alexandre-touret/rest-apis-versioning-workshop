@@ -98,31 +98,8 @@ servers:
   - url: http://localhost:8082/v2
 ```
 
-### Tests
-
-You then have to update your integration tests
-
-In the [BookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java), [OldBookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java) and [MaintenanceControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/maintenance/controller/MaintenanceControllerIT.java), update all the references from v1 to v2:
-
-For instance, in the [MaintenanceControllerIT class](../rest-book-2/src/test/java/info/touret/bookstore/spring/maintenance/controller/MaintenanceControllerIT.java):
-
-```java
-maintenanceUrl = "http://127.0.0.1:" + port + "/v2/maintenance";
-booksUrl = "http://127.0.0.1:" + port + "/v2/books";
-```
-
-You also have to update the [application.yml file](../rest-book-2/src/test/resources/application.yml):
-
-```yaml
-server:
-  servlet:
-    context-path: /v2
-```
-
-
 ### Test it
 
-#### Automatically
 First, stop the config server, and build the whole application:
 
 ```jshelllanguage
@@ -131,7 +108,6 @@ First, stop the config server, and build the whole application:
 
 The build must be successful.
 
-#### Manually
 Start your backends (we assume your Docker infrastructure is still up).
 
 <details>
@@ -202,9 +178,6 @@ spring.profiles.active=v1
 Now, we will expose both versions in the gateway.
 In the [gateway configuration file](../gateway/src/main/resources/application.yml), add the following content:
 
-<details>
-<summary>Click to expand</summary>
-
 ```yaml
                    #V2
                    # HTTP HEADER VERSIONING
@@ -268,7 +241,6 @@ In the [gateway configuration file](../gateway/src/main/resources/application.ym
                        - RewritePath=/v2/isbns,/v1/isbns
 
 ```
-</details>
 
 To propose a cohesive and coherent API to our customer, we chose to publish all our API endpoints with a v1 and v2 prefix.
 Although [rest-number](../rest-number) only provides **ONE** version (i.e., the ``v1``), we expose both on the gateway and rewrite the URL as following:
@@ -290,10 +262,8 @@ Restart your gateway and test it:
 ./gradlew clean bootRun -p gateway
 ```
 
-You can now create [new scripts files](../bin).
-For instance, here is an example for the [``countBooks.sh``](../bin/countBooks.sh) copied into a new file ``countBooks-v2.sh`` reaching the new version:
-
-You can copy/paste all the scripts in the [bin](../bin) in the same way.
+You can now use [the scripts files](../bin).
+For every script (e.g., [``countBooks.sh``](../bin/countBooks.sh)), you have one which reach the V2 endpoints (e.g., [``countBooks-v2.sh``](../bin/countBooks-v2.sh)) 
 
 Here is an example for the ``countBooks.sh`` script file copied to ``countBooks-v2.sh``.
 
@@ -309,5 +279,3 @@ Feel free to add an argument to the existing script files if you want ;-).
 > In this chapter, we have seen one part of the impacts of API versioning in configuration management. The most important part is done before, both in the GIT configuration and the release management.
 >
 > [Go then to chapter 5](05-conflicts.md)
-
-
