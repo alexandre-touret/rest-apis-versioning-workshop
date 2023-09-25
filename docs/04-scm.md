@@ -110,8 +110,6 @@ The build must be successful.
 
 Start your backends (we assume your Docker infrastructure is still up).
 
-<details>
-<summary>Click to expand</summary>
 In the first shell:
 
 ```jshelllanguage
@@ -133,7 +131,6 @@ In the fourth shell:
 ```jshelllanguage
 ./gradlew bootRun -p rest-number
 ```
-</details>
 
 Now, reach your APIs (without using the gateway):
 
@@ -143,7 +140,6 @@ http :8082/v1/books
 ```
 
 and the V2:
-
 ```jshelllanguage
 http :8083/v2/books 
 ```
@@ -255,7 +251,6 @@ Although [rest-number](../rest-number) only provides **ONE** version (i.e., the 
 ```
 
 ### Test it
-
 Restart your gateway and test it:
 
 ```jshelllanguage
