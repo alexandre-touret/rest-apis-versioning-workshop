@@ -21,9 +21,10 @@ How could we do that maintaining two versions of our API for our customers?
 
 ## V2 API Changes
 
-Stop the [rest-book-2](../rest-book-2) and [rest-book](../rest-book) modules.
+Stop both the [rest-book-2](../rest-book-2) and [rest-book](../rest-book) modules.
 
-In the [rest-books-2 OpenAPI description file](../rest-book-2/src/main/resources/openapi.yml), update the definition of the ``Book``. Rename the fied ``author`` to ``authors`` and define it like this:
+In the [rest-books-2 OpenAPI description file](../rest-book-2/src/main/resources/openapi.yml), update the definition of the ``Book``.
+Rename the fied ``author`` to ``authors`` and define it like this:
 
 ```yaml
     authors:
@@ -82,10 +83,8 @@ We will implement in this chapter this new functionality.
 
 ### JPA Entities
 
-Create an ``Author`` entity with the following content:
-
-<details>
-<summary>Click to expand</summary>
+Create an ``Author`` entity with the following content in the [rest-book-2](../rest-book-2) project. 
+Use the ``info.touret.bookstore.spring.book.entity`` package. 
 
 ```java
 package info.touret.bookstore.spring.book.entity;
@@ -158,7 +157,6 @@ public class Author implements Serializable {
 }
 
 ```
-</details>
 
 Modify the [``Book``](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/entity/Book.java) adding a new field ``authors``:
 
@@ -166,8 +164,13 @@ Modify the [``Book``](../rest-book-2/src/main/java/info/touret/bookstore/spring/
 @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
 private List<Author> authors;
 ```
+You can add this import to add the @ManyToMany annotation into the classpath:
 
-Add then the getters and setters:
+```java
+import jakarta.persistence.*;
+```
+
+Add finally the getters and setters:
 
 ```java
     public List<Author> getAuthors() {
@@ -259,9 +262,6 @@ private final AuthorRepository authorRepository;
 
 You can remove all the data located in [``import.sql``](../rest-book-2/src/main/resources/import.sql) and replace it by:
 
-<details>
-<summary>Click to expand</summary>
-
 ```sql
 INSERT INTO author(id,firstname,lastname,public_id) VALUES (1000,'Antonio','Concalves','7c11e1bf-1c74-4280-812b-cbc6038b7d21');
 INSERT INTO author(id,firstname,lastname,public_id) VALUES (1001,'Roger','Kitain','b7896f56-3168-4d45-aca7-745e2071bca2');
@@ -300,88 +300,13 @@ INSERT INTO BOOK_AUTHORS(books_id,authors_id) values (1009,1006);
 INSERT INTO BOOK_AUTHORS(books_id,authors_id) values (1010,1007);
 INSERT INTO BOOK_AUTHORS(books_id,authors_id) values (1011,1008);
 ```
-</details>
+
 
 ### Tests
 
-Your tests are currently failing.
-It is time to fix them up!
 
 Delete the [OldBookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java) and the [OldBookDto](../rest-book/src/test/java/info/touret/bookstore/spring/book/dto/OldBookDto.java) class.
 We don't need them anymore.
-
-#### BookServiceTest
-
-In [the BookServiceTest class](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/service/BookServiceTest.java), replace the following statements
-
-```java
-book.setAuthor("author");
-```
-
-by
-
-```java
-var author = new Author();
-author.setFirstname("firstname");
-author.setLastname("lastname");
-author.setPublicId(UUID.randomUUID());
-book.setAuthors(List.of(author));
-```
-
-
-
-Update the ``setUp`` method:
-
-```java
-    @BeforeEach
-    void setUp() {
-        bookService = new BookService(bookRepository,authorRepository, restTemplate, "URL", circuitBreakerFactory,10);
-    }
-```
-
-In the ``should_update_book``, modify the last assertion:
-
-```java
-@Test
-void should_update_book(){
-        [...]
-        assertEquals(book.getAuthors(),updateBook.getAuthors());
-        }
-```
-
-Don't forget to mock your new repository:
-
-```java
-@MockBean
-private AuthorRepository authorRepository;
-```
-
-#### BookControllerIT
-
-Replace in the same way as above the ``authors`` field initialization. You can also to that in a fluent way
-
-```java
-var authorDto = new AuthorDto().firstname("George").lastname("Orwell").publicId("6ce999fa-31bd-4a52-9692-22f55d2a1d2f");
-book.setAuthors(List.of(authorDto));
-```
-
-You can also add an assertion in the ``should_find_a_book()`` method:
-
-```java
-assertEquals("7c11e1bf-1c74-4280-812b-cbc6038b7d21", bookDto.getAuthors().get(0).getPublicId());
-```
-
-You have to update the [``books-data.sql``](../rest-book-2/src/test/resources/books-data.sql) file:
-
-```sql
-delete from book_authors ;
-delete from author ;
-delete from book ;
-commit;
-INSERT INTO author(id,firstname,lastname,public_id) VALUES (1000,'Harriet','Beecher Stowe','7c11e1bf-1c74-4280-812b-cbc6038b7d21');
-insert into book (id,title,isbn_13,isbn_10,year_of_publication,nb_of_pages,rank,small_image_url,medium_image_url,description) values (100,'la case de l oncle tom','1234567899123','1234567890',1852,613,4.2,null,null,'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.');
-insert into book_authors(books_id, authors_id) VALUES (100,1000);
-```
 
 ### Test it
 
@@ -506,36 +431,6 @@ Copy paste the [v2 ``import.sql``](../rest-book-2/src/main/resources/import.sql)
 In the same way than for the V1, delete the [OldBookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java) and the [OldBookDto](../rest-book/src/test/java/info/touret/bookstore/spring/book/dto/OldBookDto.java) class.
 We don't need them anymore.
 
-#### BookServiceTest
-
-Fix your test as earlier modifying your ``author`` field declaration:
-
-```java
-   var author = new Author();
-   author.setFirstname("Harriet");
-   author.setLastname("Beecher Stowe");
-   author.setPublicId(UUID.randomUUID());
-   book.setAuthors(List.of(author));
-```
-
-Update then the ``should_update_book`` assertion:
-
-
-```java
-        assertEquals(book.getAuthors().get(0), updateBook.getAuthors().get(0));
-
-```
-
-#### BookControllerIT
-
-Add an assertion in [the ``should_find_a_book()`` method](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/BookControllerIT.java):
-
-```java
-assertEquals("Harriet Beecher Stowe",bookDto.getAuthor());
-```
-
-Copy then the test data from [rest-book-v2 module](../rest-book/src/main/resources/import.sql) to the [v1](../rest-book/src/main/resources/import.sql).
-
 ### Test it
 
 Run the following command first:
@@ -555,7 +450,6 @@ Reach then the API and check the author attribute:
 ```jshelllanguage
 http :8082/v1/books
 ```
-
 
 > **Note**
 >
