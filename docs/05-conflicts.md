@@ -164,7 +164,7 @@ Modify the [``Book``](../rest-book-2/src/main/java/info/touret/bookstore/spring/
 @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
 private List<Author> authors;
 ```
-You can add this import to add the @ManyToMany annotation into the classpath:
+You can add this import to add the ``@ManyToMany`` annotation into the classpath:
 
 ```java
 import jakarta.persistence.*;
@@ -258,7 +258,7 @@ and add a field ``authorRepository``:
 private final AuthorRepository authorRepository;
 ```
 
-### Import Data
+### Import data
 
 You can remove all the data located in [``import.sql``](../rest-book-2/src/main/resources/import.sql) and replace it by:
 
@@ -424,7 +424,7 @@ public interface BookMapper {
 
 ### Import Data
 
-Copy paste the [v2 ``import.sql``](../rest-book-2/src/main/resources/import.sql) content into [the v1](../rest-book/src/main/resources/import.sql).
+Copy paste the [v2 ``import.sql``](../rest-book-2/src/main/resources/import.sql) content into [the v1](../rest-book/src/main/resources/import.sql) (don't forget to remove the existing lines).
 
 ### Tests
 
