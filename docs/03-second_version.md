@@ -25,7 +25,7 @@ You **MUST** stop the running [rest-book module](../rest-book) before!
 
 ### Duplicating the rest-book module
 
-* Update the [build.gradle] uncommenting the following configuration:
+* Update the [build.gradle](../build.gradle) file uncommenting the following configuration:
 
 ```groovy
 project(':rest-book-2') {
@@ -105,7 +105,7 @@ You can also only build the new module by running this command :
 ./gradlew build -p rest-book-2
 ```
 
-## Adding a new functionality
+## Adding a new functionality to rest-book2
 
 In this new service, we are to deploy new features for our new customer. He/She has a huge library of books, we therefore want to
 limit the numbers of results provided by our [``/books`` API](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/controller/BookController.java) to only 10 results.
@@ -117,7 +117,9 @@ This limit will be applied by creating a new query which uses a [``Pageable`` pa
 
 This object is really useful to paginate results. We will only use it for limiting the data queried on the database and returned by our API.
 
-In the [``BookRepository`` class](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository/BookRepository.java), add the following method:
+In the
+rest-book-2 [``BookRepository`` class](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository/BookRepository.java),
+add the following method:
 
 ```java
 List<Book> findAll(Pageable pageable);

@@ -53,13 +53,27 @@ Regenerate the corresponding classes:
 ./gradlew openApiGenerate -p rest-book-2 
 ```
 
-You should see in the [generated sources folder](../rest-book-2/build/generated/src/main) the new ``Author`` class.
+You should see in the [generated sources folder](../rest-book-2/build/generated/src/main) the new ``AuthorDto`` class.
 
-If you build your application, it will fail.
+If you build your application, you will get warnings.
 
 ```jshelllanguage
 ./gradlew clean build -p rest-book-2
 ```
+
+```log
+/workspace/rest-apis-versioning-workshop/rest-book-2/src/main/java/info/touret/bookstore/spring/book/mapper/BookMapper.java:11: warning: Unmapped target property: "author".
+    Book toBook(BookDto bookDto);
+         ^
+/workspace/rest-apis-versioning-workshop/rest-book-2/src/main/java/info/touret/bookstore/spring/book/mapper/BookMapper.java:13: warning: Unmapped target property: "authors".
+    BookDto toBookDto(Book book);
+            ^
+Note: /workspace/rest-apis-versioning-workshop/rest-book-2/build/generated/sources/annotationProcessor/java/main/info/touret/bookstore/spring/book/mapper/BookMapperImpl.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+2 warnings
+
+```
+
 ## What's next?
 Regarding the use case, we should apply this new relationship between the ``Book`` and ``Author`` objects into the whole application, from the API to the database.
 
@@ -164,10 +178,13 @@ Modify the [``Book``](../rest-book-2/src/main/java/info/touret/bookstore/spring/
 @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
 private List<Author> authors;
 ```
-You can add this import to add the ``@ManyToMany`` annotation into the classpath:
+
+You can add these import to add the ``@ManyToMany`` annotation and the ``List`` interface into the classpath:
 
 ```java
 import jakarta.persistence.*;
+
+import java.util.List;
 ```
 
 Add finally the getters and setters:
@@ -234,7 +251,7 @@ private Book persistBook(Book book) {
 }
 ```
 
-You have to inject the ``AuthorRepository`` class in the constructor:
+You must also inject the ``AuthorRepository`` class in the constructor:
 
 ```java
  public BookService(BookRepository bookRepository,
@@ -256,6 +273,12 @@ and add a field ``authorRepository``:
 
 ```java
 private final AuthorRepository authorRepository;
+```
+
+Finally you must add this import declaration:
+
+```java
+import info.touret.bookstore.spring.book.repository.AuthorRepository;
 ```
 
 ### Import data
@@ -353,7 +376,9 @@ For this workshop, we will do the translation in the [mappers](../rest-book/src/
 
 ### JPA entities
 
-Copy/paste [the entities modified in the v2](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/entity) in the [v1 module](../rest-book/src/main/java/info/touret/bookstore/spring/book/entity)
+Copy/paste [the entities modified in the v2](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/entity) in
+the [v1 module](../rest-book/src/main/java/info/touret/bookstore/spring/book/entity).
+Update the Book entity uncommenting the excerpt attributes and the getter/setter.
 
 ### Spring Data repository
 Nothing to do here.

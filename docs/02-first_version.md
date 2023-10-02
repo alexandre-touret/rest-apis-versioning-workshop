@@ -179,8 +179,6 @@ You can also access directly to the rest-book backend:
 http :8082/v1/books/count
 ```
 
-Now you can update in the same way [your scripts](../bin) adding the version prefix.
-
 By the way, you can also verify if the Swagger and OpenAPI is up-to-date by browsing these endpoints:
 
 * http://localhost:8082/v1/swagger-ui/index.html
@@ -215,31 +213,31 @@ We will illustrate this behaviour by adding another route in the [gateway's conf
 Here is an example:
 
 ```yaml
-[ ... ]
-cloud:
-  gateway:
-    routes:
-      - id: rewrite_v1
-        uri: http://127.0.0.1:8082
-        predicates:
-          - Path=/books/{segment}
-          - Header=X-API-VERSION, v1
-        filters:
-          - RewritePath=/books/(?<segment>.*),/v1/books/$\{segment}
-      - id: rewrite_v1
-        uri: http://127.0.0.1:8082
-        predicates:
-          - Path=/books
-          - Header=X-API-VERSION, v1
-        filters:
-          - RewritePath=/books,/v1/books
-      - id: rewrite_v1
-        uri: http://127.0.0.1:8081
-        predicates:
-          - Path=/isbns
-          - Header=X-API-VERSION, v1
-        filters:
-          - RewritePath=/isbns,/v1/isbns
+  cloud:
+    gateway:
+      routes:
+        [ ... ]
+        - id: rewrite_v1
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/books/{segment}
+            - Header=X-API-VERSION, v1
+          filters:
+            - RewritePath=/books/(?<segment>.*),/v1/books/$\{segment}
+        - id: rewrite_v1
+          uri: http://127.0.0.1:8082
+          predicates:
+            - Path=/books
+            - Header=X-API-VERSION, v1
+          filters:
+            - RewritePath=/books,/v1/books
+        - id: rewrite_v1
+          uri: http://127.0.0.1:8081
+          predicates:
+            - Path=/isbns
+            - Header=X-API-VERSION, v1
+          filters:
+            - RewritePath=/isbns,/v1/isbns
 ```
 
 Restart the gateway:

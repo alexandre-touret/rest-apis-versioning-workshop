@@ -258,7 +258,7 @@ i.e., without the ``exceprt`` attribute).
 Run it, check the log output provided by [LogBook](https://github.com/zalando/logbook/).
 
 ```jshelllanguage
-./gradlew -p rest-book test --tests "Old*IT"
+./gradlew-p rest-book test
 ```
 Check the [test log file](../rest-book/build/test-results/test/TEST-info.touret.bookstore.spring.book.controller.OldBookControllerIT.xml) and search the HTTP logs
 
