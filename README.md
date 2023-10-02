@@ -181,8 +181,6 @@ docker compose version
 Docker Compose version v2.12.2
 ```
 
-
-
 #### :rocket: If you don't want to bother with a local setup
 
 ##### With Gitpod (recommended)
@@ -205,20 +203,17 @@ sdk default java 17.0.5-tem
 ```
 
 ## :boom: Ready ?
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/alexandre-touret/rest-apis-versioning-workshop.git)
 
-> **Warning**
+> **If you fork this repo**
 >
-> I **strongly** suggest to fork this project into your personal GitHub namespace (aka your GitHub account).
+> Don't forget to change the "Open in GitPod" button URL:
+> ```markdown
+> [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git)
+> ```
+ or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` prefix):
 
-You then can change the URL mentioned above to link GitHub and Gitpod:
-
-```markdown
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git)
-```
-
-or you can directly browse this URL (think to change the ``%%MY_NAMESPACE%%`` prefix):
-
-``https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git``
+> ``https://gitpod.io/#github.com/%%MY_NAMESPACE%%/rest-apis-versioning-workshop.git``
 _________________
 
 **Now, you can start [the workshop](docs/index.md) :tada:.**
