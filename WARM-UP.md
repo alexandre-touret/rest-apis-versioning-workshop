@@ -3,6 +3,9 @@
 If you want to avoid wasting your time against a shared WIFI local connection during the first steps or your workshops, do these ones before:
 
 ## If you want to run the workshop on your desktop
+
+Consider using Gitpod first.
+
 ### Tools to install
 
 1. Check [this documentation](https://github.com/alexandre-touret/rest-apis-versioning-workshop#traffic_light-prerequisites) and install [the required tools](https://github.com/alexandre-touret/rest-apis-versioning-workshop#wrench-tools) first
@@ -31,4 +34,5 @@ Now you are ready!
 
 ## If you want to run it on Gitpod
 
-Check [this documentation first](https://github.com/alexandre-touret/rest-apis-versioning-workshop#rocket-if-you-dont-want-to-bother-with-a-local-setup)
+* Create a [Gitpod account](gitpod.io/). I advise you logging with your Github credentials. 
+* Check [this documentation](https://github.com/alexandre-touret/rest-apis-versioning-workshop#rocket-if-you-dont-want-to-bother-with-a-local-setup)
