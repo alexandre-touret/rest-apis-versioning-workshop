@@ -4,8 +4,7 @@ At this point we have our first customer : **John Doe** who uses our API with th
 
 ## Prerequisites
 
-You have to start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number), [authorization-server](../authorization-server)
-and [the gateway](../gateway) modules.
+You have to start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number) and [the gateway](../gateway) modules.
 As mentioned earlier, you must be at the root of the project (i.e., ``rest-apis-versioning-workshop``).
 
 In the first shell, run:
