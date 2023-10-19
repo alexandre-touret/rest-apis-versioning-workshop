@@ -77,7 +77,8 @@ In this chapter, we will update the [Book schema in the OpenAPI spec file](../re
 This attribute is (only for the workshop) the beginning of the [description attribute](../rest-book/src/main/resources/openapi.yml).
 We will extract the first 100 characters.
 
-1. Update the [OpenAPI spec file](../rest-book/src/main/resources/openapi.yml), add the ``excerpt`` attribute:
+1. Update the [OpenAPI spec file](../rest-book/src/main/resources/openapi.yml)
+   of [the rest-book module]((../rest-book/src/main/resources/openapi.yml)) , add the ``excerpt`` attribute:
 
 ```yaml
     Book:
@@ -102,13 +103,14 @@ The build and tests should success. In the meantime, you would get this warning 
    BookDto toBookDto(Book book);
 
 ```
-It is *"normal"* because the POJO used to persist data has not been modified yet.
+
+It is *"normal"* because the POJO (*Plain Old Java Object*) used to persist data has not been modified yet.
 
 3. Normally you can see now this new attribute in
    the [BookDto class](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java)
    .
 4. In the [Book entity class](../rest-book/src/main/java/info/touret/bookstore/spring/book/entity/Book.java), add a
-   transient attribute as below by uncommenting the following code. 
+   transient attribute as below by uncommenting the following code.
 
 ```java
 
@@ -233,10 +235,10 @@ public ResponseEntity<String> getBookExcerpt(Long id) {
 }
 ```
 
-Run tests again:
+Build it again:
 
 ```jshelllanguage
-./gradlew build
+./gradlew build-p rest-book 
 ```
 
 You have now added new data and functionality to your API without any version :exclamation:
@@ -249,7 +251,8 @@ integration test.
 It uses
 the [good old BookDto definition](../rest-book/src/test/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java)
 which represents the previous definition
-of [BookDto](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java).
+of [BookDto](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java) (
+i.e., without the ``excerpt`` functionality.
 This class is based on the
 first [BookDto definition](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java) (
 i.e., without the ``exceprt`` attribute).

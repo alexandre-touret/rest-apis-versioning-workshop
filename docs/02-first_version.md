@@ -4,7 +4,7 @@ We will define in this chapter our first version in the URI and in a header mixi
 
 > **Warning**
 >
-> Before starting, this chapter, please shut down all the apps already started:
+> Before starting this chapter, please shut down all the apps already started:
 > * [config server](../config-server)
 > * [gateway](../gateway)
 > * [authorization server](../authorization-server)
@@ -187,7 +187,7 @@ By the way, you can also verify if the Swagger and OpenAPI is up-to-date by brow
 ### Create a HTTP Header based version
 
 In this chapter, we will put in place a rewrite/redirection mechanism in the gateway to route incoming requests
-regarding an header.
+regarding a header.
 
 For this workshop we will extract the ``X-API-VERSION`` HTTP header and route to the appropriate backend.
 For instance if we reach the API as following:
