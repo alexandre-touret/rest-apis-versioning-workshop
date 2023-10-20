@@ -4,15 +4,15 @@
 
 Now it is time to move on.
 
-We just deprecated our [first version](../rest-book) and we must add new features for our new customers while bringing them wisely to our existing ones!
+We just deprecated our [first version](../rest-book), and we must add new features for our new customers while bringing them wisely to our existing ones!
 
 How to migrate your customers who use the V1 to the V2 ?
 Good question!
 
 The first thing to do is to communicate on a regular basis the roadmap and the planned your product End Of Life (EoL) milestones.
 
-By the way, our customer wants having several authors for a same book.
-Currently, one book could only have one author.
+By the way, our customer wants to get several authors for a same book.
+Currently, one book could only get one author.
 This functionality could be considered as a [breaking change](https://en.wiktionary.org/wiki/breaking_change).
 
 Beyond the API definition, this new functionality impacts the whole application. From the OpenAPI description to database schema.
@@ -174,6 +174,8 @@ public class Author implements Serializable {
 
 Modify the [``Book``](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/entity/Book.java) adding a new field ``authors``:
 
+Remove first the ``author`` field declaration and its getter/setter methods.
+
 ```java
 @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH})
 private List<Author> authors;
@@ -201,7 +203,7 @@ Add finally the getters and setters:
 
 ### Spring Data repository
 
-Create the repository ``AuthorRepository`` in the package [``info.touret.bookstore.spring.book.repository``](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository):
+Create the repository ``AuthorRepository`` class in the package [``info.touret.bookstore.spring.book.repository``](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository):
 
 ```java
 package info.touret.bookstore.spring.book.repository;
@@ -259,14 +261,15 @@ You must also inject the ``AuthorRepository`` class in the constructor:
                        RestTemplate restTemplate,
                        @Value("${booknumbers.api.url}") String isbnServiceURL,
                        @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") CircuitBreakerFactory circuitBreakerFactory,
-                       @Value("${book.find.limit:10}") Integer findLimit) {
-        this.bookRepository = bookRepository;
-        this.authorRepository = authorRepository;
-        this.restTemplate = restTemplate;
-        this.isbnServiceURL = isbnServiceURL;
+                       @Value("${book.find.limit:10}") Integer findLimit){
+        this.bookRepository=bookRepository;
+        this.authorRepository=authorRepository;
+        this.restTemplate=restTemplate;
+        this.isbnServiceURL=isbnServiceURL;
 
-        this.circuitBreakerFactory = circuitBreakerFactory;
-        this.findLimit = findLimit;
+        this.circuitBreakerFactory=circuitBreakerFactory;
+        this.findLimit=findLimit;
+        }
 ```
 
 and add a field ``authorRepository``:
