@@ -2,10 +2,13 @@
 
 ## A new functionality for a new customer
 
-We have now a new customer. Good news/bad news!
-The good one is our API tends to be famous, the bad one is we need to change our API contract without impacting our
-existing customers.
-The very bad point, is our existing customers cannot update their API clients before one year (at least).
+We have now a new customer. 
+
+Good news/bad news!
+
+The good one is our API is now famous, the bad one is we must change our API contract without impacting our existing customers.
+
+The very bad point, is our existing customers cannot update their API clients by one year (at least).
 We then decided to create a new version!
 
 In this case, it is strongly recommended to deal with GIT long time versions.
@@ -97,9 +100,7 @@ Validate your configuration by building this project:
 ./gradlew build -p rest-book-2
 ```
 
-You will then have to re-import the new configuration in your IDE by refreshing it.
-
-You can also only build the new module by running this command :
+You will then have to re-import the new configuration in your IDE by refreshing it (You can also only build the new module by running this command):
 
 ```jshelllanguage
 ./gradlew build -p rest-book-2
@@ -107,8 +108,8 @@ You can also only build the new module by running this command :
 
 ## Adding a new functionality to rest-book2
 
-In this new service, we are to deploy new features for our new customer. He/She has a huge library of books, we therefore want to
-limit the numbers of results provided by our [``/books`` API](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/controller/BookController.java) to only 10 results.
+In this new service, we are to deploy new features for our new customer. 
+He/She has a huge library of books, we therefore want to limit the numbers of results provided by our [``/books`` API](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/controller/BookController.java) to only 10 results.
 
 We could imagine that a search engine functionality would be more realistic.
 However, for this workshop, we will only work to a books list limiter.
@@ -117,8 +118,7 @@ This limit will be applied by creating a new query which uses a [``Pageable`` pa
 
 This object is really useful to paginate results. We will only use it for limiting the data queried on the database and returned by our API.
 
-In the
-rest-book-2 [``BookRepository`` class](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository/BookRepository.java),
+In the rest-book-2 [``BookRepository`` class](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository/BookRepository.java),
 add the following method:
 
 ```java
@@ -137,7 +137,7 @@ In the [BookService](../rest-book-2/src/main/java/info/touret/bookstore/spring/b
 ```java
 public List<Book> findAllBooks(){
         return bookRepository.findAll(PageRequest.of(0,findLimit));
-        }
+}
 ```
 
 Add also the corresponding import declaration:
