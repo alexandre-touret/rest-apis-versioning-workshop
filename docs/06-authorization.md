@@ -63,14 +63,15 @@ You can now try to generate token as either the ``customer1`` or ``customer2``:
 For ``customer1``:
 
 ```jshelllanguage
-http--form post:8009/oauth2/token grant_type="client_credentials"client_id="customer1"client_secret="secret1"scope="openid book:v1:write book:v1:write number:v1:read"
+http --form  :8009/oauth2/token grant_type="client_credentials" client_id="customer1" ="secret1" scope="openid book:v1:write book:v1:write number:v1:read"
 ```
 
 ```jshelllanguage
-http--form post:8009/oauth2/token grant_type="client_credentials"client_id="customer2"client_secret="secret2"scope="openid book:v2:write book:v2:read number:v2:read"
+http --form  :8009/oauth2/token grant_type="client_credentials" client_id="customer2" client_secret="secret2" scope="openid book:v2:write book:v2:read number:v2:read"
 ```
 
 Verify you have the corresponding scopes.
+Here is the customer2's token:
 
 ```json
 {
@@ -119,7 +120,7 @@ Finally, if you don't know how to create [OIDC requests](https://openid.net/deve
 
 ### Declare routes and corresponding scopes in the gateway
 
-In [the gateway's configuration](../gateway/src/main/resources/application.yml), enable first the security uncommenting this lines:
+In [the gateway's configuration](../gateway/src/main/resources/application.yml), enable first the security uncommenting these lines:
 
 ```yaml
 # SECURITY CONFIGURATION TO BE APPLIED (remove comments to apply it)
@@ -149,21 +150,21 @@ In [the gateway's configuration](../gateway/src/main/resources/application.yml),
 Uncomment block codes in the [gateway application](../gateway/src/main/java/info/touret/bookstore/spring/gateway/GatewayApplication.java) to get the following content:
 
 ```java
- @Bean
+  @Bean
     SecurityWebFilterChain springWebFilterChain(ServerHttpSecurity http) {
 
             http.csrf(ServerHttpSecurity.CsrfSpec::disable)
             .authorizeExchange(exchanges -> exchanges
-            .pathMatchers(GET,"/v1/books/count").hasAuthority("SCOPE_book:v1:read")
-            .pathMatchers(GET,"/v1/books/random").hasAuthority("SCOPE_book:v1:read")
-            .pathMatchers(POST,"/v1/books").hasAuthority("SCOPE_book:v1:write")
-            .pathMatchers(GET,"/v1/books").hasAuthority("SCOPE_book:v1:read")
-            .pathMatchers("/v1/isbns").hasAuthority("SCOPE_number:v1:read")
-            .pathMatchers(GET,"/v2/books/count").hasAuthority("SCOPE_book:v2:read")
-            .pathMatchers(GET,"/v2/books/random").hasAuthority("SCOPE_book:v2:read")
-            .pathMatchers(POST,"/v2/books").hasAuthority("SCOPE_book:v2:write")
-            .pathMatchers(GET,"/v2/books").hasAuthority("SCOPE_book:v2:read")
-            .pathMatchers("/v2/isbns").hasAuthority("SCOPE_number:v2:read")
+            .pathMatchers(GET, "/v1/books/count").hasAuthority("SCOPE_bookv1:read")
+            .pathMatchers(GET, "/v1/books/random").hasAuthority("SCOPE_bookv1:read")
+            .pathMatchers(POST, "/v1/books").hasAuthority("SCOPE_bookv1:write")
+            .pathMatchers(GET, "/v1/books").hasAuthority("SCOPE_bookv1:read")
+            .pathMatchers("/v1/isbns").hasAuthority("SCOPE_numberv1:read")
+            .pathMatchers(GET, "/v2/books/count").hasAuthority("SCOPE_bookv2:read")
+            .pathMatchers(GET, "/v2/books/random").hasAuthority("SCOPE_bookv2:read")
+            .pathMatchers(POST, "/v2/books").hasAuthority("SCOPE_bookv2:write")
+            .pathMatchers(GET, "/v2/books").hasAuthority("SCOPE_bookv2:read")
+            .pathMatchers("/v2/isbns").hasAuthority("SCOPE_numberv2:read")
             .anyExchange().authenticated()
             )
             .oauth2ResourceServer(oAuth2ResourceServerSpec -> oAuth2ResourceServerSpec.jwt(Customizer.withDefaults()));
@@ -172,11 +173,6 @@ Uncomment block codes in the [gateway application](../gateway/src/main/java/info
                 .authorizeExchange(authorizeExchangeSpec -> authorizeExchangeSpec.anyExchange().permitAll());*/
             return http.build();
             }
-
-        /* If the previous configuration is applied, you would remove this following line (and the other way around)
-        http.csrf().disable().cors().disable().authorizeExchange().anyExchange().permitAll();*/
-        return http.build();
-    }
 
     /* If the security is enabled, you MUST uncomment the following factories */
     @Bean
