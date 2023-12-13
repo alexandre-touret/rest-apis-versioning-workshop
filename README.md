@@ -156,11 +156,9 @@ Here are commands to validate your environment:
 
 ```jshelllanguage
 java -version
-    
-openjdk version "17.0.5" 2022-10-18
-OpenJDK Runtime Environment Temurin-17.0.5+8 (build 17.0.5+8)
-OpenJDK 64-Bit Server VM Temurin-17.0.5+8 (build 17.0.5+8, mixed mode, sharing)
-
+openjdk version "21.0.1" 2023-10-17 LTS
+OpenJDK Runtime Environment Temurin-21.0.1+12 (build 21.0.1+12-LTS)
+OpenJDK 64-Bit Server VM Temurin-21.0.1+12 (build 21.0.1+12-LTS, mixed mode, sharing)
 ```
 
 **Gradle**
@@ -168,9 +166,20 @@ OpenJDK 64-Bit Server VM Temurin-17.0.5+8 (build 17.0.5+8, mixed mode, sharing)
 If you use the wrapper, you won't have troubles. Otherwise...:
 
 ```jshelllanguage
-gradle --version
+gradle -version
 
-Welcome to Gradle 7.6!
+------------------------------------------------------------
+Gradle 8.5
+------------------------------------------------------------
+
+Build time:   2023-11-29 14:08:57 UTC
+Revision:     28aca86a7180baa17117e0e5ba01d8ea9feca598
+
+Kotlin:       1.9.20
+Groovy:       3.0.17
+Ant:          Apache Ant(TM) version 1.10.13 compiled on January 4 2023
+JVM:          21.0.1 (Eclipse Adoptium 21.0.1+12-LTS)
+OS:           Linux 5.15.133.1-microsoft-standard-WSL2 amd64
 ```
 
 **Docker Compose**
@@ -178,7 +187,7 @@ Welcome to Gradle 7.6!
 ```jshelllanguage
 docker compose version
     
-Docker Compose version v2.12.2
+Docker Compose version v2.22.2
 ```
 
 #### :rocket: If you don't want to bother with a local setup
@@ -198,8 +207,8 @@ You have then to run the command in the shell:
 
 ```jshelllanguage
 pip install httpie
-sdk install java 17.0.5-tem
-sdk default java 17.0.5-tem
+sdk install java 21.0.1-tem
+sdk default java 21.0.1-tem
 ```
 
 ## :boom: Ready ?

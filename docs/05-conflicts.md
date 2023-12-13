@@ -286,7 +286,7 @@ import info.touret.bookstore.spring.book.repository.AuthorRepository;
 
 ### Import data
 
-You can remove all the data located in [``import.sql``](../rest-book-2/src/main/resources/import.sql) and replace it by:
+You can remove all the data located in [``import.sql.ORI``](../rest-book-2/src/main/resources/import.sql.ORI) and replace it by:
 
 ```sql
 INSERT INTO author(id,firstname,lastname,public_id) VALUES (1000,'Antonio','Concalves','7c11e1bf-1c74-4280-812b-cbc6038b7d21');
@@ -452,7 +452,7 @@ public interface BookMapper {
 
 ### Import Data
 
-Copy paste the [v2 ``import.sql``](../rest-book-2/src/main/resources/import.sql) content into [the v1](../rest-book/src/main/resources/import.sql) (don't forget to remove the existing lines).
+Copy paste the [v2 ``import.sql.ORI``](../rest-book-2/src/main/resources/import.sql.ORI) content into [the v1](../rest-book/src/main/resources/import.sql.ORI) (don't forget to remove the existing lines).
 
 ### Tests
 
