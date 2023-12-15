@@ -1,5 +1,11 @@
 # Dealing with breaking changes
 
+## TL;DR: What are you going to learn in this chapter?
+
+This chapter covers the following topics:
+
+1. Dig into Backward compatibility hassle and implement a solution to make both of the two versions work
+
 ## Preamble
 
 Now it is time to move on.
@@ -370,7 +376,7 @@ http :8083/v2/books
 
 ```
 
-## Striving with changes for existing customers in the v1
+## Striving for changes for existing customers in the v1
 
 Now, the database is not usable as is for the V1.
 

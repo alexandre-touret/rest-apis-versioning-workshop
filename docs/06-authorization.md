@@ -1,5 +1,12 @@
 # Last but not least : what about security and authorization impacts?
 
+## TL;DR: What are you going to learn in this chapter?
+
+This chapter covers the following topics:
+
+1. Pinpointing the impacts on authorization
+2. Enforcing API versions restrictions with OAUTHv2 scopes
+
 While versioning secured APIs, there is usually one impact we miss at the beginning: security, especially authorization.
 If you apply authorization policies on your whole platform using for instance, [ABAC](https://en.wikipedia.org/wiki/Attribute-based_access_control) or [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control) approaches, you must take care about it.
 They could indeed evolve over your versions.
