@@ -13,7 +13,7 @@ We will define in this chapter our first version in the URI and in a header mixi
 
 ## URI based version
 
-In the current rest-book version,we have already defined define the version in the BookController's URI.
+In the current rest-book version,we have already defined the version in the BookController's URI.
 
 The pattern is ``/api/%VERSION%/books``.
 For instance, we could have ``/api/v1/books``.
@@ -190,10 +190,10 @@ In this chapter, we will put in place a rewrite/redirection mechanism in the gat
 regarding a header.
 
 For this workshop we will extract the ``X-API-VERSION`` HTTP header and route to the appropriate backend.
-For instance if we reach the API as following:
+For instance if we reach the API as following :
 
 ```jshelllanguage
-http :8080/books/count "X-API-VERSION: v1" 
+http :8080/... "X-API-VERSION: v1" 
 ```
 Our gateway will rewrite the URL and reach the good version (i.e., the version specified by the header).
 
