@@ -2,6 +2,13 @@
 
 At this point we have our first customer : **John Doe** who uses our API with the current specification.
 
+## TL;DR: What will you learn in this chapter?
+
+This chapter covers the following topics:
+
+1. How to start the platform
+2. Adding a non-breaking change and see how it doesn't impact the API Contract 
+
 ## Prerequisites
 
 You must start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number) and [the gateway](../gateway) modules.
