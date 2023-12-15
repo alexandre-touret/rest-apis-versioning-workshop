@@ -4,7 +4,7 @@ At this point we have our first customer : **John Doe** who uses our API with th
 
 ## Prerequisites
 
-You have to start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number) and [the gateway](../gateway) modules.
+You must start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number) and [the gateway](../gateway) modules.
 As mentioned earlier, you must be at the root of the project (i.e., ``rest-apis-versioning-workshop``).
 
 In the first shell, run:
@@ -238,7 +238,7 @@ public ResponseEntity<String> getBookExcerpt(Long id) {
 Build it again:
 
 ```jshelllanguage
-./gradlew build-p rest-book 
+./gradlew build -p rest-book 
 ```
 
 You have now added new data and functionality to your API without any version :exclamation:
@@ -260,7 +260,7 @@ i.e., without the ``exceprt`` attribute).
 Run it, check the log output provided by [LogBook](https://github.com/zalando/logbook/).
 
 ```jshelllanguage
-./gradlew-p rest-book test
+./gradlew -p rest-book test
 ```
 Check the [test log file](../rest-book/build/test-results/test/TEST-info.touret.bookstore.spring.book.controller.OldBookControllerIT.xml) and search the HTTP logs
 
