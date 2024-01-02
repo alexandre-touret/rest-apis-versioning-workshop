@@ -1,7 +1,10 @@
 
 # REST APIs Versioning: Hands-on !
 
-This workshop aims to introduce different ways to handle and propose several versions of a same API to your customers.
+This workshop aims to 
+- Introduce REST API Versioning 
+- Highlight API breaking and non breaking changes
+- Dive into all the impacts: configuration, code, security,...  
 
 ## :dart: Big picture
 
