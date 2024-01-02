@@ -4,7 +4,7 @@ If you want to avoid wasting your time against a shared WIFI local connection du
 
 ## If you want to run the workshop on your desktop
 
-Consider using Gitpod first.
+Consider using [Gitpod first](https://gitpod.io/)!
 
 ### Tools to install
 
