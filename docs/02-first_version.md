@@ -2,12 +2,15 @@
 
 ## TL;DR: What will you learn in this chapter?
 
-This chapter covers the following topics:
+> [!IMPORTANT]
+> This chapter covers the following topics:
+> 1. Pinpoint the impacts of the versioning in the OPENAPI Description file
+> 2. Implement a URL Based versioning
+> 3. Implement a header based versioning
+> 4. Deploy and configure a default version for your API
+>
 
-1. Pinpoint the impacts of the versioning in the OPENAPI Description file
-2. Implement a URL Based versioning
-3. Implement a header based versioning
-4. Deploy and configure a default version for your API
+
 
 ## Prerequisites
 We will define in this chapter our first version in the URI and in a header mixing in the gateway & the apps.

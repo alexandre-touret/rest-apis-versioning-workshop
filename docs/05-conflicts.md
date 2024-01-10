@@ -2,9 +2,10 @@
 
 ## TL;DR: What are you going to learn in this chapter?
 
-This chapter covers the following topics:
 
-1. Dig into Backward compatibility hassle and implement a solution to make both of the two versions work
+> [!IMPORTANT]
+> This chapter covers the following topics:
+> 1. Dig into Backward compatibility hassle and implement a solution to make both of the two versions work
 
 ## Preamble
 

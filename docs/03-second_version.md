@@ -2,10 +2,11 @@
 
 ## TL;DR: What are you going to learn in this chapter?
 
-This chapter covers the following topics:
-
-1. Creating a new version (it will be a copy of the rest-book module)
-2. Add a new breaking change functionality to the last version
+> [!IMPORTANT]
+> This chapter covers the following topics:
+> 1. Creating a new version (it will be a copy of the rest-book module)
+> 2. Add a new breaking change functionality to the last version
+>
 
 ## A new functionality for a new customer
 
