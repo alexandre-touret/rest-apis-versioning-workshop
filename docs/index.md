@@ -19,8 +19,7 @@ Here is how this repository is organised and a short explanation:
 
 ### :computer: Infrastructure
 
-:warning: The required infrastructure is available by
-running [Docker containers](https://www.docker.com/resources/what-container/).
+:warning: The required infrastructure is available by running [Docker containers](https://www.docker.com/resources/what-container/).
 
 You can start the whole by running [Docker compose](https://docs.docker.com/compose/).
 

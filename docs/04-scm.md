@@ -2,10 +2,14 @@
 
 ## TL;DR: What are you going to learn in this chapter?
 
-This chapter covers the following topics:
 
-1. Pinpoint Configuration management issues due to API Versioning 
-2. Exposing the two versions on the API Gateway
+
+> [!IMPORTANT]
+> This chapter covers the following topics:
+> 1. Pinpoint Configuration management issues due to API Versioning
+> 2. Exposing the two versions on the API Gateway
+
+
 
 ## Preamble
 You can configure your services either during deployment using CI tooling, such as [Gitlab Environments](https://docs.gitlab.com/ee/ci/environments/), or any other [Infra As Code](https://en.wikipedia.org/wiki/Infrastructure_as_code) tool ([Istio](https://istio.io/), [Ansible](https://www.ansible.com/),...) or using a configuration server.

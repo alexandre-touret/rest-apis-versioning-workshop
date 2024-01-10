@@ -4,10 +4,11 @@ At this point we have our first customer : **John Doe** who uses our API with th
 
 ## TL;DR: What will you learn in this chapter?
 
-This chapter covers the following topics:
-
-1. How to start the platform
-2. Adding a non-breaking change and see how it doesn't impact the API Contract 
+> [!IMPORTANT]
+> This chapter covers the following topics:
+> 1. How to start the platform
+> 2. Adding a non-breaking change and see how it doesn't impact the API Contract
+>
 
 ## Prerequisites
 
