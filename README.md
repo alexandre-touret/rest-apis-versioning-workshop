@@ -146,12 +146,11 @@ gitGraph:
 ### :wrench: Tools
 #### If you want to execute this workshop locally
 You **MUST** have set up these tools first:
-* [Java 17+](https://adoptium.net/temurin/releases/?version=17)
-* [Gradle 7.5+](https://gradle.org/)
+* [Java 21+](https://adoptium.net/temurin/releases/?version=21)
+* [Gradle 8.5+](https://gradle.org/)
 * [Docker](https://docs.docker.com/) & [Docker compose](https://docs.docker.com/compose/)
 * Any IDE ([IntelliJ IDEA](https://www.jetbrains.com/idea), [VSCode](https://code.visualstudio.com/), [Netbeans](https://netbeans.apache.org/),...) you want
 * [cURL](https://curl.se/), [jq](https://stedolan.github.io/jq/), [HTTPie](https://httpie.io/) or any tool to call your REST APIs
-
 
 Here are commands to validate your environment:
 
