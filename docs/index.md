@@ -1,5 +1,18 @@
 # Hand's on
 
+## Terms & vocabulary
+
+In this workshop you will come across specific capitalized terms such as **MUST** .
+Here is how you should interpret them in the context of this workshop:
+
+| Term                | Meaning                                                     |
+|---------------------|-------------------------------------------------------------|
+| **MUST**            | Mandatory action                                            |
+| **CHECK**           | Read & verify the content of an existing configuration/code |
+| **UPDATE**          | Update an existing configuration/code                       |
+| **CREATE**          | Create a new class/configuration file                       |
+| **RUN** / **BUILD** | Execute command|                                             |
+
 ## Repository organisation
 
 Here is how this repository is organised and a short explanation:
@@ -21,7 +34,7 @@ Here is how this repository is organised and a short explanation:
 
 :warning: The required infrastructure is available by running [Docker containers](https://www.docker.com/resources/what-container/).
 
-You can start the whole by running [Docker compose](https://docs.docker.com/compose/).
+You **MUST** start the whole by running [Docker compose](https://docs.docker.com/compose/).
 
 ```bash
 cd infrastructure
@@ -31,7 +44,7 @@ docker compose up -d
 If you start this command on Gitpod, [you will be asked to make public or not some network ports](https://www.gitpod.io/docs/configure/workspaces/ports).  
 You can make them public.
 
-You can then check the running containers by running this command:
+You **MUST** then check the running containers by running this command:
 
 ```jshelllanguage
 docker compose ps
@@ -67,7 +80,7 @@ You should have the following output indicating the service is ready:
 <==========---> 80% EXECUTING [13s]
 ```
 
-To check it is effectively ready, you can reach the API by running this command:
+To check it is effectively ready, reach the API by running this command:
 
 ```jshelllanguage
 http http://localhost:8888/rest-number/default 

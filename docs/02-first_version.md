@@ -10,19 +10,17 @@
 > 4. Deploy and configure a default version for your API
 >
 
-
-
 ## Prerequisites
 We will define in this chapter our first version in the URI and in a header mixing in the gateway & the apps.
 
-> **Warning**
->
+> [!WARNING]
 > Before starting this chapter, please shut down all the apps already started:
 > * [config server](../config-server)
 > * [gateway](../gateway)
 > * [authorization server](../authorization-server)
 > * [rest-book](../rest-book)
 > * [rest-number](../rest-number)
+> 
 
 ## URI based version
 
@@ -37,7 +35,7 @@ We will shortly review the configuration already done and update the OpenAPI doc
 
 #### Rest-Book
 
-You can check the default context path in
+You can **CHECK** the default context path in
 the [rest-book configuration file](../config-server/src/main/resources/config/rest-book.yml)
 
 ```yaml
@@ -46,7 +44,7 @@ server:
     context-path: /v1
 ```
 
-Update the [rest-book's openAPI descriptor file](../rest-book/src/main/resources/openapi.yml) adding the version in the
+**UPDATE** the [rest-book's openAPI descriptor file](../rest-book/src/main/resources/openapi.yml) adding the version in the
 URL:
 
 ```yaml
@@ -69,7 +67,7 @@ Now, build the project:
 The same version is applied in both rest-book and rest-number modules.
 
 To reach it, the same version has been applied to reach the rest-number module.
-You can check the corresponding configuration in
+You can **CHECK** the corresponding configuration in
 the [rest-book configuration file](../config-server/src/main/resources/config/rest-book.yml):
 
 ```yaml
@@ -80,7 +78,7 @@ booknumbers:
 
 #### Rest-Number
 
-Check and modify the [rest-number's openAPI descriptor file](../rest-number/src/main/resources/openapi.yml) to indicate
+**CHECK** and modify the [rest-number's openAPI descriptor file](../rest-number/src/main/resources/openapi.yml) to indicate
 the version:
 
 ```yaml
@@ -92,7 +90,7 @@ servers:
   - url: http://localhost:8081/v1
 ```
 
-Check the [rest-number configuration file](../config-server/src/main/resources/config/rest-number.yml) and the contex
+**CHECK** the [rest-number configuration file](../config-server/src/main/resources/config/rest-number.yml) and the contex
 path:
 
 ```yaml
@@ -101,14 +99,14 @@ server:
     context-path: /v1
 ```
 
-Now, build the project:
+Now, build the project, **RUN**:
 
 ```bash 
 ./gradlew build -p rest-number
 ``` 
 
 ### In the gateway
-Check the routes already defined in the [gateway application.yml configuration file](../gateway/src/main/resources/application.yml).
+**CHECK** the routes already defined in the [gateway application.yml configuration file](../gateway/src/main/resources/application.yml).
 
 ```yaml
 spring:
@@ -138,41 +136,39 @@ spring:
 ### Tests
 
 #### Startup
-
 Normally, you Docker infrastructure should be up. If not, start it:
 
+**RUN**:
 
 ```jshelllanguage
 cd infrastructure
 docker compose up
 ```
 
-
 Start then the different applications:
 
-In the first shell:
+In the first shell, **RUN**:
 
 ```jshelllanguage
 ./gradlew bootRun -p config-server
 ```
-In the second shell:
+In the second shell, **RUN**:
 
 ```jshelllanguage
 ./gradlew bootRun -p authorization-server
 ```
 
-In the third shell:
+In the third shell, **RUN**:
 
 ```jshelllanguage
 ./gradlew bootRun -p rest-book
 ```
-In the fourth shell:
+In the fourth shell, **RUN**:
 
 ```jshelllanguage
 ./gradlew bootRun -p rest-number
 ```
-
-Last but not least, in the last one:
+Last but not least, in the last one, **RUN**:
 
 ```jshelllanguage
  ./gradlew bootRun -p gateway
@@ -180,7 +176,7 @@ Last but not least, in the last one:
 
 You can now reach the API.
 
-For instance, you can reach the gateway:
+For instance, you can reach the gateway, **RUN**ing:
 
 ```jshelllanguage
 http :8080/v1/books/count
@@ -192,15 +188,15 @@ You can also access directly to the rest-book backend:
 http :8082/v1/books/count
 ```
 
-By the way, you can also verify if the Swagger and OpenAPI is up-to-date by browsing these endpoints:
-
-* http://localhost:8082/v1/swagger-ui/index.html
-* http://localhost:8081/v1/swagger-ui/index.html
+> [!TIP]
+> By the way,if you run this workshop on your local desktop, you can also verify if the Swagger and OpenAPI is up-to-date by browsing these endpoints:
+> * http://localhost:8082/v1/swagger-ui/index.html
+> * http://localhost:8081/v1/swagger-ui/index.html
+> If you run it on GitPod, change the ``localhost:8082`` to the URL specified by the Gitpod runtime. 
 
 ### Create a HTTP Header based version
 
-In this chapter, we will put in place a rewrite/redirection mechanism in the gateway to route incoming requests
-regarding a header.
+In this chapter, we will put in place a rewrite/redirection mechanism in the gateway to route incoming requests regarding a header.
 
 For this workshop we will extract the ``X-API-VERSION`` HTTP header and route to the appropriate backend.
 For instance if we reach the API as following :
@@ -284,13 +280,12 @@ You can use now some dedicated scripts for this new approach:
 Now you can test your API using either these two ways.
 
 ### Create a default version
-Now let's deep dive into the gateway configuration.
+Now let us deep dive into the gateway configuration.
 We will configure it to apply automatically a version if no one is applied.
 
 Stop the gateway by typing CTRL+C.
 
-Add the following route at **THE END** of the routes definition:
-
+**UPDATE** the following route at **THE END** of the routes definition:
 
 ```yaml
   - id: default_version_v1
@@ -301,13 +296,13 @@ Add the following route at **THE END** of the routes definition:
     - RewritePath=/isbns,/v1/isbns
 ```
 
-Restart the gateway
+Restart the gateway, **RUN**
 
 ```jshelllanguage
  ./gradlew bootRun -p gateway
 ```
 
-and run the following command:
+and **RUN** the following command:
 
 ```jshelllanguage
 http :8080/isbns
@@ -321,9 +316,7 @@ In this chapter we have seen how to specify and deal with API version numbers in
 The [gateway configuration](../gateway/src/main/resources/application.yml) is intentionally simple and minimalistic.
 In _the real life_ we would code a dynamic routing and filtering mechanism.
 
-
-> **Note**
->
+> [!NOTE]
 > In your opinion, which way is the best: URI, HTTP header, Accept HTTP header? And where: in the gateway or in the backend? or both?
 >
 > [Go then to chapter 3](./03-second_version.md)

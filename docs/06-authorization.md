@@ -2,7 +2,6 @@
 
 ## TL;DR: What are you going to learn in this chapter?
 
-
 > [!IMPORTANT]
 > This chapter covers the following topics:
 > 1. Pinpointing the impacts on authorization
@@ -20,8 +19,7 @@ action and the corresponding version.
 
 We will see in this chapter how a standard [``credential flow`` authorization mechanism](https://www.rfc-editor.org/rfc/rfc6749#section-4.4) can handle versioning.
 
-> **Note**
->
+> [!NOTE]
 > * In the same way as for version handling, we will apply the security only in the gateway using the authorization server.
 > * **In this chapter, we will only authorise URI Path service versions.**
 
@@ -31,7 +29,7 @@ Before starting, please stop the [gateway](../gateway) and the [authorization se
 
 ### Authorization server
 
-In the [``application.properties`` file](../authorization-server/src/main/resources/application.properties), update the configuration with the good scopes:
+In the [``application.properties`` file](../authorization-server/src/main/resources/application.properties), **UPDATE** the configuration with the good scopes:
 
 ```properties
 server.port=8009
@@ -59,7 +57,7 @@ management.endpoints.web.exposure.include=prometheus
 
 In this example, we declared the ``customer1`` can use the version 1 and the ``customer2`` the v2.
 
-You can start it now:
+Start it now:
 
 ```jshelllanguage
 ./gradlew bootRun -p authorization-server
@@ -94,7 +92,7 @@ Here is the customer2's token:
 
 You can also try using inappropriate scopes (e.g., using ``bookv1:read`` scope for ``customer2``).
 
-You MUST have this error:
+You **MUST** have this error:
 
 ```json
 {
@@ -124,12 +122,11 @@ After copying/pasting the access token, you can see the following output with th
 }
 ```
 
-
 Finally, if you don't know how to create [OIDC requests](https://openid.net/developers/how-connect-works/) by your own, you can use https://oidcdebugger.com/.
 
 ### Declare routes and corresponding scopes in the gateway
 
-In [the gateway's configuration](../gateway/src/main/resources/application.yml), enable first the security uncommenting these lines:
+**UPDATE** [the gateway's configuration](../gateway/src/main/resources/application.yml), uncommenting these lines:
 
 ```yaml
 # SECURITY CONFIGURATION TO BE APPLIED (remove comments to apply it)
@@ -156,7 +153,7 @@ In [the gateway's configuration](../gateway/src/main/resources/application.yml),
           jwk-set-uri: http://localhost:8009
 ```
 
-Uncomment block codes in the [gateway application](../gateway/src/main/java/info/touret/bookstore/spring/gateway/GatewayApplication.java) to get the following content:
+**UPDATE** [gateway application](../gateway/src/main/java/info/touret/bookstore/spring/gateway/GatewayApplication.java) , uncommenting the code to get the following content:
 
 ```java
   @Bean
@@ -196,7 +193,7 @@ Uncomment block codes in the [gateway application](../gateway/src/main/java/info
     }
 ```
 
-Update then the import statements:
+**UPDATE** then the import statements:
 
 ```java
 import org.springframework.beans.factory.annotation.Value;
@@ -226,7 +223,7 @@ Now restart the gateway:
 
 #### Test it
 
-Update the scripts with the appropriate version numbers in scopes and the corresponding ``client_id`` and ``client_secret``.
+**UPDATE** the scripts with the appropriate version numbers in scopes and the corresponding ``client_id`` and ``client_secret``.
 
 For instance, in the [``secureCountBooks.sh`` script file](../bin/secureCountBooks.sh), check you have the good scopes:
 
