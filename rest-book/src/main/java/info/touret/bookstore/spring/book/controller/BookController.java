@@ -75,4 +75,14 @@ public class BookController implements BooksApi {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
     }
+
+    /*@Override
+    public ResponseEntity<String> getBookExcerpt(Long id) {
+        var optionalBook = bookService.findBookById(id);
+        if (optionalBook.isPresent()) {
+            return ResponseEntity.ok(optionalBook.get().getExcerpt());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }*/
 }

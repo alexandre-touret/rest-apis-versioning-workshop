@@ -15,7 +15,7 @@ At this point we have our first customer : **John Doe** who uses our API with th
 You must start three new shells and run [rest-book](../rest-book), [rest-number](../rest-number) and [the gateway](../gateway) modules.
 As mentioned earlier, you must be at the root of the project (i.e., ``rest-apis-versioning-workshop``).
 
-In the first shell, run:
+In the first shell, **RUN**:
 
 ```jshelllanguage
 ./gradlew bootRun -p rest-book
@@ -27,7 +27,6 @@ In the second one:
 ./gradlew bootRun -p rest-number
 ```
 
-
 And in the last one:
 
 ```jshelllanguage
@@ -36,12 +35,11 @@ And in the last one:
 
 _You can disable unit and integration tests by adding the option ``-x test`` at the end of the command ;-)._
 
-
 ## The current status
 
 ### Getting the OpenAPI Documentation
 
-You can now reach the current API documentation by running these commands:
+You can now reach the current API documentation by **RUN**ning these commands:
 
 For the books API:
 
@@ -54,18 +52,13 @@ For the numbers API:
 http :8081/v1/v3/api-docs
 ```
 
-You can also check the documentation by browsing these endpoints:
-
-* http://localhost:8082/v1/swagger-ui/index.html
-* http://localhost:8081/v1/swagger-ui/index.html
-
 You can also use the scripts located in the [bin](../bin) folder.
 
 Here are some examples of the functionalities provided:
 
 * Get a Random Book
 
-You can get a random book by running this command:
+You can get a random book by **RUN**ning this command:
 
 ```jshelllanguage
 . ./bin/randomBook.sh
@@ -80,12 +73,12 @@ Now you can stop this service (i.e., [rest-book](../rest-book)) now by typing CT
 
 ## Adding new data
 
-In this chapter, we will update the [Book schema in the OpenAPI spec file](../rest-book/src/main/resources/openapi.yml) adding the attribute ``excerpt``.
+In this chapter, we will **UPDATE** the [Book schema in the OpenAPI spec file](../rest-book/src/main/resources/openapi.yml) adding the attribute ``excerpt``.
 
 This attribute is (only for the workshop) the beginning of the [description attribute](../rest-book/src/main/resources/openapi.yml).
 We will extract the first 100 characters.
 
-1. Update the [OpenAPI spec file](../rest-book/src/main/resources/openapi.yml)
+1. **UPDATE** the [OpenAPI spec file](../rest-book/src/main/resources/openapi.yml)
    of [the rest-book module]((../rest-book/src/main/resources/openapi.yml)) , add the ``excerpt`` attribute:
 
 ```yaml
@@ -98,7 +91,7 @@ We will extract the first 100 characters.
              readOnly: true
              type: string
 ```
-2. Build the application again
+2. **BUILD** the application again
 
 ```jshelllanguage
 ./gradlew build -p rest-book
@@ -140,7 +133,7 @@ public void initFields(){
         }
 }
 ```
-You can now rebuild the application.
+You can now re**BUILD** the application.
 
 Before creating unit and integration tests, we can run them to see if this modification is blocking.
 
@@ -150,21 +143,19 @@ Before creating unit and integration tests, we can run them to see if this modif
 
 :question: See what happens: Is it blocking or not?
 
-
 5. Now, let's get a random book with an excerpt
 
-Restart your rest-book service
+Restart your rest-book service, **RUN**ing this command
 
 ```jshelllanguage
 ./gradlew bootRun -p rest-book
 ```
 
-Check it manually by running the following command:
+Check it manually by **RUN**ing the following command:
 
 ```jshelllanguage
 http :8082/v1/books/1098 --print b | jq .excerpt 
 ```
-
 You can also do that through the API Gateway:
 
 ```jshelllanguage
@@ -174,7 +165,7 @@ http :8080/v1/books/1098 --print b | jq .excerpt
 
 You can then add a new operation ``getBookExcerpt``.
 
-In the [OpenAPI spec file](../rest-book/src/main/resources/openapi.yml), add a new operation:
+**UPDATE** the [OpenAPI spec file](../rest-book/src/main/resources/openapi.yml), adding a new operation:
 
 For instance:
 
@@ -220,8 +211,9 @@ For instance:
 
 ```
 
-
 You can now generate the corresponding Java code.
+
+**RUN**:
 
 ```jshelllanguage
 ./gradlew  openApiGenerate -p rest-book
@@ -229,7 +221,7 @@ You can now generate the corresponding Java code.
 
 Now, let us create the corresponding method in [BookController](../rest-book/src/main/java/info/touret/bookstore/spring/book/controller/BookController.java):
 
-Uncomment the following method:
+**UPDATE** this class uncommenting the following method:
 
 ```java
    @Override
@@ -243,7 +235,7 @@ public ResponseEntity<String> getBookExcerpt(Long id) {
 }
 ```
 
-Build it again:
+Build it again, **RUN**:
 
 ```jshelllanguage
 ./gradlew build -p rest-book 
@@ -253,24 +245,17 @@ You have now added new data and functionality to your API without any version :e
 
 ## What about backward compatibility?
 
-Let's check
-the [OldBookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java)
-integration test.
-It uses
-the [good old BookDto definition](../rest-book/src/test/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java)
-which represents the previous definition
-of [BookDto](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java) (
-i.e., without the ``excerpt`` functionality.
-This class is based on the
-first [BookDto definition](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java) (
-i.e., without the ``exceprt`` attribute).
+Let's **CHECK** the [OldBookControllerIT](../rest-book/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java) integration test.
+It uses the [good old BookDto definition](../rest-book/src/test/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java) which represents the previous definition
+of [BookDto](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java) (i.e., without the ``excerpt`` functionality.
+This class is based on the first [BookDto definition](../rest-book/build/generated/src/main/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java) (i.e., without the ``exceprt`` attribute).
 
-Run it, check the log output provided by [LogBook](https://github.com/zalando/logbook/).
+**RUN** it, check the log output provided by [LogBook](https://github.com/zalando/logbook/).
 
 ```jshelllanguage
 ./gradlew -p rest-book test
 ```
-Check the [test log file](../rest-book/build/test-results/test/TEST-info.touret.bookstore.spring.book.controller.OldBookControllerIT.xml) and search the HTTP logs
+**CHECK** the [test log file](../rest-book/build/test-results/test/TEST-info.touret.bookstore.spring.book.controller.OldBookControllerIT.xml) and search the HTTP logs
 
 For instance:
 
@@ -308,8 +293,7 @@ For instance:
 
 ```
 
-> **Note**
->
+> [!NOTE]
 > See what happens, compare the data with
 > the [good old BookDto definition](../rest-book/src/test/java/info/touret/bookstore/spring/book/generated/dto/BookDto.java)
 > and **explain it** :exclamation:

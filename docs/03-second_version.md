@@ -14,7 +14,7 @@ We have now a new customer.
 
 Good news/bad news!
 
-The good one is our API is now famous, the bad one is we must change our API contract without impacting our existing customers.
+The good one is our API is now famous, the bad one is we **MUST** change our API contract without impacting our existing customers.
 
 The very bad point, is our existing customers cannot update their API clients by one year (at least).
 We then decided to create a new version!
@@ -25,8 +25,7 @@ For instance, using [Gitflow](https://www.atlassian.com/git/tutorials/comparing-
 You can also use and ship Docker images built on top of this workflow to facilitate the deployment of module's versions.
 To simplify the development loop of this workshop, we will only duplicate the [rest-book](../rest-book) module.
 
-> **Note**
->
+> [!NOTE]
 > In this chapter, we won't be working on having two separate versions running in the same time.
 > We will be doing that on the next chapter after configuring the config server.
 
@@ -36,7 +35,7 @@ You **MUST** stop the running [rest-book module](../rest-book) before!
 
 ### Duplicating the rest-book module
 
-* Update the [build.gradle](../build.gradle) file uncommenting the following configuration:
+* **UPDATE** the [build.gradle](../build.gradle) file uncommenting the following configuration:
 
 ```groovy
 project(':rest-book-2') {
@@ -96,19 +95,19 @@ project(':rest-book-2') {
 ```
 
 In the [settings.gradle](../settings.gradle) file you have to define this new module.
-Uncomment this line:
+**UPDATE** it uncommenting this line:
 
 ```properties
 include 'rest-book-2'
 ```
 
-Validate your configuration by building this project:
+Validate your configuration by building this project, **RUN**:
 
 ```jshelllanguage
 ./gradlew build -p rest-book-2
 ```
 
-You will then have to re-import the new configuration in your IDE by refreshing it (You can also only build the new module by running this command):
+You will then **MUST** to re-import the new configuration in your IDE by refreshing it (You can also only build the new module by **RUN**ing this command):
 
 ```jshelllanguage
 ./gradlew build -p rest-book-2
@@ -126,7 +125,7 @@ This limit will be applied by creating a new query which uses a [``Pageable`` pa
 
 This object is really useful to paginate results. We will only use it for limiting the data queried on the database and returned by our API.
 
-In the rest-book-2 [``BookRepository`` class](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository/BookRepository.java),
+In the rest-book-2, **UPDATE** the [``BookRepository`` class](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository/BookRepository.java),
 add the following method:
 
 ```java
@@ -140,7 +139,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 ```
 
-In the [BookService](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/service/BookService.java) class, update the [``findAllBooks`` method](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/service/BookService.java):
+In the [BookService](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/service/BookService.java) class, **UPDATE** the [``findAllBooks`` method](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/service/BookService.java):
 
 ```java
 public List<Book> findAllBooks(){
@@ -175,7 +174,7 @@ public BookService(BookRepository bookRepository,
 
 ```
 
-You have then to add some config lines and the [rest-book.yml](../config-server/src/main/resources/config/rest-book.yml) file:
+You **MUST** then to add some config lines and the [rest-book.yml](../config-server/src/main/resources/config/rest-book.yml) file:
 
 ```yaml
 book:
@@ -185,22 +184,21 @@ book:
 
 ## Running it
 
-Now, you can start your new module:
+Now, you can start your new module, **RUN**:
 
 ```jshelllanguage
 ./gradlew bootRun -p rest-book-2
 ```
 
-You can test it and especially the new feature:
+You can test it and especially the new feature, **RUN**:
 
 ```jshelllanguage
 http :8082/v1/books --print b | jq '. | length'
 ```
 
-You must only get ten elements.
+You **MUST** only get ten elements.
 
-> **Note**
->
+> [!NOTE]
 > In this chapter, we added a new feature creating a new version.
 > At this time, we can't run both of the two versions simultaneously. It will be done in the next chapter.
 >

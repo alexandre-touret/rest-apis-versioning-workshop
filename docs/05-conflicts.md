@@ -30,7 +30,7 @@ How could we do that maintaining two versions of our API for our customers?
 
 Stop both the [rest-book-2](../rest-book-2) and [rest-book](../rest-book) modules.
 
-In the [rest-books-2 OpenAPI description file](../rest-book-2/src/main/resources/openapi.yml), update the definition of the ``Book``.
+In the [rest-books-2 OpenAPI description file](../rest-book-2/src/main/resources/openapi.yml), **UPDATE** the definition of the ``Book``.
 Rename the fied ``author`` to ``authors`` and define it like this:
 
 ```yaml
@@ -42,7 +42,7 @@ Rename the fied ``author`` to ``authors`` and define it like this:
 
 Now, create the Author object below the ``Maintenance`` object:
 
-````yaml
+```yaml
     Author:
       type: object
       properties:
@@ -52,9 +52,9 @@ Now, create the Author object below the ``Maintenance`` object:
           type: string
         publicId:
           type: string
-````
+```
 
-Regenerate the corresponding classes:
+Regenerate the corresponding classes, **RUN**:
 
 ```jshelllanguage
 ./gradlew openApiGenerate -p rest-book-2 
@@ -62,7 +62,7 @@ Regenerate the corresponding classes:
 
 You should see in the [generated sources folder](../rest-book-2/build/generated/src/main) the new ``AuthorDto`` class.
 
-If you build your application, you will get warnings.
+If you **BUILD** your application, you will get warnings.
 
 ```jshelllanguage
 ./gradlew clean build -p rest-book-2
@@ -104,7 +104,7 @@ We will implement in this chapter this new functionality.
 
 ### JPA Entities
 
-Create an ``Author`` entity with the following content in the [rest-book-2](../rest-book-2) project. 
+**CREATE** an ``Author`` entity with the following content in the [rest-book-2](../rest-book-2) project. 
 Use the ``info.touret.bookstore.spring.book.entity`` package. 
 
 ```java
@@ -179,7 +179,7 @@ public class Author implements Serializable {
 
 ```
 
-Modify the [``Book``](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/entity/Book.java) adding a new field ``authors``:
+**UPDATE** the [``Book``](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/entity/Book.java) adding a new field ``authors``:
 
 Remove first the ``author`` field declaration and its getter/setter methods.
 
@@ -210,7 +210,7 @@ Add finally the getters and setters:
 
 ### Spring Data repository
 
-Create the repository ``AuthorRepository`` class in the package [``info.touret.bookstore.spring.book.repository``](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository):
+**CREATE** the repository ``AuthorRepository`` class in the package [``info.touret.bookstore.spring.book.repository``](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/repository):
 
 ```java
 package info.touret.bookstore.spring.book.repository;
@@ -232,7 +232,7 @@ public interface AuthorRepository extends CrudRepository<Author,Long> {
 ### Service layer implementation
 
 Here is how I implemented this new feature in the service layer within the [BookService](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/service/BookService.java).
-It updates the ``persistBook`` and ``updateBook`` methods:
+**UPDATE** the ``persistBook`` and ``updateBook`` methods:
 
 ```java
 public Book updateBook(@Valid Book book) {
@@ -260,7 +260,7 @@ private Book persistBook(Book book) {
 }
 ```
 
-You must also inject the ``AuthorRepository`` class in the constructor:
+You **MUST** also inject the ``AuthorRepository`` class in the constructor:
 
 ```java
  public BookService(BookRepository bookRepository,
@@ -285,7 +285,7 @@ and add a field ``authorRepository``:
 private final AuthorRepository authorRepository;
 ```
 
-Finally you must add this import declaration:
+Finally you **MUST** add this import declaration:
 
 ```java
 import info.touret.bookstore.spring.book.repository.AuthorRepository;
@@ -337,19 +337,18 @@ INSERT INTO BOOK_AUTHORS(books_id,authors_id) values (1011,1008);
 
 ### Tests
 
-
 Delete the [OldBookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java) and the [OldBookDto](../rest-book/src/test/java/info/touret/bookstore/spring/book/dto/OldBookDto.java) class.
 We don't need them anymore.
 
 ### Test it
 
-Run the following command:
+**RUN** the following command:
 
 ```jshelllanguage
 ./gradlew clean build -p rest-book-2
 ```
 
-Check new if both your infrastructure and your config server are up.
+**CHECK** new if both your infrastructure and your config server are up.
 
 Run the application now:
 
@@ -388,7 +387,7 @@ For this workshop, we will do the translation in the [mappers](../rest-book/src/
 
 Copy/paste [the entities modified in the v2](../rest-book-2/src/main/java/info/touret/bookstore/spring/book/entity) in
 the [v1 module](../rest-book/src/main/java/info/touret/bookstore/spring/book/entity).
-Update the Book entity uncommenting the excerpt attributes and the getter/setter.
+**UPDATE** the Book entity uncommenting the excerpt attributes and the getter/setter.
 
 ### Spring Data repository
 Nothing to do here.
@@ -397,7 +396,7 @@ Nothing to do here.
 Nothing to do here too
 
 ### Mapper layer
-Create a class ``AuthorMapper`` in the package ``info.touret.bookstore.spring.book.mapper`` with the following content:
+**CREATE** a class ``AuthorMapper`` in the package ``info.touret.bookstore.spring.book.mapper`` with the following content:
 
 ```java
 package info.touret.bookstore.spring.book.mapper;
@@ -459,22 +458,24 @@ public interface BookMapper {
 
 ### Import Data
 
-Copy paste the [v2 ``import.sql.ORI``](../rest-book-2/src/main/resources/import.sql.ORI) content into [the v1](../rest-book/src/main/resources/import.sql.ORI) (don't forget to remove the existing lines).
+**UPDATE** the [V1 SQL Import file](../rest-book/src/main/resources/import.sql):
+
+Copy and paste the [v2 ``import.sql.ORI``](../rest-book-2/src/main/resources/import.sql.ORI) content into [the v1](../rest-book/src/main/resources/import.sql) (don't forget to remove the existing lines).
 
 ### Tests
 
-In the same way than for the V1, delete the [OldBookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java) and the [OldBookDto](../rest-book/src/test/java/info/touret/bookstore/spring/book/dto/OldBookDto.java) class.
+In the same way as for the V1, delete the [OldBookControllerIT](../rest-book-2/src/test/java/info/touret/bookstore/spring/book/controller/OldBookControllerIT.java) and the [OldBookDto](../rest-book/src/test/java/info/touret/bookstore/spring/book/dto/OldBookDto.java) class.
 We don't need them anymore.
 
 ### Test it
 
-Run the following command first:
+**RUN** the following command first:
 
 ```jshelllanguage
 ./gradlew clean build -p rest-book 
 ```
 
-Then, start the rest-book module:
+Then, **RUN** the rest-book module:
 
 ```jshelllanguage
 ./gradlew bootRun -p rest-book
@@ -486,8 +487,7 @@ Reach then the API and check the author attribute:
 http :8082/v1/books
 ```
 
-> **Note**
->
+> [!NOTE]
 > We have seen in this chapter the breaking changes potential issues.
 > Adding new features creating new versions usually affect the previous ones.
 > That's why it is recommended to only propose **TWO** alive versions to your customers. The V1 is deprecated and the V2 is the target version.
