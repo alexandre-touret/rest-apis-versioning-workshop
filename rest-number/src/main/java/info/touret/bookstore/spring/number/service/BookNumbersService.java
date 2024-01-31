@@ -1,6 +1,5 @@
 package info.touret.bookstore.spring.number.service;
 
-import com.github.javafaker.Faker;
 import info.touret.bookstore.spring.number.exception.ISBNExecutionException;
 import info.touret.bookstore.spring.number.generated.dto.BookNumbersDto;
 import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
@@ -10,9 +9,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.random.RandomGeneratorFactory;
 
 @Service
 public class BookNumbersService {
@@ -54,13 +55,14 @@ public class BookNumbersService {
             throw new ISBNExecutionException(e);
         }
 
-        Faker faker = new Faker();
+        var randomGenerator = RandomGeneratorFactory.getDefault().create();
+        var random = Random.from(randomGenerator);
         BookNumbersDto bookNumbers = new BookNumbersDto();
-        bookNumbers.setIsbn10(faker.code().isbn10(separator));
-        bookNumbers.setIsbn13(faker.code().isbn13(separator));
-        bookNumbers.setAsin(faker.code().asin());
-        bookNumbers.setEan8(faker.code().ean8());
-        bookNumbers.setEan13(faker.code().ean13());
+        bookNumbers.setIsbn10(String.valueOf(random.nextLong(1_000_000_000,9_999_999_999L)));
+        bookNumbers.setIsbn13(String.valueOf(random.nextLong(1000_000_000_000L,9999_999_999_999L)));
+        bookNumbers.setAsin(String.valueOf(random.nextLong(1_000_000_000,9_999_999_999L)));
+        bookNumbers.setEan8(String.valueOf(random.nextLong(1_000_000_0,9_999_999_9L)));
+        bookNumbers.setEan13(String.valueOf(random.nextLong(1000_000_000_000L,9999_999_999_999L)));
         return bookNumbers;
     }
 
