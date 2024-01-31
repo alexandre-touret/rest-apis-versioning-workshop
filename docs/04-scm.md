@@ -50,7 +50,7 @@ Test it using these HTTP requests:
 ```jshelllanguage
 http :8888/rest-book/v1 --print b | jq ' .propertySources[0].source' | jq '."server.servlet.context-path"'
 ```
-You must get this output:
+You **MUST** get this output:
 
 ```jshelllanguage
     "/v1"
@@ -60,7 +60,7 @@ and
 ```jshelllanguage
 http :8888/rest-book/v2 --print b | jq ' .propertySources[0].source."server.servlet.context-path"'
 ```
-You must get this output:
+You **MUST** get this output:
 
 ```jshelllanguage
     "/v2"
@@ -84,7 +84,7 @@ spring.profiles.active=v2
 
 ### OpenAPI
 
-**UPDATE** [the rest-book v1 OpenAPI description file](../rest-book/src/main/resources/openapi.yml) to specify the new version:
+**CHECK** [the rest-book v1 OpenAPI description file](../rest-book/src/main/resources/openapi.yml) to specify the new version:
 
 ```yaml
 openapi: 3.0.0

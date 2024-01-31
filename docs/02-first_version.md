@@ -4,7 +4,7 @@
 
 > [!IMPORTANT]
 > This chapter covers the following topics:
-> 1. Pinpoint the impacts of the versioning in the OPENAPI Description file
+> 1. Pinpoint the impacts of the versioning on the OPENAPI Description file
 > 2. Implement a URL Based versioning
 > 3. Implement a header based versioning
 > 4. Deploy and configure a default version for your API
@@ -78,7 +78,7 @@ booknumbers:
 
 #### Rest-Number
 
-**CHECK** and modify the [rest-number's openAPI descriptor file](../rest-number/src/main/resources/openapi.yml) to indicate
+**CHECK** and **UPDATE** the [rest-number's openAPI descriptor file](../rest-number/src/main/resources/openapi.yml) to indicate
 the version:
 
 ```yaml
@@ -90,7 +90,7 @@ servers:
   - url: http://localhost:8081/v1
 ```
 
-**CHECK** the [rest-number configuration file](../config-server/src/main/resources/config/rest-number.yml) and the contex
+**CHECK** the [rest-number configuration file](../config-server/src/main/resources/config/rest-number.yml) and the context
 path:
 
 ```yaml

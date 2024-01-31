@@ -50,6 +50,11 @@ subprojects {
     bootJar {
         enabled = true
     }
+     test {
+        useJUnitPlatform()
+        include("**/*IT*")
+        include("**/Tests*")
+    }
 }
 project(':rest-book') {
     apply plugin: 'org.openapi.generator'
