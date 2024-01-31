@@ -176,8 +176,6 @@ project(':rest-number') {
         implementation 'org.springframework.boot:spring-boot-starter-aop'
         implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocVersion}"
         implementation 'com.fasterxml.jackson.core:jackson-annotations'
-        implementation "com.github.javafaker:javafaker:${javaFakerVersion}"
-        implementation "org.yaml:snakeyaml:${snakeYamlVersion}"
         implementation "org.mapstruct:mapstruct:${mapstructVersion}"
         annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
