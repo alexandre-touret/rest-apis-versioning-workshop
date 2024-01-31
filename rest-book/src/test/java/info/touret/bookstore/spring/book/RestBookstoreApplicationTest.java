@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @SuppressWarnings("java:S2699")
-class RestBookstoreApplicationTests {
+class RestBookstoreApplicationTest {
 
 	@Test
 	void contextLoads() {

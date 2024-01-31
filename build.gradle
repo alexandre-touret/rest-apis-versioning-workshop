@@ -53,7 +53,7 @@ subprojects {
      test {
         useJUnitPlatform()
         include("**/*IT*")
-        include("**/Tests*")
+        include("**/*Test*")
     }
 }
 project(':rest-book') {
