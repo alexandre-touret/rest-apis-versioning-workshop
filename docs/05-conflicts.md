@@ -40,7 +40,7 @@ Rename the fied ``author`` to ``authors`` and define it like this:
         $ref: '#/components/schemas/Author'
 ```
 
-Now, create the Author object below the ``Maintenance`` object:
+Now, create the ``Author`` object below the ``Maintenance`` object:
 
 ```yaml
     Author:
@@ -293,7 +293,7 @@ import info.touret.bookstore.spring.book.repository.AuthorRepository;
 
 ### Import data
 
-You can remove all the data located in [``import.sql.ORI``](../rest-book-2/src/main/resources/import.sql.ORI) and replace it by:
+You can remove all the data located in [``import.sql``](../rest-book-2/src/main/resources/import.sql) and replace it by:
 
 ```sql
 INSERT INTO author(id,firstname,lastname,public_id) VALUES (1000,'Antonio','Concalves','7c11e1bf-1c74-4280-812b-cbc6038b7d21');

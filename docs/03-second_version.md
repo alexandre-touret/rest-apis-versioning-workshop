@@ -182,6 +182,12 @@ book:
     limit: 10
 ```
 
+Restart (**RUN**) the config server
+
+```jshelllanguage
+./gradlew bootRun -p config-server
+```
+
 ## Running it
 
 Now, you can start your new module, **RUN**:
@@ -196,7 +202,7 @@ You can test it and especially the new feature, **RUN**:
 http :8082/v1/books --print b | jq '. | length'
 ```
 
-You **MUST** only get ten elements.
+You **MUST** only get up to ten elements.
 
 > [!NOTE]
 > In this chapter, we added a new feature creating a new version.
